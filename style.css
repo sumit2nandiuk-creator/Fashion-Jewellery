@@ -37,6 +37,10 @@ img{display:block;max-width:100%}
 .header-actions{margin-left:auto;display:flex;align-items:center;gap:34px;font-size:11px;font-weight:500;letter-spacing:.14em}
 .contact-link{display:inline-flex;gap:8px;color:var(--maroon);border-bottom:1px solid transparent;padding-bottom:3px}
 .contact-link:hover{border-color:var(--gold)}
+.currency-picker{display:inline-flex;align-items:center}
+.currency-picker select{appearance:none;-webkit-appearance:none;border:1px solid var(--line);background:transparent;color:var(--maroon);font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.1em;padding:7px 26px 7px 9px;cursor:pointer;background-image:linear-gradient(45deg,transparent 50%,var(--gold) 50%),linear-gradient(135deg,var(--gold) 50%,transparent 50%);background-position:calc(100% - 12px) 50%,calc(100% - 8px) 50%;background-size:4px 4px,4px 4px;background-repeat:no-repeat}
+.currency-picker select:hover{border-color:var(--gold)}
+.currency-picker select:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 .bag-button{display:inline-flex;align-items:center;border:0;background:none;font-size:11px;font-weight:500;letter-spacing:.14em;line-height:1;color:var(--ink)}
 .bag-count{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;width:20px;height:20px;min-width:20px;border-radius:50%;background:var(--maroon);color:var(--gold-2);margin-left:8px;font-size:9px;line-height:1;letter-spacing:0}
 .icon-button{border:0;background:none}
@@ -52,6 +56,7 @@ img{display:block;max-width:100%}
 .hero h1 .bn{display:block;font-size:clamp(20px,2vw,27px);letter-spacing:.06em;color:var(--gold);margin-bottom:14px;line-height:1.4}
 .hero-text{font-size:15.5px;line-height:1.75;max-width:440px;color:rgba(255,248,236,.78);font-weight:300}
 .hero-actions{display:flex;align-items:center;gap:30px;flex-wrap:wrap;margin-top:34px}
+.hero-note{margin:18px 0 0;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,248,236,.6)}
 .button{display:inline-flex;align-items:center;justify-content:space-between;gap:44px;padding:18px 24px;font-size:11px;font-weight:500;letter-spacing:.16em;border:0}
 .button-gold{background:var(--gold);color:#2d0a12}
 .button-gold:hover{background:var(--gold-2)}
@@ -98,6 +103,7 @@ img{display:block;max-width:100%}
 .product-info h3{font-size:16px;margin:0 0 6px;font-weight:500;color:var(--maroon-deep)}
 .product-info p{font-size:9px;letter-spacing:.14em;color:var(--muted);margin:0;font-family:'Jost',sans-serif}
 .product-info>span{font-size:15px;color:var(--maroon);white-space:nowrap;padding-top:2px}
+.price-note{font-size:12px;line-height:1.7;color:var(--muted);margin:22px 0 0;font-weight:300}
 
 /* story */
 .story{display:grid;grid-template-columns:1fr 1fr;gap:8%;align-items:center;background:var(--maroon-deep);color:var(--ivory);padding-top:95px;padding-bottom:95px}
@@ -111,6 +117,17 @@ img{display:block;max-width:100%}
 .story-copy p{font-size:15px;line-height:1.85;color:rgba(255,248,236,.72);font-weight:300;margin:0 0 18px}
 .story-copy .bn-line{color:var(--gold);font-size:16px}
 .story-copy .link-underline{margin-top:8px}
+
+/* shipping & sizing */
+.info{padding-top:20px;padding-bottom:90px}
+.info-head{max-width:640px}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:6%;margin-top:44px}
+.info-grid h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--maroon);margin:0 0 14px}
+.info-grid table{width:100%;border-collapse:collapse;font-size:13.5px}
+.info-grid tr{border-bottom:1px solid var(--line)}
+.info-grid th{text-align:left;font-weight:500;color:var(--ink);padding:12px 16px 12px 0;white-space:nowrap;vertical-align:top}
+.info-grid td{color:var(--muted);padding:12px 0;font-weight:300;line-height:1.6}
+.fineprint{font-size:12px;line-height:1.7;color:var(--muted);margin:16px 0 0;font-weight:300}
 
 /* assurances */
 .assurances{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;padding-top:80px;padding-bottom:90px;text-align:center}
@@ -126,6 +143,8 @@ footer{background:var(--maroon-deep);color:var(--ivory);padding:64px 6% 26px}
 .footer-brand .logo-en{color:var(--ivory);font-size:29px}
 .footer-brand .logo-bn{color:var(--gold)}
 .footer-brand p{font-size:13px;line-height:1.8;color:rgba(255,248,236,.6);margin:18px 0 0;font-weight:300}
+.footer-brand a{color:var(--gold-2);border-bottom:1px solid rgba(231,213,169,.35)}
+.footer-brand a:hover{border-color:var(--gold-2)}
 .footer-links{display:flex;gap:30px;font-size:10.5px;letter-spacing:.16em;flex-wrap:wrap}
 .footer-links a{color:rgba(255,248,236,.8);border-bottom:1px solid transparent;padding-bottom:5px}
 .footer-links a:hover{color:var(--gold-2);border-color:var(--gold-2)}
@@ -147,6 +166,16 @@ footer{background:var(--maroon-deep);color:var(--ivory);padding:64px 6% 26px}
 .drawer-footer p{font-size:12px;color:var(--muted);line-height:1.6;margin:8px 0 12px;font-weight:300}
 .whatsapp-order{width:100%}
 .whatsapp-order:disabled{opacity:.45;cursor:not-allowed}
+
+/* policy pages */
+.page-main{padding:70px 6% 90px;max-width:900px}
+.page-back{display:inline-flex;gap:10px;align-items:center;font-size:11px;letter-spacing:.16em;color:var(--maroon);margin-bottom:34px}
+.page-main h1{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,4vw,54px);font-weight:500;color:var(--maroon-deep);margin:0 0 10px}
+.page-main .updated{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:0 0 34px}
+.page-main h2{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--maroon);margin:36px 0 12px}
+.page-main p,.page-main li{font-size:14.5px;line-height:1.85;color:var(--muted);font-weight:300}
+.page-main ul{padding-left:18px;margin:10px 0}
+.page-main a.inline{color:var(--maroon);border-bottom:1px solid rgba(110,18,36,.35)}
 
 /* floating whatsapp */
 .whatsapp-float{position:fixed;right:22px;bottom:22px;z-index:4;display:block;line-height:0;background:none;border:0;border-radius:0;padding:0;filter:drop-shadow(0 6px 14px rgba(44,10,16,.28));transition:transform .2s}
@@ -179,6 +208,9 @@ footer{background:var(--maroon-deep);color:var(--ivory);padding:64px 6% 26px}
   .nav.open{display:flex}
   .header-actions{margin-left:0}
   .contact-link{display:none}
+  .currency-picker select{font-size:10px;padding:6px 22px 6px 8px}
+  .info-grid{grid-template-columns:1fr;gap:34px}
+  .info-grid th{white-space:normal}
   .hero{min-height:600px;padding:60px 6% 96px;background-position:66% center}
   .hero:before{background:linear-gradient(0deg,rgba(43,7,13,.97) 12%,rgba(43,7,13,.8) 48%,rgba(43,7,13,.35) 100%)}
   .hero h1{font-size:44px;margin:16px 0 18px}
@@ -212,6 +244,7 @@ footer{background:var(--maroon-deep);color:var(--ivory);padding:64px 6% 26px}
   .footer-links{gap:18px}
   .footer-bottom{flex-direction:column;gap:10px;font-size:8.5px;margin-top:38px}
   .drawer{padding:22px}
+  .page-main{padding:50px 6% 70px}
   .whatsapp-float{right:14px;bottom:14px}
   .whatsapp-float svg{width:52px;height:52px}
 }

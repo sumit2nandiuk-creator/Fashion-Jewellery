@@ -18,7 +18,7 @@
   <script>if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; addEventListener('load', () => { if (!location.hash) window.scrollTo(0, 0); });</script>
 </head>
 <body>
-  <div class="announcement"><span lang="bn">হাতে তৈরি বাংলার গহনা</span><i>·</i>FREE SHIPPING ON ORDERS OVER ₹999<i>·</i>BAGHAJATIN, KOLKATA</div>
+  <div class="announcement"><span lang="bn">হাতে তৈরি বাংলার গহনা</span><i>·</i>WORLDWIDE SHIPPING FROM KOLKATA<i>·</i>FREE INDIA DELIVERY OVER ₹999</div>
 
   <header class="header">
     <button class="icon-button menu-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
@@ -33,6 +33,14 @@
     </nav>
     <div class="header-actions">
       <a href="https://wa.me/918697771768" target="_blank" rel="noopener noreferrer" class="contact-link">GET IN TOUCH <span>↗</span></a>
+      <label class="currency-picker">
+        <span class="sr-only">Currency</span>
+        <select id="currency" aria-label="Choose currency">
+          <option value="INR">₹ INR</option>
+          <option value="USD">$ USD</option>
+          <option value="GBP">£ GBP</option>
+        </select>
+      </label>
       <button class="bag-button" type="button" aria-label="Open shopping bag">BAG <span class="bag-count">0</span></button>
     </div>
   </header>
@@ -47,6 +55,7 @@
           <a class="button button-gold" href="#collections">EXPLORE COLLECTIONS <span>↗</span></a>
           <a class="link-underline" href="https://wa.me/918697771768" target="_blank" rel="noopener noreferrer">ORDER ON WHATSAPP <span>↗</span></a>
         </div>
+        <p class="hero-note">Ships worldwide · duties payable on delivery</p>
       </div>
       <div class="hero-bottom">
         <span lang="bn">সোনা ও রূপার গহনা · GOLD &amp; SILVER</span>
@@ -94,8 +103,8 @@
             <button class="add" type="button" data-name="The Rajbari Jhumka" data-price="2450" aria-label="Add The Rajbari Jhumka to bag">+</button>
           </div>
           <div class="product-info">
-            <div><h3 lang="bn">রাজবাড়ির ঝুমকা</h3><p>THE RAJBARI JHUMKA · GOLD-PLATED</p></div>
-            <span>₹2,450</span>
+            <div><h3>The Rajbari Jhumka</h3><p><span lang="bn">রাজবাড়ির ঝুমকা</span> · GOLD-PLATED</p></div>
+            <span class="price" data-inr="2450">₹2,450</span>
           </div>
         </article>
         <article class="product" data-category="necklaces">
@@ -105,8 +114,8 @@
             <button class="add" type="button" data-name="The Debi Haar" data-price="6900" aria-label="Add The Debi Haar to bag">+</button>
           </div>
           <div class="product-info">
-            <div><h3 lang="bn">দেবী হার</h3><p>THE DEBI HAAR · TEMPLE NECKLACE</p></div>
-            <span>₹6,900</span>
+            <div><h3>The Debi Haar</h3><p><span lang="bn">দেবী হার</span> · TEMPLE NECKLACE</p></div>
+            <span class="price" data-inr="6900">₹6,900</span>
           </div>
         </article>
         <article class="product" data-category="bangles">
@@ -116,11 +125,12 @@
             <button class="add" type="button" data-name="The Bangla Bala Set" data-price="3200" aria-label="Add The Bangla Bala Set to bag">+</button>
           </div>
           <div class="product-info">
-            <div><h3 lang="bn">বাংলা বালা</h3><p>THE BANGLA BALA SET · SET OF 4</p></div>
-            <span>₹3,200</span>
+            <div><h3>The Bangla Bala Set</h3><p><span lang="bn">বাংলা বালা</span> · SET OF 4</p></div>
+            <span class="price" data-inr="3200">₹3,200</span>
           </div>
         </article>
       </div>
+      <p class="price-note">Prices are in Indian rupees. USD and GBP conversions are approximate — your card is charged in INR.</p>
     </section>
 
     <section class="story section" id="story">
@@ -136,6 +146,35 @@
       </div>
     </section>
 
+    <section class="info section" id="shipping">
+      <div class="info-head">
+        <p class="eyebrow">SHIPPING &amp; SIZING</p>
+        <h2>Delivered <em>worldwide.</em></h2>
+      </div>
+      <div class="info-grid">
+        <div>
+          <h3>Shipping</h3>
+          <table>
+            <tr><th>India</th><td>2–4 working days · free over ₹999</td></tr>
+            <tr><th>USA &amp; Canada</th><td>7–12 working days · tracked courier</td></tr>
+            <tr><th>UK &amp; Europe</th><td>6–10 working days · tracked courier</td></tr>
+            <tr><th>Rest of world</th><td>10–18 working days · tracked courier</td></tr>
+          </table>
+          <p class="fineprint">Every order is insured and tracked. Import duties and local taxes are payable by the recipient.</p>
+        </div>
+        <div>
+          <h3>Size guide</h3>
+          <table>
+            <tr><th>Bangle</th><td>2.4 in / 6.1 cm · 2.6 in / 6.6 cm · 2.8 in / 7.1 cm</td></tr>
+            <tr><th>Ring (India)</th><td>10 · 12 · 14 · 16</td></tr>
+            <tr><th>Ring (US)</th><td>5 · 6 · 7 · 8</td></tr>
+            <tr><th>Ring (UK)</th><td>J · L · N · P</td></tr>
+          </table>
+          <p class="fineprint">Not sure of your size? Send us a measurement on WhatsApp and we will match the piece for you.</p>
+        </div>
+      </div>
+    </section>
+
     <section class="assurances section" aria-label="Why shop with us">
       <div><span class="assurance-icon">◈</span><h3 lang="bn">হলমার্কড সোনা</h3><p>BIS hallmarked gold and 92.5 silver, priced by weight.</p></div>
       <div><span class="assurance-icon">◈</span><h3 lang="bn">হাতে তৈরি</h3><p>Hand-finished in our own workshop, never mass produced.</p></div>
@@ -147,13 +186,16 @@
     <div class="footer-top">
       <div class="footer-brand">
         <a class="logo" href="#top"><span class="logo-en">Fashion Jewellery</span><span class="logo-bn" lang="bn">বাংলার গহনা</span></a>
-        <p>Baghajatin, Kolkata 700086<br>Mon – Sat · 11am to 8pm</p>
+        <p>Baghajatin, Kolkata 700086, India<br>Mon – Sat · 11am to 8pm IST<br><a href="mailto:hello@fashion-jewellery.example">hello@fashion-jewellery.example</a></p>
       </div>
       <div class="footer-links">
         <a href="#collections">COLLECTIONS</a>
         <a href="#story">OUR STORY</a>
+        <a href="#shipping">SHIPPING</a>
+        <a href="returns.html">RETURNS</a>
+        <a href="privacy.html">PRIVACY</a>
+        <a href="terms.html">TERMS</a>
         <a href="https://wa.me/918697771768" target="_blank" rel="noopener noreferrer">WHATSAPP</a>
-        <a href="mailto:hello@fashion-jewellery.example">EMAIL</a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -168,7 +210,7 @@
     <div class="bag-items"></div>
     <div class="drawer-footer">
       <div>Subtotal <strong class="subtotal">₹0</strong></div>
-      <p>Confirm availability, delivery and final price on WhatsApp.</p>
+      <p>Confirm availability, shipping and payment on WhatsApp. Final charge in INR.</p>
       <button class="button button-gold whatsapp-order" type="button">ORDER VIA WHATSAPP <span>↗</span></button>
     </div>
   </aside>
