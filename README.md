@@ -5,14 +5,16 @@ A responsive storefront concept for a Bengali gold and silver jewellery house in
 ## Pages
 
 - `index.html` — the storefront: hero, collections, workshop story, shipping and sizing, contact and shopping bag
+- `product-jhumka.html`, `product-haar.html`, `product-bala.html` — item detail pages with a thumbnail gallery, full-screen image viewer and add-to-bag
 - `shipping.html`, `returns.html`, `privacy.html`, `terms.html` — customer policy pages
 - `style.css` — the maroon, gold and ivory design system, with layout rules for tablet and mobile
-- `script.js` — mobile navigation, collection filters, the shopping bag (saved in `localStorage`) and WhatsApp order hand-off
+- `script.js` — mobile navigation, collection filters, the custom currency dropdown, the shopping bag (saved in `localStorage`) and WhatsApp order hand-off
+- `product.js` — product gallery thumbnails and the full-screen image viewer (keyboard arrows, Escape, swipe)
 - `images/` — hero, collection and workshop photography plus the favicon
 
 ## International customers
 
-- A currency picker in the header switches display between INR, USD and GBP. Prices are held in INR and converted with indicative rates in `CURRENCIES` (edit `script.js` to update them).
+- A custom currency dropdown in the header switches display between INR, USD and GBP. Prices are held in INR and converted with indicative rates in `CURRENCIES` (edit `script.js` to update them).
 - The chosen currency is saved in the browser; the shopping bag and WhatsApp order always quote the INR price, with an approximate conversion in the message.
 - Shipping timelines, duties and size conversions are covered on the page and in `shipping.html`.
 
