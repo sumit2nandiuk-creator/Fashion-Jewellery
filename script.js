@@ -1,4 +1,4 @@
-/* Fashion Jewellery — shared behaviour: currency, bag, navigation, filters */
+/* Fashion Jewellery — shared behaviour: navigation, currency, bag and cart */
 (function () {
   'use strict';
 
@@ -18,6 +18,14 @@
         menu.setAttribute('aria-label', 'Open menu');
       }
     });
+  }
+
+  /* ------------------------------------------------------- sticky header */
+  const header = document.querySelector('.header');
+  if (header) {
+    const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 6);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
   }
 
   /* ------------------------------------------------------------ filters */
@@ -44,7 +52,7 @@
   const REGION_CURRENCY = { IN: 'INR', GB: 'GBP', US: 'USD', CA: 'USD', AU: 'USD', NZ: 'USD', AE: 'USD', SG: 'USD', IE: 'GBP' };
 
   let currency = 'INR';
-  let currencyLocked = false; /* true once the visitor chooses a currency themselves */
+  let currencyLocked = false;
   try {
     const saved = localStorage.getItem('fashion-jewellery-currency');
     if (saved && CURRENCIES[saved]) { currency = saved; currencyLocked = true; }
@@ -69,7 +77,6 @@
     });
   }
 
-  /* custom currency dropdown */
   const picker = document.querySelector('[data-currency-picker]');
   const toggle = picker && picker.querySelector('.currency-toggle');
   const menuList = picker && picker.querySelector('.currency-menu');
@@ -114,7 +121,6 @@
     return REGION_CURRENCY[region] || 'USD';
   }
 
-  /* best guess from the browser when the network lookup is unavailable */
   function browserRegion() {
     const tags = [].concat(navigator.languages || [], navigator.language || []);
     for (const tag of tags) {
@@ -134,7 +140,6 @@
     if (currencyLocked) return;
     let region = '';
     try {
-      /* Cloudflare Pages exposes the visitor country on the same origin */
       const response = await fetch('/cdn-cgi/trace', { cache: 'no-store' });
       if (response.ok) {
         const match = (await response.text()).match(/^loc=([A-Z]{2})$/m);
@@ -171,23 +176,21 @@
   }
 
   /* ---------------------------------------------------------------- bag */
-  const drawer = document.querySelector('.drawer');
-  const backdrop = document.querySelector('.drawer-backdrop');
+  const CART_KEY = 'fashion-jewellery-bag';
+  const cartIcon = document.querySelector('.bag-button');
   const orderButton = document.querySelector('.whatsapp-order');
-  const bagButton = document.querySelector('.bag-button');
-  const closeButton = document.querySelector('.close-drawer');
   const reduceMotion = typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   let bag = [];
   try {
-    const saved = JSON.parse(localStorage.getItem('fashion-jewellery-bag') || '[]');
+    const saved = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
     if (Array.isArray(saved)) {
       saved.forEach(item => {
         if (typeof item.name !== 'string' || !Number.isFinite(item.price)) return;
         const qty = Number.isFinite(item.qty) && item.qty > 0 ? Math.floor(item.qty) : 1;
         const existing = bag.find(line => line.name === item.name && line.price === item.price);
         if (existing) existing.qty += qty;
-        else bag.push({ name: item.name, price: item.price, qty: qty });
+        else bag.push({ name: item.name, price: item.price, qty, image: item.image || '', url: item.url || '' });
       });
     }
   } catch (_) {}
@@ -196,86 +199,115 @@
   const bagTotal = () => bag.reduce((total, item) => total + item.price * item.qty, 0);
 
   function saveBag() {
-    try { localStorage.setItem('fashion-jewellery-bag', JSON.stringify(bag)); } catch (_) {}
+    try { localStorage.setItem(CART_KEY, JSON.stringify(bag)); } catch (_) {}
   }
 
-  function toggleBag(open) {
-    if (!drawer) return;
-    drawer.classList.toggle('open', open);
-    drawer.setAttribute('aria-hidden', String(!open));
-    if (backdrop) backdrop.hidden = !open;
-    if (open && closeButton) closeButton.focus();
+  function stepQuantity(item, delta) {
+    item.qty += delta;
+    if (item.qty < 1) bag = bag.filter(line => line !== item);
+    renderBag();
   }
 
-  function quantityControl(item, direction, label) {
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'qty-button';
-    button.textContent = direction > 0 ? '+' : '\u2212';
-    button.setAttribute('aria-label', label);
-    button.addEventListener('click', () => {
-      item.qty += direction;
-      if (item.qty < 1) bag = bag.filter(line => line !== item);
-      renderBag();
-      saveBag();
-    });
-    return button;
+  function removeItem(item) {
+    bag = bag.filter(line => line !== item);
+    renderBag();
+  }
+
+  function makeStepper(item) {
+    const wrap = document.createElement('div');
+    wrap.className = 'qty';
+    const less = document.createElement('button');
+    less.type = 'button';
+    less.className = 'qty-button';
+    less.textContent = '\u2212';
+    less.setAttribute('aria-label', 'Decrease quantity of ' + item.name);
+    less.addEventListener('click', () => stepQuantity(item, -1));
+    const value = document.createElement('span');
+    value.className = 'qty-value';
+    value.textContent = String(item.qty);
+    const more = document.createElement('button');
+    more.type = 'button';
+    more.className = 'qty-button';
+    more.textContent = '+';
+    more.setAttribute('aria-label', 'Increase quantity of ' + item.name);
+    more.addEventListener('click', () => stepQuantity(item, 1));
+    wrap.append(less, value, more);
+    return wrap;
+  }
+
+  function makeRemove(item) {
+    const remove = document.createElement('button');
+    remove.type = 'button';
+    remove.className = 'bag-remove';
+    remove.textContent = 'Remove';
+    remove.addEventListener('click', () => removeItem(item));
+    return remove;
   }
 
   function renderBag() {
     document.querySelectorAll('.bag-count').forEach(el => { el.textContent = String(bagCount()); });
-    const items = document.querySelector('.bag-items');
-    if (items) {
-      items.replaceChildren();
-      if (!bag.length) {
-        const p = document.createElement('p');
-        p.className = 'bag-empty';
-        p.textContent = 'Your bag is waiting for a little sparkle.';
-        items.append(p);
-      }
-      bag.forEach(item => {
-        const row = document.createElement('div');
-        row.className = 'bag-row';
 
-        const top = document.createElement('div');
-        top.className = 'bag-row-top';
-        const name = document.createElement('span');
-        name.className = 'bag-name';
-        name.textContent = item.name;
-        const total = document.createElement('span');
-        total.className = 'bag-line-total';
-        total.textContent = money(item.price * item.qty);
-        top.append(name, total);
+    document.querySelectorAll('[data-bag-subtotal]').forEach(el => { el.textContent = money(bagTotal()); });
+    document.querySelectorAll('[data-bag-count-label]').forEach(el => {
+      const n = bagCount();
+      el.textContent = n === 0 ? 'No pieces yet' : n + (n === 1 ? ' piece' : ' pieces');
+    });
 
-        const bottom = document.createElement('div');
-        bottom.className = 'bag-row-bottom';
-        const qty = document.createElement('div');
-        qty.className = 'qty';
-        const value = document.createElement('span');
-        value.className = 'qty-value';
-        value.textContent = String(item.qty);
-        value.setAttribute('aria-live', 'polite');
-        qty.append(quantityControl(item, -1, 'Decrease quantity of ' + item.name), value, quantityControl(item, 1, 'Increase quantity of ' + item.name));
-        const unit = document.createElement('span');
-        unit.className = 'bag-unit';
-        unit.textContent = item.qty > 1 ? money(item.price) + ' each' : '';
-        const remove = document.createElement('button');
-        remove.type = 'button';
-        remove.className = 'bag-remove';
-        remove.textContent = 'Remove';
-        remove.addEventListener('click', () => {
-          bag = bag.filter(line => line !== item);
-          renderBag();
-          saveBag();
+    const page = document.querySelector('[data-cart-page]');
+    if (page) {
+      const list = page.querySelector('.cart-items');
+      const layout = page.querySelector('.cart-layout');
+      const empty = page.querySelector('.cart-empty');
+      if (list) {
+        list.replaceChildren();
+        bag.forEach(item => {
+          const row = document.createElement('article');
+          row.className = 'cart-item';
+
+          const media = document.createElement(item.url ? 'a' : 'div');
+          media.className = 'cart-item-media';
+          if (item.url) media.setAttribute('href', item.url);
+          if (item.image) {
+            const img = document.createElement('img');
+            img.src = item.image;
+            img.alt = item.name;
+            img.loading = 'lazy';
+            media.append(img);
+          } else {
+            const glyph = document.createElement('span');
+            glyph.className = 'cart-item-placeholder';
+            glyph.textContent = '\u25c8';
+            media.append(glyph);
+          }
+
+          const body = document.createElement('div');
+          body.className = 'cart-item-body';
+          const head = document.createElement('div');
+          head.className = 'cart-item-head';
+          const name = document.createElement('h2');
+          name.className = 'cart-item-name';
+          name.textContent = item.name;
+          head.append(name, makeRemove(item));
+
+          const unit = document.createElement('p');
+          unit.className = 'cart-item-unit';
+          unit.textContent = money(item.price) + ' each';
+
+          const foot = document.createElement('div');
+          foot.className = 'cart-item-foot';
+          const lineTotal = document.createElement('span');
+          lineTotal.className = 'cart-line-total';
+          lineTotal.textContent = money(item.price * item.qty);
+          foot.append(makeStepper(item), lineTotal);
+
+          body.append(head, unit, foot);
+          row.append(media, body);
+          list.append(row);
         });
-        bottom.append(qty, unit, remove);
-
-        row.append(top, bottom);
-        items.append(row);
-      });
+      }
+      if (layout) layout.hidden = !bag.length;
+      if (empty) empty.hidden = Boolean(bag.length);
     }
-    const subtotal = document.querySelector('.subtotal');
-    if (subtotal) subtotal.textContent = money(bagTotal());
     if (orderButton) orderButton.disabled = !bag.length;
     saveBag();
   }
@@ -290,11 +322,7 @@
     toast.className = 'toast';
     toast.setAttribute('role', 'status');
     toast.setAttribute('aria-live', 'polite');
-    toast.innerHTML = '<span class="toast-text"></span><button class="toast-link" type="button">View bag</button>';
-    toast.querySelector('.toast-link').addEventListener('click', () => {
-      toast.classList.remove('show');
-      toggleBag(true);
-    });
+    toast.innerHTML = '<span class="toast-text"></span><a class="toast-link" href="cart.html">View bag</a>';
     document.body.append(toast);
     return toast;
   }
@@ -308,65 +336,50 @@
   }
 
   function pulseCart() {
-    if (!bagButton) return;
-    bagButton.classList.remove('bump');
-    void bagButton.offsetWidth;
-    bagButton.classList.add('bump');
-    setTimeout(() => bagButton.classList.remove('bump'), 600);
+    if (!cartIcon) return;
+    cartIcon.classList.remove('bump');
+    void cartIcon.offsetWidth;
+    cartIcon.classList.add('bump');
+    setTimeout(() => cartIcon.classList.remove('bump'), 620);
   }
 
   function flyToCart(source) {
-    if (reduceMotion || !bagButton) { pulseCart(); return; }
-    const image = source && (source.querySelector('img') || (source.tagName === 'IMG' ? source : null));
-    const from = (image || source || {}).getBoundingClientRect ? (image || source).getBoundingClientRect() : null;
-    const to = bagButton.getBoundingClientRect();
-    if (!from || !from.width) { pulseCart(); return; }
-    const size = Math.min(from.width, 110);
-    let node;
-    if (image) {
-      node = document.createElement('img');
-      node.src = image.currentSrc || image.src;
-    } else {
-      node = document.createElement('span');
-      node.className = 'fly-dot';
-    }
-    node.classList.add('fly-thumb');
-    node.style.left = (from.left + from.width / 2 - size / 2) + 'px';
-    node.style.top = (from.top + from.height / 2 - size / 2) + 'px';
-    node.style.width = size + 'px';
-    node.style.height = size + 'px';
-    if (typeof node.animate !== 'function') { pulseCart(); return; }
-    document.body.append(node);
-    const dx = to.left + to.width / 2 - (from.left + from.width / 2);
-    const dy = to.top + to.height / 2 - (from.top + from.height / 2);
-    const animation = node.animate([
-      { transform: 'translate(0, 0) scale(1)', opacity: 1 },
-      { transform: 'translate(' + dx * 0.5 + 'px,' + (dy * 0.5 - 70) + 'px) scale(.62)', opacity: .95, offset: .55 },
-      { transform: 'translate(' + dx + 'px,' + dy + 'px) scale(.12)', opacity: .15 }
-    ], { duration: 720, easing: 'cubic-bezier(.2,.72,.3,1)' });
-    animation.onfinish = () => { node.remove(); pulseCart(); };
+    if (!cartIcon) return;
+    if (reduceMotion || !source || typeof source.getBoundingClientRect !== 'function') { pulseCart(); return; }
+    const from = source.getBoundingClientRect();
+    const to = cartIcon.getBoundingClientRect();
+    const chip = document.createElement('span');
+    chip.className = 'fly-chip';
+    chip.textContent = '+1';
+    chip.setAttribute('aria-hidden', 'true');
+    chip.style.left = (from.left + from.width / 2) + 'px';
+    chip.style.top = (from.top + from.height / 2) + 'px';
+    if (typeof chip.animate !== 'function') { pulseCart(); return; }
+    document.body.append(chip);
+    const dx = (to.left + to.width / 2) - (from.left + from.width / 2);
+    const dy = (to.top + to.height / 2) - (from.top + from.height / 2);
+    const animation = chip.animate([
+      { transform: 'translate(-50%, -50%) scale(.6)', opacity: 0 },
+      { transform: 'translate(-50%, -50%) scale(1.05)', opacity: 1, offset: .18 },
+      { transform: 'translate(calc(-50% + ' + dx * .55 + 'px), calc(-50% + ' + (dy * .55 - 60) + 'px)) scale(.9)', opacity: 1, offset: .6 },
+      { transform: 'translate(calc(-50% + ' + dx + 'px), calc(-50% + ' + dy + 'px)) scale(.35)', opacity: 0 }
+    ], { duration: 760, easing: 'cubic-bezier(.2,.72,.3,1)' });
+    animation.onfinish = () => { chip.remove(); pulseCart(); };
   }
 
   document.querySelectorAll('.add, .add-to-bag').forEach(button => {
     button.addEventListener('click', () => {
       const name = button.dataset.name;
       const price = Number(button.dataset.price);
+      const image = button.dataset.image || '';
+      const url = button.dataset.url || '';
       const existing = bag.find(item => item.name === name && item.price === price);
       if (existing) existing.qty += 1;
-      else bag.push({ name: name, price: price, qty: 1 });
+      else bag.push({ name, price, qty: 1, image, url });
       renderBag();
       showToast(name);
-      const card = button.closest('.product') || button.closest('.product-detail');
-      const source = (card && (card.querySelector('.gallery-image') || card.querySelector('.product-image img'))) || button;
-      flyToCart(source);
+      flyToCart(button);
     });
-  });
-
-  if (bagButton) bagButton.addEventListener('click', () => toggleBag(true));
-  if (closeButton) closeButton.addEventListener('click', () => toggleBag(false));
-  if (backdrop) backdrop.addEventListener('click', () => toggleBag(false));
-  document.addEventListener('keydown', event => {
-    if (event.key === 'Escape' && drawer && drawer.classList.contains('open')) toggleBag(false);
   });
 
   if (orderButton) {
