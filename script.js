@@ -41,10 +41,13 @@
     USD: { rate: 1 / 88, symbol: '$', locale: 'en-US', name: 'US dollar' },
     GBP: { rate: 1 / 112, symbol: '\u00a3', locale: 'en-GB', name: 'Pound sterling' }
   };
+  const REGION_CURRENCY = { IN: 'INR', GB: 'GBP', US: 'USD', CA: 'USD', AU: 'USD', NZ: 'USD', AE: 'USD', SG: 'USD', IE: 'GBP' };
+
   let currency = 'INR';
+  let currencyLocked = false; /* true once the visitor chooses a currency themselves */
   try {
     const saved = localStorage.getItem('fashion-jewellery-currency');
-    if (saved && CURRENCIES[saved]) currency = saved;
+    if (saved && CURRENCIES[saved]) { currency = saved; currencyLocked = true; }
   } catch (_) {}
 
   function inrText(amount) {
@@ -87,10 +90,14 @@
     toggle.setAttribute('aria-expanded', 'true');
     if (typeof focusIndex === 'number' && options[focusIndex]) options[focusIndex].focus();
   }
-  function selectCurrency(value, focusPicker) {
+
+  function applyCurrency(value, persist) {
     if (!CURRENCIES[value]) return;
     currency = value;
-    try { localStorage.setItem('fashion-jewellery-currency', value); } catch (_) {}
+    if (persist) {
+      currencyLocked = true;
+      try { localStorage.setItem('fashion-jewellery-currency', value); } catch (_) {}
+    }
     options.forEach(option => {
       const isSelected = option.dataset.value === value;
       option.setAttribute('aria-selected', String(isSelected));
@@ -100,7 +107,43 @@
     if (toggle) toggle.setAttribute('aria-label', 'Currency: ' + CURRENCIES[value].name);
     renderPrices();
     renderBag();
-    if (focusPicker && toggle) toggle.focus();
+  }
+
+  function regionCurrency(region) {
+    if (!region) return 'INR';
+    return REGION_CURRENCY[region] || 'USD';
+  }
+
+  /* best guess from the browser when the network lookup is unavailable */
+  function browserRegion() {
+    const tags = [].concat(navigator.languages || [], navigator.language || []);
+    for (const tag of tags) {
+      const parts = String(tag).split('-');
+      if (parts.length > 1 && /^[A-Za-z]{2}$/.test(parts[1])) return parts[1].toUpperCase();
+    }
+    try {
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+      if (/Kolkata|Calcutta/.test(tz)) return 'IN';
+      if (/^Europe\/London/.test(tz)) return 'GB';
+      if (/^America\//.test(tz)) return 'US';
+    } catch (_) {}
+    return '';
+  }
+
+  async function detectCurrency() {
+    if (currencyLocked) return;
+    let region = '';
+    try {
+      /* Cloudflare Pages exposes the visitor country on the same origin */
+      const response = await fetch('/cdn-cgi/trace', { cache: 'no-store' });
+      if (response.ok) {
+        const match = (await response.text()).match(/^loc=([A-Z]{2})$/m);
+        if (match && !['XX', 'T1'].includes(match[1])) region = match[1];
+      }
+    } catch (_) {}
+    if (!region) region = browserRegion();
+    if (currencyLocked) return;
+    applyCurrency(regionCurrency(region), false);
   }
 
   if (picker && toggle && menuList) {
@@ -109,10 +152,10 @@
       else closePicker(true);
     });
     options.forEach(option => {
-      option.addEventListener('click', () => { selectCurrency(option.dataset.value, true); closePicker(false); });
+      option.addEventListener('click', () => { applyCurrency(option.dataset.value, true); closePicker(false); toggle.focus(); });
       option.addEventListener('keydown', event => {
         const index = options.indexOf(option);
-        if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); selectCurrency(option.dataset.value, true); closePicker(false); }
+        if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); applyCurrency(option.dataset.value, true); closePicker(false); toggle.focus(); }
         else if (event.key === 'ArrowDown') { event.preventDefault(); (options[index + 1] || options[0]).focus(); }
         else if (event.key === 'ArrowUp') { event.preventDefault(); (options[index - 1] || options[options.length - 1]).focus(); }
         else if (event.key === 'Escape') { event.preventDefault(); closePicker(true); }
@@ -203,7 +246,8 @@
     });
   }
 
-  if (picker && options.length) selectCurrency(currency, false);
+  if (picker && options.length) applyCurrency(currency, false);
   else renderPrices();
   renderBag();
+  detectCurrency();
 })();

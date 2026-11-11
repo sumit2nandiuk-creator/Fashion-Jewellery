@@ -27,8 +27,8 @@ img{display:block;max-width:100%;height:auto}
 
 /* header */
 .header{height:88px;display:flex;align-items:center;gap:6%;padding:0 5%;background:var(--ivory);border-bottom:1px solid var(--line);position:relative;z-index:3}
-.logo{display:flex;flex-direction:column;line-height:1;gap:6px}
-.logo-en{font-family:'Cormorant Garamond',serif;font-size:27px;font-weight:600;letter-spacing:.01em;color:var(--maroon)}
+.logo{display:flex;flex-direction:column;line-height:1;gap:6px;min-width:0}
+.logo-en{font-family:'Cormorant Garamond',serif;font-size:27px;font-weight:600;letter-spacing:.01em;color:var(--maroon);white-space:nowrap}
 .logo-bn{font-size:11px;letter-spacing:.32em;color:var(--gold);text-transform:none}
 .nav{display:flex;gap:36px;font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink)}
 .nav a{position:relative;padding:6px 0}
@@ -54,7 +54,9 @@ img{display:block;max-width:100%;height:auto}
 .currency-menu li.selected{background:rgba(110,18,36,.06)}
 .currency-menu li.selected .c-code{color:var(--maroon);font-weight:500}
 .currency-menu li.selected:after{content:'✓';position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:11px;color:var(--gold)}
-.bag-button{display:inline-flex;align-items:center;border:0;background:none;font-size:11px;font-weight:500;letter-spacing:.14em;line-height:1;color:var(--ink)}
+.bag-button{display:inline-flex;align-items:center;gap:5px;border:0;background:none;padding:0;line-height:1;color:var(--maroon)}
+.bag-icon{width:22px;height:22px;flex:0 0 auto;display:block}
+.header .bag-count{margin-left:0}
 .bag-count{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;width:20px;height:20px;min-width:20px;border-radius:50%;background:var(--maroon);color:var(--gold-2);margin-left:8px;font-size:9px;line-height:1;letter-spacing:0}
 .icon-button{border:0;background:none}
 .menu-toggle{display:none;font-size:20px;color:var(--maroon);padding:0}
@@ -270,14 +272,16 @@ body.lightbox-open{overflow:hidden}
   .announcement{font-size:8.5px;letter-spacing:.1em;padding:9px 12px;line-height:1.7}
   .announcement i{margin:0 6px}
   .header{height:74px;justify-content:space-between;padding:0 5%;gap:10px}
-  .logo-en{font-size:22px}
+  .logo-en{font-size:19px}
   .logo-bn{font-size:9.5px;letter-spacing:.26em}
   .menu-toggle{display:block}
   .nav{display:none;position:absolute;top:100%;left:0;right:0;background:var(--ivory);border-bottom:1px solid var(--line);box-shadow:0 18px 30px rgba(44,10,16,.08);padding:22px 5%;flex-direction:column;gap:18px;font-size:13px}
   .nav.open{display:flex}
   .header-actions{margin-left:0}
   .contact-link{display:none}
-  .currency-toggle{width:78px;font-size:10px;padding:6px 7px;gap:5px}
+  .currency-toggle{width:74px;font-size:10px;padding:6px 7px;gap:5px}
+  .bag-icon{width:20px;height:20px}
+  .header .bag-count{width:18px;height:18px;min-width:18px;font-size:8px;margin-left:0}
   .currency-menu{min-width:170px;right:-40px}
   .product-page{padding:0 5% 70px}
   .breadcrumb{padding:18px 0 22px;font-size:9.5px}
@@ -334,3 +338,12 @@ body.lightbox-open{overflow:hidden}
   .whatsapp-float{right:14px;bottom:14px}
   .whatsapp-float svg{width:52px;height:52px}
 }
+
+/* very small handsets */
+@media(max-width:380px){
+  .logo-en{font-size:17px}
+  .logo-bn{font-size:8px;letter-spacing:.2em}
+  .currency-toggle{width:70px;font-size:9.5px;padding:6px}
+  .header{gap:6px}
+}
+

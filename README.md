@@ -14,7 +14,7 @@ A responsive storefront concept for a Bengali gold and silver jewellery house in
 
 ## International customers
 
-- A custom currency dropdown in the header switches display between INR, USD and GBP. Prices are held in INR and converted with indicative rates in `CURRENCIES` (edit `script.js` to update them).
+- A custom currency dropdown in the header switches display between INR, USD and GBP. On a first visit the currency is chosen automatically from the visitor's country (via Cloudflare's `/cdn-cgi/trace`, with a browser language/timezone fallback); an explicit choice is remembered and always wins. Prices are held in INR and converted with indicative rates in `CURRENCIES` (edit `script.js` to update them).
 - The chosen currency is saved in the browser; the shopping bag and WhatsApp order always quote the INR price, with an approximate conversion in the message.
 - Shipping timelines, duties and size conversions are covered on the page and in `shipping.html`.
 
