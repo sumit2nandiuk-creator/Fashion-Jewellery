@@ -28,6 +28,7 @@ img{display:block;max-width:100%;height:auto}
 /* header */
 .header{position:sticky;top:0;z-index:9;height:88px;display:flex;align-items:center;gap:clamp(14px,2.2vw,38px);padding:0 5%;background:var(--ivory);border-bottom:1px solid var(--line);transition:box-shadow .25s ease}
 .header.scrolled{box-shadow:0 10px 26px rgba(44,10,16,.12)}
+#top,#shop,#collections,#story,#shipping{scroll-margin-top:104px}
 .logo{display:flex;flex-direction:column;line-height:1;gap:6px;min-width:0}
 .logo-en{font-family:'Cormorant Garamond',serif;font-size:27px;font-weight:600;letter-spacing:.01em;color:var(--maroon);white-space:nowrap}
 .logo-bn{font-size:11px;letter-spacing:.32em;color:var(--gold);text-transform:none}
@@ -393,6 +394,7 @@ body.lightbox-open{overflow:hidden}
   .cart-item-name{font-size:19px}
   .cart-summary{position:static;padding:22px 18px}
   .toast-link{margin-left:10px}
+  #top,#shop,#collections,#story,#shipping{scroll-margin-top:86px}
   .page-main{padding:50px 6% 70px}
   .whatsapp-float{right:14px;bottom:14px}
   .whatsapp-float svg{width:52px;height:52px}
