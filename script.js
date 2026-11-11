@@ -228,40 +228,81 @@
     try { localStorage.setItem(CART_KEY, JSON.stringify(bag)); } catch (_) {}
   }
 
+  let rowRefs = [];
+
   function stepQuantity(item, delta) {
+    if (item.qty + delta < 1) { removeItem(item); return; }
     item.qty += delta;
-    if (item.qty < 1) bag = bag.filter(line => line !== item);
-    renderBag();
+    refreshCartValues();
   }
 
   function removeItem(item) {
     bag = bag.filter(line => line !== item);
-    renderBag();
+    const index = rowRefs.findIndex(ref => ref.item === item);
+    if (index > -1) {
+      rowRefs[index].row.remove();
+      rowRefs.splice(index, 1);
+    }
+    refreshCartValues();
   }
 
-  function makeStepper(item) {
-    const wrap = document.createElement('div');
-    wrap.className = 'qty';
+  function buildCartRow(item) {
+    const row = document.createElement('article');
+    row.className = 'cart-item';
+
+    const media = document.createElement(item.url ? 'a' : 'div');
+    media.className = 'cart-item-media';
+    if (item.url) media.setAttribute('href', item.url);
+    let img = null;
+    if (item.image) {
+      img = document.createElement('img');
+      img.src = item.image;
+      img.alt = item.name;
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      media.append(img);
+    } else {
+      const glyph = document.createElement('span');
+      glyph.className = 'cart-item-placeholder';
+      glyph.textContent = '\u25c8';
+      media.append(glyph);
+    }
+
+    const totalEl = document.createElement('span');
+    totalEl.className = 'cart-line-total';
+    totalEl.textContent = money(item.price * item.qty);
+
+    const head = document.createElement('div');
+    head.className = 'cart-item-head';
+    const nameEl = document.createElement('h2');
+    nameEl.className = 'cart-item-name';
+    nameEl.textContent = item.name;
+    head.append(nameEl, totalEl);
+
+    const unitEl = document.createElement('p');
+    unitEl.className = 'cart-item-unit';
+    unitEl.textContent = money(item.price) + ' each';
+
+    const qty = document.createElement('div');
+    qty.className = 'qty';
     const less = document.createElement('button');
     less.type = 'button';
     less.className = 'qty-button';
     less.textContent = '\u2212';
     less.setAttribute('aria-label', 'Decrease quantity of ' + item.name);
     less.addEventListener('click', () => stepQuantity(item, -1));
-    const value = document.createElement('span');
-    value.className = 'qty-value';
-    value.textContent = String(item.qty);
+    const valueEl = document.createElement('span');
+    valueEl.className = 'qty-value';
+    valueEl.textContent = String(item.qty);
+    valueEl.setAttribute('aria-live', 'polite');
     const more = document.createElement('button');
     more.type = 'button';
     more.className = 'qty-button';
     more.textContent = '+';
     more.setAttribute('aria-label', 'Increase quantity of ' + item.name);
     more.addEventListener('click', () => stepQuantity(item, 1));
-    wrap.append(less, value, more);
-    return wrap;
-  }
+    qty.append(less, valueEl, more);
 
-  function makeRemove(item) {
     const remove = document.createElement('button');
     remove.type = 'button';
     remove.className = 'bag-remove';
@@ -272,76 +313,71 @@
       '<path d="M6.25 6.75l.85 12.4a1.5 1.5 0 0 0 1.5 1.35h6.8a1.5 1.5 0 0 0 1.5-1.35l.85-12.4"/>' +
       '<path d="M10 10.75v6M14 10.75v6"/></svg>';
     remove.addEventListener('click', () => removeItem(item));
-    return remove;
+
+    const foot = document.createElement('div');
+    foot.className = 'cart-item-foot';
+    foot.append(qty, remove);
+
+    const body = document.createElement('div');
+    body.className = 'cart-item-body';
+    body.append(head, unitEl, foot);
+    row.append(media, body);
+
+    return { item, row, media, img, nameEl, unitEl, valueEl, totalEl };
   }
 
-  function renderBag() {
-    document.querySelectorAll('.bag-count').forEach(el => { el.textContent = String(bagCount()); });
+  function refreshCartValues() {
+    rowRefs.forEach(ref => {
+      ref.valueEl.textContent = String(ref.item.qty);
+      ref.unitEl.textContent = money(ref.item.price) + ' each';
+      ref.totalEl.textContent = money(ref.item.price * ref.item.qty);
+      ref.totalEl.setAttribute('data-bag-line', String(ref.item.price * ref.item.qty));
+    });
+    updateCartSummary();
+  }
 
+  function updateCartSummary() {
+    document.querySelectorAll('.bag-count').forEach(el => { el.textContent = String(bagCount()); });
     document.querySelectorAll('[data-bag-subtotal]').forEach(el => { el.textContent = money(bagTotal()); });
     document.querySelectorAll('[data-bag-count-label]').forEach(el => {
       const n = bagCount();
       el.textContent = n === 0 ? 'No pieces yet' : n + (n === 1 ? ' piece' : ' pieces');
     });
-
     const page = document.querySelector('[data-cart-page]');
     if (page) {
-      const list = page.querySelector('.cart-items');
       const layout = page.querySelector('.cart-layout');
       const empty = page.querySelector('.cart-empty');
-      if (list) {
-        list.replaceChildren();
-        bag.forEach(item => {
-          const row = document.createElement('article');
-          row.className = 'cart-item';
-
-          const media = document.createElement(item.url ? 'a' : 'div');
-          media.className = 'cart-item-media';
-          if (item.url) media.setAttribute('href', item.url);
-          if (item.image) {
-            const img = document.createElement('img');
-            img.src = item.image;
-            img.alt = item.name;
-            img.loading = 'lazy';
-            media.append(img);
-          } else {
-            const glyph = document.createElement('span');
-            glyph.className = 'cart-item-placeholder';
-            glyph.textContent = '\u25c8';
-            media.append(glyph);
-          }
-
-          const body = document.createElement('div');
-          body.className = 'cart-item-body';
-          const lineTotal = document.createElement('span');
-          lineTotal.className = 'cart-line-total';
-          lineTotal.textContent = money(item.price * item.qty);
-
-          const head = document.createElement('div');
-          head.className = 'cart-item-head';
-          const name = document.createElement('h2');
-          name.className = 'cart-item-name';
-          name.textContent = item.name;
-          head.append(name, lineTotal);
-
-          const unit = document.createElement('p');
-          unit.className = 'cart-item-unit';
-          unit.textContent = money(item.price) + ' each';
-
-          const foot = document.createElement('div');
-          foot.className = 'cart-item-foot';
-          foot.append(makeStepper(item), makeRemove(item));
-
-          body.append(head, unit, foot);
-          row.append(media, body);
-          list.append(row);
-        });
-      }
       if (layout) layout.hidden = !bag.length;
       if (empty) empty.hidden = Boolean(bag.length);
     }
     if (orderButton) orderButton.disabled = !bag.length;
     saveBag();
+  }
+
+  function renderBag() {
+    const page = document.querySelector('[data-cart-page]');
+    if (page) {
+      const list = page.querySelector('.cart-items');
+      if (list) {
+        const unchanged = rowRefs.length === bag.length &&
+          rowRefs.every((ref, index) => ref.item === bag[index] && ref.row.isConnected);
+        if (!unchanged) {
+          list.replaceChildren();
+          rowRefs = bag.map(item => {
+            const ref = buildCartRow(item);
+            list.append(ref.row);
+            return ref;
+          });
+        } else {
+          rowRefs.forEach(ref => {
+            ref.nameEl.textContent = ref.item.name;
+            if (ref.img && ref.item.image && ref.img.getAttribute('src') !== ref.item.image) ref.img.src = ref.item.image;
+            if (ref.media && ref.item.url && ref.media.getAttribute('href') !== ref.item.url) ref.media.setAttribute('href', ref.item.url);
+          });
+        }
+      }
+    }
+    refreshCartValues();
   }
 
   /* ------------------------------------------------- added-to-bag feedback */
