@@ -239,7 +239,12 @@
     const remove = document.createElement('button');
     remove.type = 'button';
     remove.className = 'bag-remove';
-    remove.textContent = 'Remove';
+    remove.title = 'Remove';
+    remove.setAttribute('aria-label', 'Remove ' + item.name + ' from bag');
+    remove.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' +
+      '<path d="M3.75 6.75h16.5"/><path d="M9.25 6.75V4.5a.75.75 0 0 1 .75-.75h4a.75.75 0 0 1 .75.75v2.25"/>' +
+      '<path d="M6.25 6.75l.85 12.4a1.5 1.5 0 0 0 1.5 1.35h6.8a1.5 1.5 0 0 0 1.5-1.35l.85-12.4"/>' +
+      '<path d="M10 10.75v6M14 10.75v6"/></svg>';
     remove.addEventListener('click', () => removeItem(item));
     return remove;
   }
