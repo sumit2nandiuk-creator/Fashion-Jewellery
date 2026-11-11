@@ -38,11 +38,11 @@ img{display:block;max-width:100%;height:auto}
 .contact-link{display:inline-flex;gap:8px;color:var(--maroon);border-bottom:1px solid transparent;padding-bottom:3px}
 .contact-link:hover{border-color:var(--gold)}
 .currency-picker{position:relative;display:inline-block}
-.currency-toggle{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:transparent;color:var(--maroon);font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.12em;padding:7px 9px;cursor:pointer;transition:border-color .2s,background .2s}
+.currency-toggle{display:inline-flex;align-items:center;justify-content:space-between;gap:7px;width:86px;box-sizing:border-box;border:1px solid var(--line);background:transparent;color:var(--maroon);font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.12em;padding:7px 9px;cursor:pointer;transition:border-color .2s,background .2s}
 .currency-toggle:hover{border-color:var(--gold);background:rgba(190,151,77,.08)}
 .currency-toggle:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
-.currency-code{white-space:nowrap}
-.currency-chevron{width:9px;height:6px;color:var(--gold);transition:transform .22s ease}
+.currency-code{white-space:nowrap;flex:1 1 auto;text-align:left}
+.currency-chevron{flex:0 0 auto;width:9px;height:6px;color:var(--gold);transition:transform .22s ease}
 .currency-picker.open .currency-chevron{transform:rotate(180deg)}
 .currency-menu{position:absolute;top:calc(100% + 8px);right:0;min-width:200px;margin:0;padding:6px;list-style:none;background:#fffaf0;border:1px solid var(--line);box-shadow:0 20px 44px rgba(44,10,16,.18);z-index:8}
 .currency-menu[hidden]{display:none}
@@ -277,7 +277,7 @@ body.lightbox-open{overflow:hidden}
   .nav.open{display:flex}
   .header-actions{margin-left:0}
   .contact-link{display:none}
-  .currency-toggle{font-size:10px;padding:6px 7px;gap:5px}
+  .currency-toggle{width:78px;font-size:10px;padding:6px 7px;gap:5px}
   .currency-menu{min-width:170px;right:-40px}
   .product-page{padding:0 5% 70px}
   .breadcrumb{padding:18px 0 22px;font-size:9.5px}
