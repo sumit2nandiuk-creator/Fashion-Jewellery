@@ -111,6 +111,7 @@ img{display:block;max-width:100%;height:auto}
 .section-heading h2{font-size:clamp(32px,3.4vw,50px)}
 .bn-inline{font-size:.5em;color:var(--gold);letter-spacing:.02em;margin-left:10px;vertical-align:middle}
 .section-heading .link-underline{color:var(--maroon);border-color:rgba(110,18,36,.35);margin-bottom:8px}
+.anchor-target{display:block;height:0;scroll-margin-top:118px}
 .filters{display:flex;gap:26px;margin:42px 0 20px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--line);padding-bottom:0}
 .filters::-webkit-scrollbar{display:none}
 .filters button{border:0;background:transparent;padding:0 0 12px;font-size:10.5px;letter-spacing:.12em;white-space:nowrap;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px}

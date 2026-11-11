@@ -34,7 +34,16 @@
     const buttons = Array.from(filters.querySelectorAll('button'));
     const products = Array.from(document.querySelectorAll('.product'));
 
-    const applyFilter = (value, updateHash) => {
+    const smooth = !(typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+    const revealGrid = () => {
+      const grid = document.querySelector('.filters');
+      if (!grid || typeof window.scrollTo !== 'function') return;
+      const top = grid.getBoundingClientRect().top + window.scrollY - 120;
+      window.scrollTo({ top: Math.max(top, 0), behavior: smooth ? 'smooth' : 'auto' });
+    };
+
+    const applyFilter = (value, updateHash, scroll) => {
       const target = buttons.find(button => button.dataset.filter === value) || buttons[0];
       if (!target) return;
       buttons.forEach(button => button.classList.toggle('active', button === target));
@@ -44,16 +53,19 @@
       if (updateHash && window.history && history.replaceState) {
         try { history.replaceState(null, '', '#' + target.dataset.filter); } catch (_) {}
       }
+      if (scroll) revealGrid();
     };
 
     buttons.forEach(button => {
-      button.addEventListener('click', () => applyFilter(button.dataset.filter, true));
+      button.addEventListener('click', () => applyFilter(button.dataset.filter, true, false));
     });
 
     const fromHash = () => (location.hash || '').replace('#', '');
-    if (buttons.some(button => button.dataset.filter === fromHash())) applyFilter(fromHash(), false);
+    if (buttons.some(button => button.dataset.filter === fromHash())) {
+      applyFilter(fromHash(), false, true);
+    }
     window.addEventListener('hashchange', () => {
-      if (buttons.some(button => button.dataset.filter === fromHash())) applyFilter(fromHash(), false);
+      if (buttons.some(button => button.dataset.filter === fromHash())) applyFilter(fromHash(), false, true);
     });
   }
 
