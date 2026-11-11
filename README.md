@@ -5,6 +5,7 @@ A responsive storefront concept for a Bengali gold and silver jewellery house in
 ## Pages
 
 - `index.html` — the storefront: hero, collections, workshop story, shipping and sizing, contact and bag
+- `collections.html` — the full shop page: filter tabs (all pieces, earrings, necklaces, bangles & rings), product grid and a styling CTA
 - `cart.html` — a full bag page with line items, quantity steppers, totals and the WhatsApp order hand-off
 - `product-jhumka.html`, `product-haar.html`, `product-bala.html` — item detail pages with a thumbnail gallery, full-screen image viewer and add-to-bag
 - `shipping.html`, `returns.html`, `privacy.html`, `terms.html` — customer policy pages

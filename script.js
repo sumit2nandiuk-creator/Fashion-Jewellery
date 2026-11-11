@@ -31,15 +31,29 @@
   /* ------------------------------------------------------------ filters */
   const filters = document.querySelector('.filters');
   if (filters) {
-    filters.querySelectorAll('button').forEach(button => {
-      button.addEventListener('click', () => {
-        const active = filters.querySelector('.active');
-        if (active) active.classList.remove('active');
-        button.classList.add('active');
-        document.querySelectorAll('.product').forEach(product => {
-          product.hidden = button.dataset.filter !== 'all' && product.dataset.category !== button.dataset.filter;
-        });
+    const buttons = Array.from(filters.querySelectorAll('button'));
+    const products = Array.from(document.querySelectorAll('.product'));
+
+    const applyFilter = (value, updateHash) => {
+      const target = buttons.find(button => button.dataset.filter === value) || buttons[0];
+      if (!target) return;
+      buttons.forEach(button => button.classList.toggle('active', button === target));
+      products.forEach(product => {
+        product.hidden = target.dataset.filter !== 'all' && product.dataset.category !== target.dataset.filter;
       });
+      if (updateHash && window.history && history.replaceState) {
+        try { history.replaceState(null, '', '#' + target.dataset.filter); } catch (_) {}
+      }
+    };
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => applyFilter(button.dataset.filter, true));
+    });
+
+    const fromHash = () => (location.hash || '').replace('#', '');
+    if (buttons.some(button => button.dataset.filter === fromHash())) applyFilter(fromHash(), false);
+    window.addEventListener('hashchange', () => {
+      if (buttons.some(button => button.dataset.filter === fromHash())) applyFilter(fromHash(), false);
     });
   }
 

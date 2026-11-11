@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&family=Noto+Serif+Bengali:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=11">
+  <link rel="stylesheet" href="style.css?v=12">
   <script>if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; addEventListener('load', () => { if (!location.hash) window.scrollTo(0, 0); });</script>
 </head>
 <body>
@@ -27,8 +27,16 @@
       <span class="logo-bn" lang="bn">বাংলার গহনা</span>
     </a>
     <nav class="nav" aria-label="Main navigation">
-      <a href="#shop">Shop</a>
-      <a href="#collections">Collections</a>
+      <a href="collections.html">Shop</a>
+      <div class="nav-group">
+        <a href="collections.html" class="nav-parent">Collections <span class="nav-caret" aria-hidden="true"></span></a>
+        <ul class="nav-sub" aria-label="Collection categories">
+          <li><a href="collections.html#all">All Pieces</a></li>
+          <li><a href="collections.html#earrings">Earrings</a></li>
+          <li><a href="collections.html#necklaces">Necklaces</a></li>
+          <li><a href="collections.html#bangles">Bangles &amp; Rings</a></li>
+        </ul>
+      </div>
       <a href="#story">Our Story</a>
     </nav>
     <div class="header-actions">
@@ -55,7 +63,7 @@
         <h1><span class="bn" lang="bn">বাংলার গহনা</span>Fine jewellery,<br>handcrafted in <em>Bengal.</em></h1>
         <p class="hero-text">Gold and silver jewellery shaped by Bengali karigars — for weddings, pujo, and every ordinary Tuesday that deserves a little gold.</p>
         <div class="hero-actions">
-          <a class="button button-gold" href="#collections">EXPLORE COLLECTIONS <span>↗</span></a>
+          <a class="button button-gold" href="collections.html">EXPLORE COLLECTIONS <span>↗</span></a>
           <a class="link-underline" href="https://wa.me/918697771768" target="_blank" rel="noopener noreferrer">ORDER ON WHATSAPP <span>↗</span></a>
         </div>
         <p class="hero-note">Ships worldwide · duties payable on delivery</p>
@@ -88,50 +96,22 @@
           <p class="eyebrow">THE PIECES YOU CAN'T GET ENOUGH OF</p>
           <h2>Our collections <span class="bn-inline" lang="bn">সংগ্রহ</span></h2>
         </div>
-        <a class="link-underline" href="#products-grid">VIEW ALL PIECES <span>↗</span></a>
+        <a class="link-underline" href="collections.html">VIEW ALL PIECES <span>↗</span></a>
       </div>
 
-      <div class="filters" role="group" aria-label="Filter products">
-        <button class="active" data-filter="all">ALL PIECES</button>
-        <button data-filter="earrings">EARRINGS</button>
-        <button data-filter="necklaces">NECKLACES</button>
-        <button data-filter="bangles">BANGLES &amp; RINGS</button>
-      </div>
-
-      <div class="product-grid" id="products-grid">
-        <article class="product" data-category="earrings">
-          <div class="product-image">
-            <a class="product-link" href="product-jhumka.html" aria-label="View The Rajbari Jhumka"><img src="images/earrings.jpg" alt="Traditional gold Bengali jhumka earrings with pearl drops on maroon silk" loading="lazy"></a>
-            <span class="tag">BESTSELLER</span>
-            <button class="add" type="button" data-name="The Rajbari Jhumka" data-image="images/earrings.jpg" data-url="product-jhumka.html" data-price="2450" aria-label="Add The Rajbari Jhumka to bag">+</button>
-          </div>
-          <div class="product-info">
-            <div><h3><a href="product-jhumka.html">The Rajbari Jhumka</a></h3><p><span lang="bn">রাজবাড়ির ঝুমকা</span> · GOLD-PLATED</p></div>
-            <span class="price" data-inr="2450">₹2,450</span>
-          </div>
-        </article>
-        <article class="product" data-category="necklaces">
-          <div class="product-image">
-            <a class="product-link" href="product-haar.html" aria-label="View The Debi Haar"><img src="images/necklace.jpg" alt="Antique gold Bengali temple necklace with carved deity pendants on ivory silk" loading="lazy"></a>
-            <span class="tag">CLASSIC</span>
-            <button class="add" type="button" data-name="The Debi Haar" data-image="images/necklace.jpg" data-url="product-haar.html" data-price="6900" aria-label="Add The Debi Haar to bag">+</button>
-          </div>
-          <div class="product-info">
-            <div><h3><a href="product-haar.html">The Debi Haar</a></h3><p><span lang="bn">দেবী হার</span> · TEMPLE NECKLACE</p></div>
-            <span class="price" data-inr="6900">₹6,900</span>
-          </div>
-        </article>
-        <article class="product" data-category="bangles">
-          <div class="product-image">
-            <a class="product-link" href="product-bala.html" aria-label="View The Bangla Bala Set"><img src="images/bangles.jpg" alt="Set of traditional gold Bengali bangles and a carved gold ring on maroon velvet with marigolds" loading="lazy"></a>
-            <span class="tag">NEW</span>
-            <button class="add" type="button" data-name="The Bangla Bala Set" data-image="images/bangles.jpg" data-url="product-bala.html" data-price="3200" aria-label="Add The Bangla Bala Set to bag">+</button>
-          </div>
-          <div class="product-info">
-            <div><h3><a href="product-bala.html">The Bangla Bala Set</a></h3><p><span lang="bn">বাংলা বালা</span> · SET OF 4</p></div>
-            <span class="price" data-inr="3200">₹3,200</span>
-          </div>
-        </article>
+      <div class="collection-cards">
+        <a class="collection-card" href="collections.html#earrings">
+          <span class="collection-media"><img src="images/earrings.jpg" alt="Gold Bengali jhumka earrings with pearl drops on maroon silk" loading="lazy"></span>
+          <span class="collection-label">Earrings<small>Jhumkas &amp; studs</small></span>
+        </a>
+        <a class="collection-card" href="collections.html#necklaces">
+          <span class="collection-media"><img src="images/necklace.jpg" alt="Antique gold Bengali temple necklace on ivory silk" loading="lazy"></span>
+          <span class="collection-label">Necklaces<small>Haars &amp; temple gold</small></span>
+        </a>
+        <a class="collection-card" href="collections.html#bangles">
+          <span class="collection-media"><img src="images/bangles.jpg" alt="Traditional gold Bengali bangles and a carved ring on maroon velvet" loading="lazy"></span>
+          <span class="collection-label">Bangles &amp; Rings<small>Balas, churis &amp; bands</small></span>
+        </a>
       </div>
       <p class="price-note">Prices are in Indian rupees. USD and GBP conversions are approximate — your card is charged in INR.</p>
     </section>
@@ -192,7 +172,7 @@
         <p>Baghajatin, Kolkata 700086, India<br>Mon – Sat · 11am to 8pm IST<br><a href="mailto:hello@fashion-jewellery.example">hello@fashion-jewellery.example</a></p>
       </div>
       <div class="footer-links">
-        <a href="#collections">COLLECTIONS</a>
+        <a href="collections.html">COLLECTIONS</a>
         <a href="#story">OUR STORY</a>
         <a href="#shipping">SHIPPING</a>
         <a href="returns.html">RETURNS</a>
