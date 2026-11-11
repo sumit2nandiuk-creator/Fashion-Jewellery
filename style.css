@@ -16,7 +16,7 @@ body{margin:0;background:var(--ivory);color:var(--ink);font-family:'Jost',system
 a{color:inherit;text-decoration:none}
 button,input{font:inherit}
 button{cursor:pointer}
-img{display:block;max-width:100%}
+img{display:block;max-width:100%;height:auto}
 .bn,.logo-bn,.bn-line,.bn-inline,.product-info h3{font-family:'Noto Serif Bengali',serif}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
 
@@ -106,7 +106,7 @@ img{display:block;max-width:100%}
 .filters button.active{color:var(--maroon);border-color:var(--maroon);font-weight:500}
 .product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .product[hidden]{display:none}
-.product-image{position:relative;background:var(--ivory-2);border:1px solid var(--line);overflow:hidden;aspect-ratio:1/1.05}
+.product-image{position:relative;background:var(--ivory-2);border:1px solid var(--line);overflow:hidden;aspect-ratio:1/1}
 .product-image img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
 .product:hover .product-image img{transform:scale(1.04)}
 .tag{position:absolute;top:14px;left:14px;background:var(--maroon);color:var(--gold-2);padding:7px 10px;font-size:9px;letter-spacing:.16em;font-weight:500}
@@ -189,7 +189,7 @@ footer{background:var(--maroon-deep);color:var(--ivory);padding:64px 6% 26px}
 .product-detail{display:grid;grid-template-columns:1.04fr 1fr;gap:6%;align-items:start}
 .gallery-main{position:relative;background:var(--ivory-2);border:1px solid var(--line);overflow:hidden}
 .gallery-open{display:block;width:100%;border:0;background:none;padding:0;cursor:zoom-in}
-.gallery-image{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;transition:transform .5s ease}
+.gallery-image{width:100%;height:100%;aspect-ratio:1/1;object-fit:contain;display:block;background:var(--ivory-2);transition:transform .5s ease}
 .gallery-main:hover .gallery-image{transform:scale(1.02)}
 .zoom-hint{position:absolute;right:12px;bottom:12px;display:inline-flex;align-items:center;gap:7px;background:rgba(251,245,233,.95);color:var(--maroon);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;padding:8px 10px;opacity:0;transition:opacity .2s}
 .gallery-main:hover .zoom-hint,.zoom-hint:focus-visible{opacity:1}
