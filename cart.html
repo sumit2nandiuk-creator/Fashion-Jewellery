@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#6E1224">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <meta name="description" content="Your bag at Fashion Jewellery — handcrafted Bengali jewellery from Kolkata.">
+  <title>Your bag | Fashion Jewellery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&family=Noto+Serif+Bengali:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=9">
+</head>
+<body>
+  <div class="announcement"><span lang="bn">হাতে তৈরি বাংলার গহনা</span><i>·</i>WORLDWIDE SHIPPING FROM KOLKATA<i>·</i>FREE INDIA DELIVERY OVER ₹999</div>
+
+  <header class="header">
+    <button class="icon-button menu-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+    <a class="logo" href="#top" aria-label="Fashion Jewellery home">
+      <span class="logo-en">Fashion Jewellery</span>
+      <span class="logo-bn" lang="bn">বাংলার গহনা</span>
+    </a>
+    <nav class="nav" aria-label="Main navigation">
+      <a href="#shop">Shop</a>
+      <a href="#collections">Collections</a>
+      <a href="#story">Our Story</a>
+    </nav>
+    <div class="header-actions">
+      <a href="https://wa.me/918697771768" target="_blank" rel="noopener noreferrer" class="contact-link">GET IN TOUCH <span>↗</span></a>
+      <div class="currency-picker" data-currency-picker>
+        <button class="currency-toggle" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Currency: Indian rupee">
+          <span class="currency-code">₹ INR</span>
+          <svg class="currency-chevron" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <ul class="currency-menu" role="listbox" aria-label="Choose currency" hidden>
+          <li role="option" tabindex="-1" data-value="INR" aria-selected="true" class="selected"><span class="c-sym">₹</span><span class="c-code">INR</span><span class="c-name">Indian rupee</span></li>
+          <li role="option" tabindex="-1" data-value="USD" aria-selected="false"><span class="c-sym">$</span><span class="c-code">USD</span><span class="c-name">US dollar</span></li>
+          <li role="option" tabindex="-1" data-value="GBP" aria-selected="false"><span class="c-sym">£</span><span class="c-code">GBP</span><span class="c-name">Pound sterling</span></li>
+        </ul>
+      </div>
+      <a class="bag-button" href="cart.html" aria-current="page" aria-label="View your bag"><svg class="bag-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 4h2.2l2.3 9.9a2 2 0 0 0 1.95 1.55h7.9a2 2 0 0 0 1.95-1.55L20.5 7.5H6.1"/><circle cx="10" cy="19.5" r="1.35"/><circle cx="17.8" cy="19.5" r="1.35"/></svg><span class="bag-count">0</span></a>
+    </div>
+  </header>
+
+  <main class="cart-page" data-cart-page>
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a><span>/</span><span aria-current="page">Bag</span>
+    </nav>
+
+    <div class="cart-head">
+      <h1>Your bag</h1>
+      <p class="cart-count-label" data-bag-count-label>No pieces yet</p>
+    </div>
+
+    <div class="cart-layout">
+      <div class="cart-items" aria-live="polite"></div>
+
+      <aside class="cart-summary" aria-label="Order summary">
+        <h2>Summary</h2>
+        <div class="summary-row"><span>Subtotal</span><strong data-bag-subtotal>₹0</strong></div>
+        <p class="cart-note">Shipping, duties and the payment link are confirmed on WhatsApp before anything is charged. The final charge is in INR.</p>
+        <button class="button button-gold whatsapp-order" type="button">ORDER VIA WHATSAPP <span>↗</span></button>
+        <a class="link-underline cart-continue" href="index.html#collections">CONTINUE SHOPPING <span>↗</span></a>
+        <ul class="cart-trust">
+          <li>Hand-finished in our Kolkata workshop</li>
+          <li>Ships worldwide · tracked and insured</li>
+          <li>14-day returns on unworn pieces</li>
+        </ul>
+      </aside>
+    </div>
+
+    <div class="cart-empty" hidden>
+      <span class="cart-empty-glyph">◈</span>
+      <h2>Your bag is empty</h2>
+      <p>Add a piece or two, and they will be waiting here when you return.</p>
+      <a class="button button-maroon" href="index.html#collections">EXPLORE COLLECTIONS <span>↗</span></a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="logo" href="#top"><span class="logo-en">Fashion Jewellery</span><span class="logo-bn" lang="bn">বাংলার গহনা</span></a>
+        <p>Baghajatin, Kolkata 700086, India<br>Mon – Sat · 11am to 8pm IST<br><a href="mailto:hello@fashion-jewellery.example">hello@fashion-jewellery.example</a></p>
+      </div>
+      <div class="footer-links">
+        <a href="#collections">COLLECTIONS</a>
+        <a href="#story">OUR STORY</a>
+        <a href="#shipping">SHIPPING</a>
+        <a href="returns.html">RETURNS</a>
+        <a href="privacy.html">PRIVACY</a>
+        <a href="terms.html">TERMS</a>
+        <a href="https://wa.me/918697771768" target="_blank" rel="noopener noreferrer">WHATSAPP</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 FASHION JEWELLERY. ALL RIGHTS RESERVED.</span>
+      <span lang="bn">বাংলার গহনা · MADE WITH CARE IN BENGAL</span>
+    </div>
+  </footer>
+
+  <a class="whatsapp-float" href="https://wa.me/918697771768?text=Hello%20Fashion%20Jewellery!%20I%27d%20like%20to%20know%20more%20about%20your%20jewellery." target="_blank" rel="noopener noreferrer" aria-label="Chat with Fashion Jewellery on WhatsApp">
+    <svg viewBox="-1.1 -1.1 26.2 26.2" aria-hidden="true" focusable="false"><path d="M20.463 3.488A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" fill="#6BD67C" stroke="#FFFFFF" stroke-width="1.1" stroke-linejoin="round"/><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347" fill="#FFFFFF"/></svg>
+  </a>
+
+  <script src="script.js"></script>
+</body></html>
