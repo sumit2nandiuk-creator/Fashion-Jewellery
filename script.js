@@ -313,12 +313,16 @@
 
           const body = document.createElement('div');
           body.className = 'cart-item-body';
+          const lineTotal = document.createElement('span');
+          lineTotal.className = 'cart-line-total';
+          lineTotal.textContent = money(item.price * item.qty);
+
           const head = document.createElement('div');
           head.className = 'cart-item-head';
           const name = document.createElement('h2');
           name.className = 'cart-item-name';
           name.textContent = item.name;
-          head.append(name, makeRemove(item));
+          head.append(name, lineTotal);
 
           const unit = document.createElement('p');
           unit.className = 'cart-item-unit';
@@ -326,10 +330,7 @@
 
           const foot = document.createElement('div');
           foot.className = 'cart-item-foot';
-          const lineTotal = document.createElement('span');
-          lineTotal.className = 'cart-line-total';
-          lineTotal.textContent = money(item.price * item.qty);
-          foot.append(makeStepper(item), lineTotal);
+          foot.append(makeStepper(item), makeRemove(item));
 
           body.append(head, unit, foot);
           row.append(media, body);
