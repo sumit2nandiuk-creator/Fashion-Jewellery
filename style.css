@@ -110,8 +110,9 @@ img{display:block;max-width:100%}
 .product-image img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
 .product:hover .product-image img{transform:scale(1.04)}
 .tag{position:absolute;top:14px;left:14px;background:var(--maroon);color:var(--gold-2);padding:7px 10px;font-size:9px;letter-spacing:.16em;font-weight:500}
-.add{position:absolute;right:14px;bottom:14px;width:42px;height:42px;border-radius:50%;border:1px solid var(--gold);background:rgba(251,245,233,.94);color:var(--maroon);font-size:22px;line-height:1;display:grid;place-items:center;transition:.2s}
-.add:hover{background:var(--maroon);color:var(--gold-2);border-color:var(--maroon)}
+.product-image .add{position:absolute;right:14px;bottom:14px;width:42px;height:42px;border-radius:50%;border:1px solid var(--gold);background:rgba(251,245,233,.94);color:var(--maroon);font-size:22px;line-height:1;display:grid;place-items:center;transition:.2s}
+.product-image .add:hover{background:var(--maroon);color:var(--gold-2);border-color:var(--maroon)}
+.detail-actions .button{width:auto;flex:0 0 auto}
 .product-info{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding-top:16px}
 .product-info h3{font-size:16px;margin:0 0 6px;font-weight:500;color:var(--maroon-deep)}
 .product-info p{font-size:9px;letter-spacing:.14em;color:var(--muted);margin:0;font-family:'Jost',sans-serif}
@@ -284,7 +285,7 @@ body.lightbox-open{overflow:hidden}
   .gallery-thumbs{gap:8px}
   .zoom-hint{opacity:1;font-size:9px;padding:7px 8px}
   .detail-actions{flex-direction:column;align-items:stretch;gap:16px}
-  .button-maroon{width:100%}
+  .detail-actions .button-maroon{width:100%}
   .detail-wa{justify-content:center}
   .detail-list li{grid-template-columns:104px 1fr;gap:10px;font-size:13px}
   .related{margin-top:56px}
