@@ -33,14 +33,17 @@
     </nav>
     <div class="header-actions">
       <a href="https://wa.me/918697771768" target="_blank" rel="noopener noreferrer" class="contact-link">GET IN TOUCH <span>↗</span></a>
-      <label class="currency-picker">
-        <span class="sr-only">Currency</span>
-        <select id="currency" aria-label="Choose currency">
-          <option value="INR">₹ INR</option>
-          <option value="USD">$ USD</option>
-          <option value="GBP">£ GBP</option>
-        </select>
-      </label>
+      <div class="currency-picker" data-currency-picker>
+        <button class="currency-toggle" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Currency: Indian rupee">
+          <span class="currency-code">₹ INR</span>
+          <svg class="currency-chevron" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <ul class="currency-menu" role="listbox" aria-label="Choose currency" hidden>
+          <li role="option" tabindex="-1" data-value="INR" aria-selected="true" class="selected"><span class="c-sym">₹</span><span class="c-code">INR</span><span class="c-name">Indian rupee</span></li>
+          <li role="option" tabindex="-1" data-value="USD" aria-selected="false"><span class="c-sym">$</span><span class="c-code">USD</span><span class="c-name">US dollar</span></li>
+          <li role="option" tabindex="-1" data-value="GBP" aria-selected="false"><span class="c-sym">£</span><span class="c-code">GBP</span><span class="c-name">Pound sterling</span></li>
+        </ul>
+      </div>
       <button class="bag-button" type="button" aria-label="Open shopping bag">BAG <span class="bag-count">0</span></button>
     </div>
   </header>
@@ -98,34 +101,34 @@
       <div class="product-grid" id="products-grid">
         <article class="product" data-category="earrings">
           <div class="product-image">
-            <img src="images/earrings.jpg" alt="Traditional gold Bengali jhumka earrings with pearl drops on maroon silk" loading="lazy">
+            <a class="product-link" href="product-jhumka.html" aria-label="View The Rajbari Jhumka"><img src="images/earrings.jpg" alt="Traditional gold Bengali jhumka earrings with pearl drops on maroon silk" loading="lazy"></a>
             <span class="tag">BESTSELLER</span>
             <button class="add" type="button" data-name="The Rajbari Jhumka" data-price="2450" aria-label="Add The Rajbari Jhumka to bag">+</button>
           </div>
           <div class="product-info">
-            <div><h3>The Rajbari Jhumka</h3><p><span lang="bn">রাজবাড়ির ঝুমকা</span> · GOLD-PLATED</p></div>
+            <div><h3><a href="product-jhumka.html">The Rajbari Jhumka</a></h3><p><span lang="bn">রাজবাড়ির ঝুমকা</span> · GOLD-PLATED</p></div>
             <span class="price" data-inr="2450">₹2,450</span>
           </div>
         </article>
         <article class="product" data-category="necklaces">
           <div class="product-image">
-            <img src="images/necklace.jpg" alt="Antique gold Bengali temple necklace with carved deity pendants on ivory silk" loading="lazy">
+            <a class="product-link" href="product-haar.html" aria-label="View The Debi Haar"><img src="images/necklace.jpg" alt="Antique gold Bengali temple necklace with carved deity pendants on ivory silk" loading="lazy"></a>
             <span class="tag">CLASSIC</span>
             <button class="add" type="button" data-name="The Debi Haar" data-price="6900" aria-label="Add The Debi Haar to bag">+</button>
           </div>
           <div class="product-info">
-            <div><h3>The Debi Haar</h3><p><span lang="bn">দেবী হার</span> · TEMPLE NECKLACE</p></div>
+            <div><h3><a href="product-haar.html">The Debi Haar</a></h3><p><span lang="bn">দেবী হার</span> · TEMPLE NECKLACE</p></div>
             <span class="price" data-inr="6900">₹6,900</span>
           </div>
         </article>
         <article class="product" data-category="bangles">
           <div class="product-image">
-            <img src="images/bangles.jpg" alt="Set of traditional gold Bengali bangles and a carved gold ring on maroon velvet with marigolds" loading="lazy">
+            <a class="product-link" href="product-bala.html" aria-label="View The Bangla Bala Set"><img src="images/bangles.jpg" alt="Set of traditional gold Bengali bangles and a carved gold ring on maroon velvet with marigolds" loading="lazy"></a>
             <span class="tag">NEW</span>
             <button class="add" type="button" data-name="The Bangla Bala Set" data-price="3200" aria-label="Add The Bangla Bala Set to bag">+</button>
           </div>
           <div class="product-info">
-            <div><h3>The Bangla Bala Set</h3><p><span lang="bn">বাংলা বালা</span> · SET OF 4</p></div>
+            <div><h3><a href="product-bala.html">The Bangla Bala Set</a></h3><p><span lang="bn">বাংলা বালা</span> · SET OF 4</p></div>
             <span class="price" data-inr="3200">₹3,200</span>
           </div>
         </article>
