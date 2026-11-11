@@ -176,7 +176,7 @@
     try { localStorage.setItem('fashion-jewellery-bag', JSON.stringify(bag)); } catch (_) {}
   }
 
-  document.querySelectorAll('.add').forEach(button => {
+  document.querySelectorAll('.add, .add-to-bag').forEach(button => {
     button.addEventListener('click', () => {
       bag.push({ name: button.dataset.name, price: Number(button.dataset.price) });
       renderBag();
