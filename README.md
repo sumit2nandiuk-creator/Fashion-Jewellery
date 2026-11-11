@@ -8,7 +8,7 @@ A responsive storefront concept for a Bengali gold and silver jewellery house in
 - `product-jhumka.html`, `product-haar.html`, `product-bala.html` — item detail pages with a thumbnail gallery, full-screen image viewer and add-to-bag
 - `shipping.html`, `returns.html`, `privacy.html`, `terms.html` — customer policy pages
 - `style.css` — the maroon, gold and ivory design system, with layout rules for tablet and mobile
-- `script.js` — mobile navigation, collection filters, the custom currency dropdown, the shopping bag (saved in `localStorage`) and WhatsApp order hand-off
+- `script.js` — mobile navigation, collection filters, the custom currency dropdown, the shopping bag (quantities merged per piece, saved in `localStorage`, fly-to-cart animation and toast) and WhatsApp order hand-off
 - `product.js` — product gallery thumbnails and the full-screen image viewer (keyboard arrows, Escape, swipe)
 - `images/` — hero, collection and workshop photography plus the favicon
 

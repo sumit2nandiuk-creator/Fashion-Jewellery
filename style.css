@@ -176,8 +176,18 @@ footer{background:var(--maroon-deep);color:var(--ivory);padding:64px 6% 26px}
 .close-drawer{border:0;background:none;font-size:30px;line-height:1;color:var(--maroon)}
 .bag-items{flex:1;overflow:auto;padding-top:14px;font-size:14px;color:var(--ink)}
 .bag-items p{color:var(--muted);font-weight:300}
-.bag-row{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding:15px 0}
-.bag-row button{background:none;border:0;text-decoration:underline;font-size:11px;color:var(--maroon)}
+.bag-empty{color:var(--muted);font-weight:300}
+.bag-row{border-bottom:1px solid var(--line);padding:16px 0}
+.bag-row-top{display:flex;align-items:baseline;justify-content:space-between;gap:14px}
+.bag-name{font-size:15px;color:var(--ink);line-height:1.35}
+.bag-line-total{font-size:14px;color:var(--maroon);white-space:nowrap}
+.bag-row-bottom{display:flex;align-items:center;gap:12px;margin-top:10px;flex-wrap:wrap}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--line);background:rgba(255,255,255,.5)}
+.qty-button{width:28px;height:28px;border:0;background:transparent;color:var(--maroon);font-size:15px;line-height:1;cursor:pointer;transition:background .15s}
+.qty-button:hover{background:rgba(190,151,77,.18)}
+.qty-value{min-width:26px;text-align:center;font-size:12px;letter-spacing:.06em}
+.bag-unit{font-size:11px;color:var(--muted)}
+.bag-remove{margin-left:auto;background:none;border:0;padding:0;text-decoration:underline;text-underline-offset:2px;font-size:11px;color:var(--maroon);cursor:pointer}
 .drawer-footer>div{display:flex;justify-content:space-between;font-size:15px;color:var(--maroon);font-weight:500}
 .drawer-footer p{font-size:12px;color:var(--muted);line-height:1.6;margin:8px 0 12px;font-weight:300}
 .whatsapp-order{width:100%}
@@ -223,6 +233,22 @@ footer{background:var(--maroon-deep);color:var(--ivory);padding:64px 6% 26px}
 .product-info h3 a:hover{color:var(--gold)}
 .product-link{display:block}
 .product-info .price{font-size:15px;color:var(--maroon);white-space:nowrap;padding-top:2px}
+
+/* added-to-bag feedback */
+.toast{position:fixed;left:50%;bottom:26px;z-index:12;display:flex;align-items:center;gap:16px;max-width:min(92vw,430px);background:var(--ivory);border:1px solid var(--gold);box-shadow:0 16px 34px rgba(44,10,16,.22);padding:13px 16px;opacity:0;pointer-events:none;transform:translate(-50%,14px);transition:opacity .28s ease,transform .28s ease}
+.toast.show{opacity:1;pointer-events:auto;transform:translate(-50%,0)}
+.toast-text{font-size:12.5px;line-height:1.45;color:var(--ink)}
+.toast-link{border:0;background:none;padding:0;color:var(--maroon);font-family:'Jost',sans-serif;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.fly-thumb{position:fixed;z-index:31;object-fit:cover;border-radius:8px;pointer-events:none;box-shadow:0 10px 24px rgba(0,0,0,.3)}
+.fly-dot{background:var(--gold);border-radius:50%}
+.bag-button.bump .bag-icon{animation:cart-bump .55s ease}
+.bag-button.bump .bag-count{animation:badge-pop .55s ease}
+@keyframes cart-bump{0%,100%{transform:translateY(0) scale(1)}30%{transform:translateY(-3px) scale(1.12)}60%{transform:translateY(0) scale(.96)}}
+@keyframes badge-pop{0%,100%{transform:scale(1)}35%{transform:scale(1.35)}70%{transform:scale(.92)}}
+@media(prefers-reduced-motion: reduce){
+  .bag-button.bump .bag-icon,.bag-button.bump .bag-count{animation:none}
+  .fly-thumb{display:none}
+}
 
 /* full-screen image viewer */
 .lightbox{position:fixed;inset:0;z-index:20;background:rgba(24,4,8,.95);display:flex;align-items:center;justify-content:center;padding:4vh 5vw}
@@ -307,6 +333,10 @@ body.lightbox-open{overflow:hidden}
   .lightbox-prev{left:8px}
   .lightbox-next{right:8px}
   .lightbox-close{top:10px;right:10px;width:40px;height:40px}
+  .toast{left:12px;right:12px;bottom:84px;max-width:none;justify-content:space-between;transform:translateY(14px)}
+  .toast.show{transform:translateY(0)}
+  .bag-name{font-size:14px}
+  .qty-button{width:30px;height:30px}
   .info-grid{grid-template-columns:1fr;gap:34px}
   .info-grid th{white-space:normal}
   .hero{min-height:600px;padding:60px 6% 96px;background-position:66% center}

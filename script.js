@@ -176,11 +176,28 @@
   const orderButton = document.querySelector('.whatsapp-order');
   const bagButton = document.querySelector('.bag-button');
   const closeButton = document.querySelector('.close-drawer');
+  const reduceMotion = typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   let bag = [];
   try {
     const saved = JSON.parse(localStorage.getItem('fashion-jewellery-bag') || '[]');
-    if (Array.isArray(saved)) bag = saved.filter(item => typeof item.name === 'string' && Number.isFinite(item.price));
+    if (Array.isArray(saved)) {
+      saved.forEach(item => {
+        if (typeof item.name !== 'string' || !Number.isFinite(item.price)) return;
+        const qty = Number.isFinite(item.qty) && item.qty > 0 ? Math.floor(item.qty) : 1;
+        const existing = bag.find(line => line.name === item.name && line.price === item.price);
+        if (existing) existing.qty += qty;
+        else bag.push({ name: item.name, price: item.price, qty: qty });
+      });
+    }
   } catch (_) {}
+
+  const bagCount = () => bag.reduce((total, item) => total + item.qty, 0);
+  const bagTotal = () => bag.reduce((total, item) => total + item.price * item.qty, 0);
+
+  function saveBag() {
+    try { localStorage.setItem('fashion-jewellery-bag', JSON.stringify(bag)); } catch (_) {}
+  }
 
   function toggleBag(open) {
     if (!drawer) return;
@@ -190,42 +207,161 @@
     if (open && closeButton) closeButton.focus();
   }
 
+  function quantityControl(item, direction, label) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'qty-button';
+    button.textContent = direction > 0 ? '+' : '\u2212';
+    button.setAttribute('aria-label', label);
+    button.addEventListener('click', () => {
+      item.qty += direction;
+      if (item.qty < 1) bag = bag.filter(line => line !== item);
+      renderBag();
+      saveBag();
+    });
+    return button;
+  }
+
   function renderBag() {
-    document.querySelectorAll('.bag-count').forEach(el => { el.textContent = String(bag.length); });
+    document.querySelectorAll('.bag-count').forEach(el => { el.textContent = String(bagCount()); });
     const items = document.querySelector('.bag-items');
     if (items) {
       items.replaceChildren();
       if (!bag.length) {
         const p = document.createElement('p');
+        p.className = 'bag-empty';
         p.textContent = 'Your bag is waiting for a little sparkle.';
         items.append(p);
       }
-      bag.forEach((item, index) => {
+      bag.forEach(item => {
         const row = document.createElement('div');
         row.className = 'bag-row';
+
+        const top = document.createElement('div');
+        top.className = 'bag-row-top';
         const name = document.createElement('span');
-        name.textContent = item.name + ' \u2014 ' + money(item.price);
+        name.className = 'bag-name';
+        name.textContent = item.name;
+        const total = document.createElement('span');
+        total.className = 'bag-line-total';
+        total.textContent = money(item.price * item.qty);
+        top.append(name, total);
+
+        const bottom = document.createElement('div');
+        bottom.className = 'bag-row-bottom';
+        const qty = document.createElement('div');
+        qty.className = 'qty';
+        const value = document.createElement('span');
+        value.className = 'qty-value';
+        value.textContent = String(item.qty);
+        value.setAttribute('aria-live', 'polite');
+        qty.append(quantityControl(item, -1, 'Decrease quantity of ' + item.name), value, quantityControl(item, 1, 'Increase quantity of ' + item.name));
+        const unit = document.createElement('span');
+        unit.className = 'bag-unit';
+        unit.textContent = item.qty > 1 ? money(item.price) + ' each' : '';
         const remove = document.createElement('button');
         remove.type = 'button';
+        remove.className = 'bag-remove';
         remove.textContent = 'Remove';
-        remove.addEventListener('click', () => { bag.splice(index, 1); renderBag(); });
-        row.append(name, remove);
+        remove.addEventListener('click', () => {
+          bag = bag.filter(line => line !== item);
+          renderBag();
+          saveBag();
+        });
+        bottom.append(qty, unit, remove);
+
+        row.append(top, bottom);
         items.append(row);
       });
     }
     const subtotal = document.querySelector('.subtotal');
-    if (subtotal) subtotal.textContent = money(bag.reduce((sum, item) => sum + item.price, 0));
+    if (subtotal) subtotal.textContent = money(bagTotal());
     if (orderButton) orderButton.disabled = !bag.length;
-    try { localStorage.setItem('fashion-jewellery-bag', JSON.stringify(bag)); } catch (_) {}
+    saveBag();
+  }
+
+  /* ------------------------------------------------- added-to-bag feedback */
+  let toast;
+  let toastTimer;
+
+  function getToast() {
+    if (toast) return toast;
+    toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.setAttribute('role', 'status');
+    toast.setAttribute('aria-live', 'polite');
+    toast.innerHTML = '<span class="toast-text"></span><button class="toast-link" type="button">View bag</button>';
+    toast.querySelector('.toast-link').addEventListener('click', () => {
+      toast.classList.remove('show');
+      toggleBag(true);
+    });
+    document.body.append(toast);
+    return toast;
+  }
+
+  function showToast(name) {
+    const el = getToast();
+    el.querySelector('.toast-text').textContent = 'Added to bag \u2014 ' + name;
+    el.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => el.classList.remove('show'), 2800);
+  }
+
+  function pulseCart() {
+    if (!bagButton) return;
+    bagButton.classList.remove('bump');
+    void bagButton.offsetWidth;
+    bagButton.classList.add('bump');
+    setTimeout(() => bagButton.classList.remove('bump'), 600);
+  }
+
+  function flyToCart(source) {
+    if (reduceMotion || !bagButton) { pulseCart(); return; }
+    const image = source && (source.querySelector('img') || (source.tagName === 'IMG' ? source : null));
+    const from = (image || source || {}).getBoundingClientRect ? (image || source).getBoundingClientRect() : null;
+    const to = bagButton.getBoundingClientRect();
+    if (!from || !from.width) { pulseCart(); return; }
+    const size = Math.min(from.width, 110);
+    let node;
+    if (image) {
+      node = document.createElement('img');
+      node.src = image.currentSrc || image.src;
+    } else {
+      node = document.createElement('span');
+      node.className = 'fly-dot';
+    }
+    node.classList.add('fly-thumb');
+    node.style.left = (from.left + from.width / 2 - size / 2) + 'px';
+    node.style.top = (from.top + from.height / 2 - size / 2) + 'px';
+    node.style.width = size + 'px';
+    node.style.height = size + 'px';
+    if (typeof node.animate !== 'function') { pulseCart(); return; }
+    document.body.append(node);
+    const dx = to.left + to.width / 2 - (from.left + from.width / 2);
+    const dy = to.top + to.height / 2 - (from.top + from.height / 2);
+    const animation = node.animate([
+      { transform: 'translate(0, 0) scale(1)', opacity: 1 },
+      { transform: 'translate(' + dx * 0.5 + 'px,' + (dy * 0.5 - 70) + 'px) scale(.62)', opacity: .95, offset: .55 },
+      { transform: 'translate(' + dx + 'px,' + dy + 'px) scale(.12)', opacity: .15 }
+    ], { duration: 720, easing: 'cubic-bezier(.2,.72,.3,1)' });
+    animation.onfinish = () => { node.remove(); pulseCart(); };
   }
 
   document.querySelectorAll('.add, .add-to-bag').forEach(button => {
     button.addEventListener('click', () => {
-      bag.push({ name: button.dataset.name, price: Number(button.dataset.price) });
+      const name = button.dataset.name;
+      const price = Number(button.dataset.price);
+      const existing = bag.find(item => item.name === name && item.price === price);
+      if (existing) existing.qty += 1;
+      else bag.push({ name: name, price: price, qty: 1 });
       renderBag();
-      toggleBag(true);
+      showToast(name);
+      const card = button.closest('.product') || button.closest('.product-detail');
+      const source = (card && (card.querySelector('.gallery-image') || card.querySelector('.product-image img'))) || button;
+      flyToCart(source);
     });
   });
+
   if (bagButton) bagButton.addEventListener('click', () => toggleBag(true));
   if (closeButton) closeButton.addEventListener('click', () => toggleBag(false));
   if (backdrop) backdrop.addEventListener('click', () => toggleBag(false));
@@ -236,8 +372,8 @@
   if (orderButton) {
     orderButton.addEventListener('click', () => {
       if (!bag.length) return;
-      const lines = bag.map(item => '- ' + item.name + ' (' + inrText(item.price) + ')');
-      const total = bag.reduce((sum, item) => sum + item.price, 0);
+      const lines = bag.map(item => '- ' + item.name + ' \u00d7 ' + item.qty + ' (' + inrText(item.price * item.qty) + ')');
+      const total = bagTotal();
       const converted = currency === 'INR' ? '' : ' (approx. ' + money(total) + ')';
       const message = 'Hello Fashion Jewellery! I\'d like to order:\n' + lines.join('\n') +
         '\nSubtotal: ' + inrText(total) + converted +
