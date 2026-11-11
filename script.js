@@ -41,6 +41,6 @@ orderButton.addEventListener('click', () => {
   const lines = bag.map(item => `- ${item.name} (₹${item.price})`);
   const total = bag.reduce((sum, item) => sum + item.price, 0);
   const message = `Hello Fashion Jewellery! I'd like to order:\n${lines.join('\n')}\nSubtotal: ₹${total}\nPlease confirm availability, delivery and final price.`;
-  window.open(`https://wa.me/918420386752?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
+  window.open(`https://wa.me/918697771768?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
 });
 renderBag();
