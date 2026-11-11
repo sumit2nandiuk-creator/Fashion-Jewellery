@@ -1,6 +1,6 @@
 # Fashion Jewellery — বাংলার গহনা
 
-A responsive storefront concept for a Bengali gold and silver jewellery house in Kolkata. Built as plain HTML, CSS and JavaScript, so it can be served from any static host (Cloudflare Pages, GitHub Pages, S3, Netlify).
+A responsive storefront concept for a Bengali gold and silver jewellery house in Baghajatin, Kolkata. Built as plain HTML, CSS and JavaScript, so it can be served from any static host (Cloudflare Pages, GitHub Pages, S3, Netlify).
 
 ## Pages
 
@@ -11,7 +11,7 @@ A responsive storefront concept for a Bengali gold and silver jewellery house in
 
 ## Ordering
 
-Customers build a bag and send the order as a WhatsApp message to +91 84203 86752. Availability, delivery and payment are settled in chat; there is no online checkout or newsletter signup.
+Customers build a bag and send the order as a WhatsApp message to +91 86977 71768. Availability, delivery and payment are settled in chat; there is no online checkout or newsletter signup.
 
 ## Notes
 
