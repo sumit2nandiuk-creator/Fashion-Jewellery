@@ -133,7 +133,7 @@ img{display:block;max-width:100%;height:auto}
 .story-copy .link-underline{margin-top:8px}
 
 /* shipping & sizing */
-.info{padding-top:20px;padding-bottom:90px}
+.info{padding-top:10px;padding-bottom:0}
 .info-head{max-width:640px}
 .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:6%;margin-top:44px}
 .info-grid h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--maroon);margin:0 0 14px}
@@ -144,7 +144,7 @@ img{display:block;max-width:100%;height:auto}
 .fineprint{font-size:12px;line-height:1.7;color:var(--muted);margin:16px 0 0;font-weight:300}
 
 /* assurances */
-.assurances{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;padding-top:80px;padding-bottom:90px;text-align:center}
+.assurances{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;padding-top:74px;padding-bottom:80px;text-align:center}
 .assurances>div{border-right:1px solid var(--line);padding-right:30px}
 .assurances>div:last-child{border-right:0;padding-right:0}
 .assurance-icon{display:block;color:var(--gold);font-size:20px;margin-bottom:14px}
@@ -319,7 +319,8 @@ body.lightbox-open{overflow:hidden}
   .story{grid-template-columns:1fr;gap:34px;padding-top:60px;padding-bottom:64px}
   .story-image img{height:380px}
   .story-image:after{inset:10px -10px -10px 10px}
-  .assurances{grid-template-columns:1fr;gap:30px;padding-top:56px;padding-bottom:60px;text-align:left}
+  .assurances{grid-template-columns:1fr;gap:28px;padding-top:40px;padding-bottom:52px;text-align:left}
+  .info{padding-top:0}
   .assurances>div{border-right:0;padding-right:0;border-bottom:1px solid var(--line);padding-bottom:26px}
   .assurances>div:last-child{border-bottom:0;padding-bottom:0}
   .assurances p{margin:0;max-width:none}
