@@ -34,4 +34,5 @@ Customers build a bag and send the order as a WhatsApp message to +91 86977 7176
 
 - `docs/Fashion-Jewellery-Website-Estimate.pdf` — client-facing project estimate and scope sheet
 - `docs/website-estimate.md` — the same estimate as editable Markdown
+- `docs/logos/` — the chosen emblem logo (master, 1200 px lockup and seal-only mark)
 - `docs/build-estimate-pdf.py` — regenerates the PDF (`python3 docs/build-estimate-pdf.py`, needs `fpdf2`)
