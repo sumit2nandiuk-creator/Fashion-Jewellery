@@ -20,6 +20,16 @@ The emblem chosen for the shop: a maroon seal with an alpona-inspired gold borde
 
 These match the site's existing palette, so the logo sits on the header and the estimate without a re-colour.
 
+## Web assets
+
+Derived from `logo-emblem-mark.png` with the cream background removed, and used on the site:
+
+| File | Use |
+|---|---|
+| `images/logo-mark.png` | 128 px mark shown beside the wordmark in the header (and in the footer) |
+| `images/logo-mark-180.png` | Apple touch icon |
+| `images/favicon.png` | 64 px browser tab icon |
+
 ## Notes before print
 
 - The artwork is a raster concept (PNG). Have it traced to vector (SVG/AI) before it is used on signage, boxes or foil stamping, so it stays sharp at large sizes.
