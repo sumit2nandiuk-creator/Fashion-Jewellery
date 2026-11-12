@@ -192,8 +192,8 @@ footer{background:var(--maroon-deep);color:var(--ivory);padding:64px 6% 26px}
 .footer-brand .logo-en{color:var(--ivory);font-size:29px}
 .footer-brand .logo-bn{color:var(--gold)}
 .footer-brand p{font-size:13px;line-height:1.8;color:rgba(255,248,236,.6);margin:18px 0 0;font-weight:300}
-.footer-brand a{color:var(--gold-2);border-bottom:1px solid rgba(231,213,169,.35)}
-.footer-brand a:hover{border-color:var(--gold-2)}
+.footer-brand a{color:var(--gold-2);border-bottom:0;text-decoration:none}
+.footer-brand a:hover{color:var(--ivory)}
 .footer-links{display:flex;gap:30px;font-size:10.5px;letter-spacing:.16em;flex-wrap:wrap}
 .footer-links a{color:rgba(255,248,236,.8);border-bottom:1px solid transparent;padding-bottom:5px}
 .footer-links a:hover{color:var(--gold-2);border-color:var(--gold-2)}
