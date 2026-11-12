@@ -29,7 +29,9 @@ img{display:block;max-width:100%;height:auto}
 .header{position:sticky;top:0;z-index:9;height:88px;display:flex;align-items:center;gap:clamp(14px,2.2vw,38px);padding:0 5%;background:var(--ivory);border-bottom:1px solid var(--line);transition:box-shadow .25s ease}
 .header.scrolled{box-shadow:0 10px 26px rgba(44,10,16,.12)}
 #top,#shop,#collections,#story,#shipping{scroll-margin-top:104px}
-.logo{display:flex;flex-direction:column;line-height:1;gap:6px;min-width:0}
+.logo{display:flex;align-items:center;gap:12px;min-width:0}
+.logo-mark{display:block;width:36px;height:36px;flex:0 0 auto}
+.logo-text{display:flex;flex-direction:column;line-height:1;gap:6px;min-width:0}
 .logo-en{font-family:'Cormorant Garamond',serif;font-size:27px;font-weight:600;letter-spacing:.01em;color:var(--maroon);white-space:nowrap}
 .logo-bn{font-size:11px;letter-spacing:.32em;color:var(--gold);text-transform:none}
 .nav{display:flex;gap:clamp(16px,1.9vw,32px);font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink)}
@@ -186,6 +188,7 @@ img{display:block;max-width:100%;height:auto}
 /* footer */
 footer{background:var(--maroon-deep);color:var(--ivory);padding:64px 6% 26px}
 .footer-top{display:flex;justify-content:space-between;gap:10%;align-items:flex-start}
+.footer-brand .logo-mark{width:42px;height:42px}
 .footer-brand .logo-en{color:var(--ivory);font-size:29px}
 .footer-brand .logo-bn{color:var(--gold)}
 .footer-brand p{font-size:13px;line-height:1.8;color:rgba(255,248,236,.6);margin:18px 0 0;font-weight:300}
@@ -357,6 +360,8 @@ body.lightbox-open{overflow:hidden}
   .announcement{font-size:8.5px;letter-spacing:.1em;padding:9px 12px;line-height:1.7}
   .announcement i{margin:0 6px}
   .header{height:74px;justify-content:flex-start;padding:0 5%;gap:12px}
+  .logo{gap:9px}
+  .logo-mark{width:30px;height:30px}
   .logo-en{font-size:19px}
   .logo-bn{font-size:9.5px;letter-spacing:.26em}
   .menu-toggle{display:block}
@@ -451,7 +456,17 @@ body.lightbox-open{overflow:hidden}
 }
 
 /* very small handsets */
+@media(max-width:430px){
+  .header{padding:0 4%;gap:10px}
+  .logo{gap:8px}
+  .logo-mark{width:26px;height:26px}
+  .logo-en{font-size:18px}
+  .currency-toggle{width:70px}
+}
+
 @media(max-width:380px){
+  .logo{gap:7px}
+  .logo-mark{width:24px;height:24px}
   .logo-en{font-size:17px}
   .logo-bn{font-size:8px;letter-spacing:.2em}
   .currency-toggle{width:70px;font-size:9.5px;padding:6px}

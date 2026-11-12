@@ -136,6 +136,8 @@ def build():
     pdf.set_fill_color(*GOLD)
     pdf.rect(0, 46, 210, 1.2, style="F")
 
+    pdf.image("images/logo-mark.png", x=172, y=9, w=24)
+
     pdf.set_xy(18, 11)
     pdf.set_font("body", "", 8)
     pdf.set_text_color(*GOLD)
