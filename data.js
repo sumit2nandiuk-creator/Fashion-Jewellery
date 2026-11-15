@@ -51,22 +51,22 @@ window.FJ_PRODUCTS = [
 
   /* ---- anklets ---- */
   { id: 'ghungroo-payal', name: 'Ghungroo Payal', bn: 'ঘুঙুর পায়েল', cat: 'anklets', price: 990, mrp: 1400, rating: 4.4, ratings: 588, metal: 'Silver', occasion: 'Everyday', stock: 64, img: 'images/products/ghungroo-payal.jpg' },
-  { id: 'silver-chain-anklet', name: 'Silver Chain Anklet', bn: 'রুপোর নূপুর', cat: 'anklets', price: 1350, mrp: 1800, rating: 4.2, ratings: 213, metal: 'Silver', occasion: 'Daily', stock: 39, img: null },
-  { id: 'bridal-payal', name: 'Bridal Payal with Bells', bn: 'বিয়ের পায়েল', cat: 'anklets', price: 2190, mrp: 2800, rating: 4.6, ratings: 97, metal: 'Silver', occasion: 'Bridal', stock: 19, img: null },
+  { id: 'silver-chain-anklet', name: 'Silver Chain Anklet', bn: 'রুপোর নূপুর', cat: 'anklets', price: 1350, mrp: 1800, rating: 4.2, ratings: 213, metal: 'Silver', occasion: 'Daily', stock: 39, img: 'images/products/silver-chain-anklet.jpg' },
+  { id: 'bridal-payal', name: 'Bridal Payal with Bells', bn: 'বিয়ের পায়েল', cat: 'anklets', price: 2190, mrp: 2800, rating: 4.6, ratings: 97, metal: 'Silver', occasion: 'Bridal', stock: 19, img: 'images/products/bridal-payal.jpg' },
 
   /* ---- hair ---- */
-  { id: 'alpona-tikka', name: 'Alpona Maang Tikka', bn: 'আলপনা টিকলি', cat: 'hair', price: 1690, mrp: 2200, rating: 4.4, ratings: 156, metal: 'Gold plated', occasion: 'Bridal', stock: 23, img: null },
-  { id: 'jhumka-hair-chain', name: 'Jhumka Hair Chain', bn: 'চুলের ঝুমকো', cat: 'hair', price: 2490, mrp: 3100, rating: 4.6, ratings: 88, metal: 'Gold plated', occasion: 'Wedding', stock: 12, img: null },
-  { id: 'juda-pin-set', name: 'Juda Pin Set', bn: 'জুড়ার পিন', cat: 'hair', price: 890, mrp: 1200, rating: 4.1, ratings: 301, metal: 'Gold plated', occasion: 'Everyday', stock: 45, img: null },
+  { id: 'alpona-tikka', name: 'Alpona Maang Tikka', bn: 'আলপনা টিকলি', cat: 'hair', price: 1690, mrp: 2200, rating: 4.4, ratings: 156, metal: 'Gold plated', occasion: 'Bridal', stock: 23, img: 'images/products/alpona-tikka.jpg' },
+  { id: 'jhumka-hair-chain', name: 'Jhumka Hair Chain', bn: 'চুলের ঝুমকো', cat: 'hair', price: 2490, mrp: 3100, rating: 4.6, ratings: 88, metal: 'Gold plated', occasion: 'Wedding', stock: 12, img: 'images/products/jhumka-hair-chain.jpg' },
+  { id: 'juda-pin-set', name: 'Juda Pin Set', bn: 'জুড়ার পিন', cat: 'hair', price: 890, mrp: 1200, rating: 4.1, ratings: 301, metal: 'Gold plated', occasion: 'Everyday', stock: 45, img: 'images/products/juda-pin-set.jpg' },
 
   /* ---- bridal ---- */
-  { id: 'bou-set', name: 'Bou Bridal Set', bn: 'বউ সেট', cat: 'bridal', price: 14500, mrp: 18500, rating: 4.9, ratings: 64, metal: '22k gold', occasion: 'Bridal', stock: 3, img: null, badge: 'Premium' },
-  { id: 'holud-set', name: 'Holud Ceremony Set', bn: 'হলুদ সেট', cat: 'bridal', price: 8200, mrp: 10500, rating: 4.7, ratings: 41, metal: 'Gold plated', occasion: 'Bridal', stock: 6, img: null },
-  { id: 'reception-set', name: 'Reception Diamond Set', bn: 'রিসেপশন সেট', cat: 'bridal', price: 17900, mrp: 22000, rating: 4.8, ratings: 28, metal: 'Cz & gold', occasion: 'Wedding', stock: 2, img: null },
+  { id: 'bou-set', name: 'Bou Bridal Set', bn: 'বউ সেট', cat: 'bridal', price: 14500, mrp: 18500, rating: 4.9, ratings: 64, metal: '22k gold', occasion: 'Bridal', stock: 3, img: 'images/products/bou-set.jpg', badge: 'Premium' },
+  { id: 'holud-set', name: 'Holud Ceremony Set', bn: 'হলুদ সেট', cat: 'bridal', price: 8200, mrp: 10500, rating: 4.7, ratings: 41, metal: 'Gold plated', occasion: 'Bridal', stock: 6, img: 'images/products/holud-set.jpg' },
+  { id: 'reception-set', name: 'Reception Diamond Set', bn: 'রিসেপশন সেট', cat: 'bridal', price: 17900, mrp: 22000, rating: 4.8, ratings: 28, metal: 'Cz & gold', occasion: 'Wedding', stock: 2, img: 'images/products/reception-set.jpg' },
 
   /* ---- silver ---- */
-  { id: 'silver-coin-10g', name: 'Silver Coin 10 g', bn: 'রুপোর মুদ্রা', cat: 'silver', price: 1150, mrp: 1290, rating: 4.3, ratings: 187, metal: '999 silver', occasion: 'Investment', stock: 120, img: null },
-  { id: 'silver-pooja-set', name: 'Silver Pooja Set', bn: 'রুপোর পুজো সেট', cat: 'silver', price: 3490, mrp: 4200, rating: 4.5, ratings: 76, metal: 'Silver', occasion: 'Gift', stock: 17, img: null },
+  { id: 'silver-coin-10g', name: 'Silver Coin 10 g', bn: 'রুপোর মুদ্রা', cat: 'silver', price: 1150, mrp: 1290, rating: 4.3, ratings: 187, metal: '999 silver', occasion: 'Investment', stock: 120, img: 'images/products/silver-coin-10g.jpg' },
+  { id: 'silver-pooja-set', name: 'Silver Pooja Set', bn: 'রুপোর পুজো সেট', cat: 'silver', price: 3490, mrp: 4200, rating: 4.5, ratings: 76, metal: 'Silver', occasion: 'Gift', stock: 17, img: 'images/products/silver-pooja-set.jpg' },
   { id: 'silver-bracelet', name: 'Silver Kada Bracelet', bn: 'রুপোর বালা', cat: 'silver', price: 2690, mrp: 3200, rating: 4.2, ratings: 142, metal: 'Silver', occasion: 'Men', stock: 25, img: null },
 
   /* ---- men ---- */
