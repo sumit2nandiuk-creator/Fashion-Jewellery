@@ -112,6 +112,8 @@
   function updateChrome() {
     const count = cart.reduce((n, line) => n + line.qty, 0);
     const badge = $('#cartCount'); if (badge) badge.textContent = String(count);
+    const badge2 = $('#cartCount2'); if (badge2) { badge2.textContent = String(count); badge2.hidden = count === 0; }
+    const wishBadge = $('#wishCount'); if (wishBadge) { wishBadge.textContent = String(wishlist.length); wishBadge.hidden = wishlist.length === 0; }
     const user = currentUser();
     const top = $('#accountMenuTop');
     if (top) {
@@ -213,7 +215,7 @@
       '</section>' +
 
       '<section class="section card"><div class="card-head"><h2>' + esc(t('shopByCategory')) + '</h2>' +
-        '<a href="#/c/all">' + esc(t('seeAll')) + '</a></div>' +
+        '<a href="#/browse">' + esc(t('seeAll')) + '</a></div>' +
         '<div class="tiles">' + CATEGORIES.map(c =>
           '<a class="tile" href="#/c/' + c.id + '"><span class="tile-art" aria-hidden="true">' + c.icon + '</span>' +
           '<span class="tile-body"><b>' + esc(catName(c.id)) + '</b><span>' + products.filter(p => p.cat === c.id).length + ' ' + esc(t('items').toLowerCase()) + '</span></span></a>').join('') +
@@ -481,6 +483,113 @@
         : '<div class="card"><p>' + esc(t('emptyWishlist')) + '</p><a class="btn btn-cart" href="#/c/all">' + esc(t('continue')) + '</a></div>') + '</section>';
   }
 
+  /* ---------------------------------------------------------- browse & profile */
+  let lastListingKey = null;
+
+  function applyListingQuery(query) {
+    const key = query.toString();
+    if (key === lastListingKey) return;
+    lastListingKey = key;
+    filters.price = query.get('price') || 'all';
+    filters.sort = query.get('sort') || 'relevance';
+    filters.metal = [];
+    filters.occasion = query.get('occasion') ? [query.get('occasion')] : [];
+    filters.rating = query.get('rating') === '1';
+  }
+
+  function viewBrowse() {
+    const tiles = CATEGORIES.map(c => {
+      const n = products.filter(p => p.cat === c.id).length;
+      return '<a class="browse-tile" href="#/c/' + c.id + '">' +
+        '<span class="bt-ico" aria-hidden="true">' + c.icon + '</span>' +
+        '<b>' + esc(catName(c.id)) + '</b>' +
+        '<small>' + n + ' ' + esc(t('items').toLowerCase()) + '</small></a>';
+    }).join('');
+
+    const rail = '<aside class="browse-rail"><h4>' + esc(t('allCats')) + '</h4>' +
+      '<a class="active" href="#/browse">' + esc(t('allCats')) + '</a>' +
+      CATEGORIES.map(c => '<a href="#/c/' + c.id + '">' + esc(catName(c.id)) + '</a>').join('') + '</aside>';
+
+    return '<section class="browse">' + rail + '<div class="browse-main">' +
+      '<h2>' + esc(t('topCats')) + '</h2><div class="browse-grid">' + tiles + '</div>' +
+      '<h2>' + esc(t('explore')) + '</h2><div class="chip-row">' +
+        '<a class="chip" href="#/c/all?price=under1">' + esc(t('under999')) + '</a>' +
+        '<a class="chip" href="#/c/all?price=1to3">₹1,000 – ₹3,000</a>' +
+        '<a class="chip" href="#/c/all?sort=rating">' + esc(t('bestsellers')) + '</a>' +
+        '<a class="chip" href="#/c/all?occasion=Gift">' + esc(t('gifts')) + '</a>' +
+        '<a class="chip" href="#/c/bridal">' + esc(catName('bridal')) + '</a>' +
+        '<a class="chip" href="#/c/silver">' + esc(catName('silver')) + '</a>' +
+      '</div></div></section>';
+  }
+
+  function miniCard(p) {
+    return '<a class="mini" href="#/p/' + p.id + '"><span class="mini-art">' + art(p) + '</span>' +
+      '<b>' + esc(prodName(p)) + '</b><span>' + money(p.price) + '</span></a>';
+  }
+
+  function viewProfile() {
+    const user = currentUser();
+    if (!user) {
+      return '<section class="section"><div class="profile-head">' +
+          '<span class="avatar">FJ</span>' +
+          '<div><h1>' + esc(t('greet')) + '</h1><p>' + esc(t('profileGuest')) + '</p></div>' +
+          '<button class="btn btn-buy" type="button" data-act="open-auth" data-mode="in">' + esc(t('signIn')) + '</button>' +
+        '</div>' +
+        '<div class="card" style="margin-top:16px;max-width:520px">' +
+          '<p style="font-size:13.5px">' + esc(t('newHere')) + ' ' +
+            '<button class="linkish" type="button" data-act="open-auth" data-mode="up">' + esc(t('signUp')) + '</button></p>' +
+          '<p class="hint">Demo account: ananya@example.com / ananya123 · Admin: admin@fashionjewellery.in / admin123</p>' +
+        '</div></section>';
+    }
+
+    const mine = orders.filter(o => o.user === user.email).slice().reverse();
+    const initials = user.name.split(' ').filter(Boolean).map(w => w[0]).join('').slice(0, 2).toUpperCase();
+    const bought = [];
+    mine.forEach(o => o.items.forEach(i => { if (!bought.includes(i.id)) bought.push(i.id); }));
+    const again = bought.map(product).filter(Boolean).slice(0, 4);
+    const suggestions = products.slice().sort((a, b) => b.rating - a.rating).slice(0, 4);
+
+    const chips = [
+      ['#/orders', t('ordersTitle'), mine.length + ' ' + t('orders').toLowerCase(), '<path d="M5 4h14v16l-7-4-7 4V4Z"/>'],
+      ['#/wishlist', t('wishlist'), wishlist.length + ' ' + t('items').toLowerCase(), '<path d="M12 20s-7.2-4.5-7.2-9.3A4.1 4.1 0 0 1 12 8a4.1 4.1 0 0 1 7.2 2.7C19.2 15.5 12 20 12 20Z"/>'],
+      ['#/account', t('savedAddress'), ((user.addresses || []).length) + ' ' + t('items').toLowerCase(), '<path d="M12 21c4.2-4.4 6.5-7.6 6.5-10.5a6.5 6.5 0 1 0-13 0C5.5 13.4 7.8 16.6 12 21Z"/><circle cx="12" cy="10.4" r="2.4"/>'],
+      [isAdmin() ? '#/admin' : '#/browse', isAdmin() ? t('admin') : t('browseTitle'), isAdmin() ? t('adminDash') : t('allCats'), '<rect x="4" y="4" width="6.5" height="6.5" rx="1"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1"/>']
+    ].map(([href, label, meta, path]) => '<a class="profile-chip" href="' + href + '">' +
+        '<svg viewBox="0 0 24 24" aria-hidden="true">' + path + '</svg>' +
+        '<b>' + esc(label) + '</b><small>' + esc(meta) + '</small></a>').join('');
+
+    return '<section class="section"><div class="profile-head">' +
+        '<span class="avatar" aria-hidden="true">' + esc(initials) + '</span>' +
+        '<div><h1>' + esc(t('greet')) + ', ' + esc(user.name.split(' ')[0]) + '</h1>' +
+          '<p>' + esc(user.email) + (user.phone ? ' · ' + esc(user.phone) : '') + '</p></div>' +
+        '<button class="btn btn-line" type="button" data-act="signout">' + esc(t('signOut')) + '</button>' +
+      '</div>' +
+      '<div class="profile-chips">' + chips + '</div>' +
+
+      '<div class="card" style="margin-top:16px"><div class="card-head"><h2>' + esc(t('ordersTitle')) + '</h2>' +
+        '<a href="#/orders">' + esc(t('seeAll')) + '</a></div>' +
+        (mine.length ? mine.slice(0, 2).map(o => orderCard(o)).join('')
+          : '<p class="empty-note">' + esc(t('noOrders')) + '</p>') +
+      '</div>' +
+
+      '<div class="card" style="margin-top:16px"><div class="card-head"><h2>' +
+        esc(again.length ? t('buyAgain') : t('bestsellers')) + '</h2>' +
+        '<a href="#/c/all">' + esc(t('seeAll')) + '</a></div>' +
+        '<div class="mini-grid">' + (again.length ? again : suggestions).map(miniCard).join('') + '</div>' +
+      '</div>' +
+
+      '<div class="card" style="margin-top:16px"><div class="card-head"><h2>' + esc(t('yourDetails')) + '</h2>' +
+        '<a href="#/account">' + esc(t('accountTitle')) + '</a></div>' +
+        '<p style="font-size:13.5px;color:var(--ink-2);margin:0 0 12px">' + esc(user.name) + '<br>' + esc(user.email) +
+          (user.phone ? '<br>' + esc(user.phone) : '') + '</p>' +
+        ((user.addresses || []).length
+          ? user.addresses.map(a => '<div class="addr"><b>' + esc(a.name) + '</b><br>' + esc(a.line) + '<br>' +
+              esc(a.city) + ', ' + esc(a.state) + ' ' + esc(a.pin) + '<br>' + esc(a.phone) + '</div>').join('')
+          : '<p class="empty-note">' + esc(t('savedAddress')) + ': —</p>') +
+        '<button class="btn btn-line" type="button" data-act="add-address">' + esc(t('addAddressBtn')) + '</button>' +
+      '</div></section>';
+  }
+
   /* ------------------------------------------------------------------- admin */
   function viewAdmin() {
     if (!isAdmin()) {
@@ -558,13 +667,28 @@
     return { parts: pathPart.split('/').filter(Boolean), query: new URLSearchParams(queryPart || '') };
   }
 
+  function syncTabs() {
+    const top = (location.hash || '#/').replace(/^#\/?/, '').split('?')[0].split('/')[0];
+    const map = {
+      '': 'home', browse: 'browse', c: 'browse', s: 'browse', p: 'browse',
+      wishlist: 'wishlist', cart: 'cart', checkout: 'cart',
+      profile: 'profile', account: 'profile', orders: 'profile', order: 'profile', admin: 'profile'
+    };
+    const active = map[top] || '';
+    $$('.tab').forEach(el => {
+      const on = el.dataset.tab === active;
+      el.classList.toggle('active', on);
+      if (on) el.setAttribute('aria-current', 'page'); else el.removeAttribute('aria-current');
+    });
+  }
+
   function render() {
     const { parts, query } = parseHash();
     const view = $('#view');
     let html = '';
 
     if (!parts.length) html = viewHome();
-    else if (parts[0] === 'c') html = viewListing(parts[1] || 'all');
+    else if (parts[0] === 'c') { applyListingQuery(query); html = viewListing(parts[1] || 'all'); }
     else if (parts[0] === 's') html = viewListing(null, decodeURIComponent(parts.slice(1).join('/')));
     else if (parts[0] === 'p') html = viewProduct(parts[1]);
     else if (parts[0] === 'cart') html = viewCart();
@@ -572,6 +696,8 @@
     else if (parts[0] === 'orders') html = viewOrders();
     else if (parts[0] === 'order') html = viewOrder(parts[1]);
     else if (parts[0] === 'wishlist') html = viewWishlist();
+    else if (parts[0] === 'browse') html = viewBrowse();
+    else if (parts[0] === 'profile') html = viewProfile();
     else if (parts[0] === 'account') html = viewAccount();
     else if (parts[0] === 'admin') {
       const tab = query.get('tab');
@@ -581,6 +707,7 @@
 
     view.innerHTML = html;
     updateChrome();
+    syncTabs();
     try { window.scrollTo({ top: 0, behavior: 'auto' }); } catch (e) {}
   }
 

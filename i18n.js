@@ -40,6 +40,11 @@ window.FJ_STRINGS = {
     productName: 'Product name', productImage: 'Image URL (optional)', badge: 'Badge',
     addedToCart: 'Added to cart', removed: 'Removed', signInFirst: 'Please sign in to continue.',
     confirmDelete: 'Delete this product?', qtyUpdated: 'Quantity updated',
+    greet: 'Hello', tabHome: 'Home', tabBrowse: 'Browse', tabWishlist: 'Wishlist', tabProfile: 'You', tabCart: 'Cart',
+    browseTitle: 'Browse categories', topCats: 'Top categories for you', explore: 'Explore more',
+    under999: 'Under ₹999', gifts: 'Gift ideas', allCats: 'All categories',
+    profileTitle: 'Your profile', buyAgain: 'Buy again', yourDetails: 'Your details',
+    profileGuest: 'Sign in to see your orders, addresses and wishlist.', addedOn: 'Member',
     footerHelp: 'Help & settings', footerAbout: 'About Fashion Jewellery', backToTop: 'Back to top',
     viewBoutique: 'Boutique pages', languageNote: 'Interface language'
   },
@@ -83,6 +88,11 @@ window.FJ_STRINGS = {
     productName: 'গহনার নাম', productImage: 'ছবির লিঙ্ক (ঐচ্ছিক)', badge: 'ব্যাজ',
     addedToCart: 'কার্টে যোগ হয়েছে', removed: 'সরানো হয়েছে', signInFirst: 'চালিয়ে যেতে সাইন ইন করুন।',
     confirmDelete: 'এই গহনাটি মুছবেন?', qtyUpdated: 'সংখ্যা বদলেছে',
+    greet: 'নমস্কার', tabHome: 'হোম', tabBrowse: 'ব্রাউজ', tabWishlist: 'পছন্দ', tabProfile: 'আপনি', tabCart: 'কার্ট',
+    browseTitle: 'বিভাগ দেখুন', topCats: 'আপনার জন্য জনপ্রিয় বিভাগ', explore: 'আরও দেখুন',
+    under999: '₹৯৯৯-এর নিচে', gifts: 'উপহারের আইডিয়া', allCats: 'সব বিভাগ',
+    profileTitle: 'আপনার প্রোফাইল', buyAgain: 'আবার কিনুন', yourDetails: 'আপনার তথ্য',
+    profileGuest: 'অর্ডার, ঠিকানা ও পছন্দের তালিকা দেখতে সাইন ইন করুন।', addedOn: 'সদস্য',
     footerHelp: 'সহায়তা', footerAbout: 'ফ্যাশন জুয়েলারি সম্পর্কে', backToTop: 'উপরে ফিরুন',
     viewBoutique: 'বুটিক পাতা', languageNote: 'ভাষা'
   },
@@ -126,6 +136,11 @@ window.FJ_STRINGS = {
     productName: 'गहने का नाम', productImage: 'छवि लिंक (वैकल्पिक)', badge: 'बैज',
     addedToCart: 'कार्ट में जोड़ा गया', removed: 'हटाया गया', signInFirst: 'जारी रखने के लिए साइन इन करें।',
     confirmDelete: 'यह गहना हटाएँ?', qtyUpdated: 'मात्रा बदली',
+    greet: 'नमस्ते', tabHome: 'होम', tabBrowse: 'ब्राउज़', tabWishlist: 'पसंदीदा', tabProfile: 'आप', tabCart: 'कार्ट',
+    browseTitle: 'श्रेणियाँ देखें', topCats: 'आपके लिए शीर्ष श्रेणियाँ', explore: 'और देखें',
+    under999: '₹999 से कम', gifts: 'उपहार विचार', allCats: 'सभी श्रेणियाँ',
+    profileTitle: 'आपकी प्रोफ़ाइल', buyAgain: 'फिर से खरीदें', yourDetails: 'आपका विवरण',
+    profileGuest: 'अपने ऑर्डर, पते और पसंदीदा सूची देखने के लिए साइन इन करें।', addedOn: 'सदस्य',
     footerHelp: 'सहायता', footerAbout: 'फैशन ज्वेलरी के बारे में', backToTop: 'ऊपर जाएँ',
     viewBoutique: 'बुटीक पेज', languageNote: 'भाषा'
   }
