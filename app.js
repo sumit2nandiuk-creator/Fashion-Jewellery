@@ -1,4 +1,4 @@
-/* Fashion Jewellery — Amazon-style store app (no build step, data in localStorage) */
+/* Fashion Jewellery — store app (no build step, data in localStorage) */
 (function () {
   'use strict';
 
@@ -96,7 +96,7 @@
   /* ------------------------------------------------------------------ header */
   function renderCategoryBar() {
     const bar = $('#catBar'); if (!bar) return;
-    bar.innerHTML = '<a class="all-btn" href="#/c/all">☰ ' + esc(t('all')) + '</a>' +
+    bar.innerHTML = '<a class="all-btn" href="#/c/all"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>' + esc(t('all')) + '</a>' +
       CATEGORIES.map(c => '<a href="#/c/' + c.id + '">' + esc(catName(c.id)) + '</a>').join('');
     const foot = $('#footCats');
     if (foot) foot.innerHTML = CATEGORIES.slice(0, 6).map(c => '<a href="#/c/' + c.id + '">' + esc(catName(c.id)) + '</a>').join('');
@@ -209,7 +209,7 @@
         '<p>Earrings, necklaces, bangles and bridal sets shaped by karigars whose families have done this for generations. Free India delivery over ₹999.</p>' +
         '<div class="hero-actions"><a class="btn btn-cart" href="#/c/all">' + esc(t('browseAll')) + '</a>' +
         '<a class="btn btn-line" href="#/c/bridal">' + esc(t('browseAll')) + ' · ' + esc(catName('bridal')) + '</a></div></div>' +
-        '<div class="hero-art" aria-hidden="true">❈</div>' +
+        '<div class="hero-art" aria-hidden="true"><svg viewBox="0 0 120 120"><path d="M34 34h52l20 24-46 48-46-48 20-24Z"/><path d="M34 34l26 72 26-72M12 58h96M46 20h28l12 14H34l12-14Z"/><path d="M34 34l12 24M86 34L74 58"/></svg></div>' +
       '</section>' +
 
       '<section class="section card"><div class="card-head"><h2>' + esc(t('shopByCategory')) + '</h2>' +
@@ -247,7 +247,7 @@
     const sortOpts = [['relevance', t('relevance')], ['price-asc', t('priceLow')], ['price-desc', t('priceHigh')], ['rating', t('avgRating')], ['new', t('newArrivals')]];
 
     return '<section class="section">' +
-      '<div class="results-head"><h1>' + esc(title) + ' <span style="font-weight:400;color:#565959;font-size:14px">· ' + t('results', { n: filtered.length }) + '</span></h1>' +
+      '<div class="results-head"><h1>' + esc(title) + ' <span style="font-weight:400;color:#7a6552;font-size:14px">· ' + t('results', { n: filtered.length }) + '</span></h1>' +
         '<label style="display:flex;align-items:center;gap:8px;font-size:13px">' + esc(t('sortBy')) +
         '<select class="sort-select" data-change="sort">' + sortOpts.map(o => '<option value="' + o[0] + '"' + (filters.sort === o[0] ? ' selected' : '') + '>' + esc(o[1]) + '</option>').join('') + '</select></label></div>' +
       '<div class="listing">' +
@@ -275,7 +275,7 @@
     const revs = reviews.filter(r => r.product === p.id);
     const deliveryDate = new Date(Date.now() + 3 * 864e5).toLocaleDateString('en-IN', { weekday: 'short', month: 'short', day: 'numeric' });
 
-    return '<nav style="font-size:12px;color:#565959;padding:10px 0"><a href="#/">Home</a> › <a href="#/c/' + p.cat + '">' + esc(catName(p.cat)) + '</a> › ' + esc(p.name) + '</nav>' +
+    return '<nav style="font-size:12px;color:#7a6552;padding:10px 0"><a href="#/">Home</a> › <a href="#/c/' + p.cat + '">' + esc(catName(p.cat)) + '</a> › ' + esc(p.name) + '</nav>' +
       '<div class="pd">' +
         '<div class="pd-gallery">' +
           '<div class="pd-thumbs">' + [0, 1, 2].map(i => '<button class="pd-thumb' + (i === 0 ? ' active' : '') + '" type="button">' + art(p) + '</button>').join('') + '</div>' +
@@ -285,7 +285,7 @@
           '<h1>' + esc(prodName(p)) + '</h1>' +
           (lang !== 'bn' && p.bn ? '<div class="bn" lang="bn">' + esc(p.bn) + '</div>' : '') +
           '<div>' + starRow(p) + ' · <a class="linkish" href="#reviews">' + t('reviewsTitle') + '</a></div>' +
-          '<div class="pd-price">' + priceBlock(p) + '<div style="font-size:12px;color:#565959">Inclusive of all taxes</div></div>' +
+          '<div class="pd-price">' + priceBlock(p) + '<div style="font-size:12px;color:#7a6552">Inclusive of all taxes</div></div>' +
           '<ul class="pd-notes" style="padding-left:18px">' +
             '<li>' + esc(p.metal) + ' finish, hand-finished in our Kolkata workshop</li>' +
             '<li>' + esc(t('freeDelivery')) + ' over ₹' + settings.freeDeliveryOver + '</li>' +
@@ -293,7 +293,7 @@
             '<li>14-day returns on unworn pieces</li>' +
           '</ul>' +
           '<h2 style="font-size:16px;margin:16px 0 8px">' + esc(t('about')) + '</h2>' +
-          '<p style="font-size:13.5px;color:#333">A ' + esc(p.occasion.toLowerCase()) + ' piece from our ' + esc(catName(p.cat).toLowerCase()) + ' range, ' +
+          '<p style="font-size:13.5px;color:#54402f">A ' + esc(p.occasion.toLowerCase()) + ' piece from our ' + esc(catName(p.cat).toLowerCase()) + ' range, ' +
             esc(p.metal.toLowerCase()) + ' on a base of brass and copper, finished by hand so no two pieces are identical. Store in the pouch provided, away from perfume and water.</p>' +
           '<h2 style="font-size:16px;margin:18px 0 8px">' + esc(t('specs')) + '</h2>' +
           '<table class="spec-table"><tr><th>' + esc(t('metal')) + '</th><td>' + esc(p.metal) + '</td></tr>' +
@@ -315,7 +315,7 @@
       '</div>' +
       '<section class="section card" id="reviews"><h2>' + esc(t('reviewsTitle')) + '</h2>' +
         (revs.length ? revs.map(r => '<div class="review"><b>' + esc(r.user) + '</b> · <span class="stars"><span class="s">' + '★'.repeat(r.rating) + '</span></span><br><b>' + esc(r.title) + '</b><p>' + esc(r.body) + '</p></div>').join('')
-                     : '<p style="color:#565959">' + esc(t('noResults')) + '</p>') +
+                     : '<p style="color:#7a6552">' + esc(t('noResults')) + '</p>') +
       '</section>' +
       (rel.length ? '<section class="section card"><h2>' + esc(t('related')) + '</h2><div class="prod-grid">' + rel.map(productCard).join('') + '</div></section>' : '');
   }
@@ -337,7 +337,7 @@
       return '<div class="cart-row"><div class="thumb"><a href="#/p/' + p.id + '">' + art(p) + '</a></div>' +
         '<div><h3><a href="#/p/' + p.id + '">' + esc(prodName(p)) + '</a></h3>' +
         '<div class="muted">' + esc(p.metal) + ' · ' + esc(catName(p.cat)) + '</div>' +
-        '<div style="margin:6px 0">' + (p.stock > 0 ? '<span style="color:#067d62;font-size:13px">' + esc(t('inStock')) + '</span>' : '<span style="color:#b12704">' + esc(t('outOfStock')) + '</span>') + '</div>' +
+        '<div style="margin:6px 0">' + (p.stock > 0 ? '<span style="color:#39684c;font-size:13px">' + esc(t('inStock')) + '</span>' : '<span style="color:#7a1225">' + esc(t('outOfStock')) + '</span>') + '</div>' +
         '<div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">' +
           '<select class="qty-select" data-change="cart-qty" data-id="' + p.id + '" aria-label="Quantity">' +
             Array.from({ length: 10 }, (_, i) => '<option value="' + (i + 1) + '"' + (line.qty === i + 1 ? ' selected' : '') + '>' + (i + 1) + '</option>').join('') + '</select>' +
@@ -358,7 +358,7 @@
 
   function orderCard(order, admin) {
     const pill = order.status === 'Cancelled' ? 'cancelled' : order.status === 'Shipped' ? 'shipped' : '';
-    const thumbs = order.items.map(i => { const p = product(i.id); return p ? '<div style="width:64px;height:64px;border:1px solid #eee;border-radius:6px;overflow:hidden">' + art(p) + '</div>' : ''; }).join('');
+    const thumbs = order.items.map(i => { const p = product(i.id); return p ? '<div style="width:64px;height:64px;border:1px solid #e9dcc7;border-radius:6px;overflow:hidden">' + art(p) + '</div>' : ''; }).join('');
     const total = order.items.reduce((s, i) => s + i.price * i.qty, 0);
     return '<article class="order-card"><div class="order-head">' +
       '<div><span>' + esc(t('orderId')) + '</span><b>' + esc(order.id) + '</b></div>' +
@@ -413,9 +413,9 @@
     return '<section class="section"><h1 style="font-size:24px;margin:0 0 14px">' + esc(t('checkoutTitle')) + '</h1>' +
       '<form data-form="checkout"><div class="cart-grid"><div>' +
         '<div class="card" style="margin-bottom:14px"><h2 style="font-size:17px">1. ' + esc(t('deliveryAddress')) + '</h2>' +
-          (addresses.length ? addresses.map((a, i) => '<label style="display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid #eee"><input type="radio" name="address" value="' + i + '"' + (i === 0 ? ' checked' : '') + '>' + addressBlock(a) + '</label>').join('')
+          (addresses.length ? addresses.map((a, i) => '<label style="display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid #e9dcc7"><input type="radio" name="address" value="' + i + '"' + (i === 0 ? ' checked' : '') + '>' + addressBlock(a) + '</label>').join('')
             : '<p class="hint">No saved address yet — add one below.</p>') +
-          '<details style="margin-top:10px"' + (addresses.length ? '' : ' open') + '><summary style="cursor:pointer;color:#007185;font-size:13px">' + esc(t('addAddressBtn')) + '</summary>' +
+          '<details style="margin-top:10px"' + (addresses.length ? '' : ' open') + '><summary style="cursor:pointer;color:#8a2436;font-size:13px">' + esc(t('addAddressBtn')) + '</summary>' +
           '<div class="form-grid" style="margin-top:10px">' +
             '<div class="field"><label>Name</label><input name="name" value="' + esc(user.name) + '"></div>' +
             '<div class="field"><label>' + esc(t('phone')) + '</label><input name="phone" value="' + esc(user.phone || '') + '"></div>' +
@@ -461,9 +461,9 @@
     }
     return '<section class="section"><h1 style="font-size:24px;margin:0 0 14px">' + esc(t('accountTitle')) + '</h1>' +
       '<div class="cart-grid"><div class="card"><h2 style="font-size:17px">' + esc(user.name) + '</h2>' +
-        '<p style="font-size:13.5px;color:#565959">' + esc(user.email) + ' · ' + esc(user.phone || '') + '</p>' +
+        '<p style="font-size:13.5px;color:#7a6552">' + esc(user.email) + ' · ' + esc(user.phone || '') + '</p>' +
         '<h3 style="font-size:15px;margin:16px 0 8px">' + esc(t('savedAddress')) + '</h3>' +
-        (user.addresses && user.addresses.length ? user.addresses.map(addressBlock).join('<hr style="border:0;border-top:1px solid #eee;margin:10px 0">') : '<p class="hint">No address saved yet.</p>') +
+        (user.addresses && user.addresses.length ? user.addresses.map(addressBlock).join('<hr style="border:0;border-top:1px solid #e9dcc7;margin:10px 0">') : '<p class="hint">No address saved yet.</p>') +
         '<p style="margin-top:16px"><button class="btn btn-line" data-act="add-address">' + esc(t('addAddressBtn')) + '</button> ' +
         '<button class="btn btn-line" data-act="signout">' + esc(t('signOut')) + '</button></p></div>' +
       '<aside class="summary"><h2 style="font-size:17px;margin:0 0 10px">' + esc(t('ordersTitle')) + '</h2>' +
@@ -517,7 +517,7 @@
           '<button class="btn btn-cart" data-act="new-product">＋ ' + esc(t('addProduct')) + '</button></div>' +
         '<div class="table-wrap"><table class="grid"><thead><tr><th>' + esc(t('productName')) + '</th><th>' + esc(t('category')) + '</th><th>' + esc(t('priceCol')) + '</th><th>' + esc(t('stock')) + '</th><th></th></tr></thead><tbody>' +
         products.map(p => '<tr><td><b>' + esc(p.name) + '</b><div class="hint">' + esc(p.id) + '</div></td><td>' + esc(catName(p.cat)) + '</td><td>' + money(p.price) + '</td>' +
-          '<td' + (p.stock < 10 ? ' style="color:#b12704;font-weight:600"' : '') + '>' + p.stock + '</td>' +
+          '<td' + (p.stock < 10 ? ' style="color:#7a1225;font-weight:600"' : '') + '>' + p.stock + '</td>' +
           '<td style="white-space:nowrap"><button class="linkish" data-act="edit-product" data-id="' + p.id + '">' + esc(t('edit')) + '</button> · ' +
           '<button class="linkish" data-act="delete-product" data-id="' + p.id + '">' + esc(t('delete')) + '</button></td></tr>').join('') +
         '</tbody></table></div>';
@@ -794,7 +794,7 @@
         const order = orders.find(o => o.id === id);
         if (order) openModal('<h2>' + esc(t('trackOrder')) + ' · ' + esc(order.id) + '</h2>' +
           '<ol style="font-size:14px;line-height:1.9;padding-left:20px">' +
-          ['Ordered', 'Shipped', 'Delivered'].map(s => '<li' + (s === order.status ? ' style="font-weight:700;color:#067d62"' : '') + '>' + esc(s) + '</li>').join('') +
+          ['Ordered', 'Shipped', 'Delivered'].map(s => '<li' + (s === order.status ? ' style="font-weight:700;color:#39684c"' : '') + '>' + esc(s) + '</li>').join('') +
           '</ol><p class="hint">Mock tracking for demo purposes.</p>');
         break;
       }

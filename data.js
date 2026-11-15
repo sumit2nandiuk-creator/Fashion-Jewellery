@@ -1,4 +1,4 @@
-/* Fashion Jewellery — catalogue data for the Amazon-style store */
+/* Fashion Jewellery — catalogue data for the store */
 window.FJ_CATEGORIES = [
   { id: 'earrings',  en: 'Earrings',          bn: 'কানের দুল',      hi: 'कान की बालियाँ', icon: '◈' },
   { id: 'necklaces', en: 'Necklaces',         bn: 'হার ও নেকলেস',   hi: 'हार और नेकलेस', icon: '◉' },
