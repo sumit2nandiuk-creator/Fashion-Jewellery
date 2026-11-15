@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="shop.css?v=6">
+  <link rel="stylesheet" href="shop.css?v=7">
 </head>
 <body>
 
@@ -39,7 +39,6 @@
           <span class="flag"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><path d="M3.6 12h16.8M12 3.4c2.7 2.9 2.7 14.3 0 17.2-2.7-2.9-2.7-14.3 0-17.2Z"/></svg></span><span id="langCode">EN</span>
         </button>
         <div class="menu" id="langMenu" role="menu">
-          <h4 data-i18n="languageNote">Language</h4>
           <button type="button" data-act="lang" data-lang="en" role="menuitem">English</button>
           <button type="button" data-act="lang" data-lang="bn" role="menuitem">বাংলা</button>
           <button type="button" data-act="lang" data-lang="hi" role="menuitem">हिन्दी</button>
@@ -56,7 +55,7 @@
 <main class="wrap" id="view"></main>
 
 <footer class="foot">
-  <a class="back-top" href="#/" data-i18n="backToTop">Back to top</a>
+  <button class="back-top" type="button" data-act="top" data-i18n="backToTop">Back to top</button>
   <div class="foot-top">
     <div>
       <h4 data-i18n="shopByCategory">Shop by category</h4>
@@ -115,6 +114,6 @@
 
 <script src="data.js"></script>
 <script src="i18n.js"></script>
-<script src="app.js?v=5"></script>
+<script src="app.js?v=6"></script>
 </body>
 </html>
