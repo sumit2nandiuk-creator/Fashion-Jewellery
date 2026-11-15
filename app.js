@@ -218,7 +218,7 @@
       '<section class="section card"><div class="card-head"><h2>' + esc(t('shopByCategory')) + '</h2>' +
         '<a href="#/browse">' + esc(t('seeAll')) + '</a></div>' +
         '<div class="tiles">' + CATEGORIES.map(c =>
-          '<a class="tile" href="#/c/' + c.id + '"><span class="tile-art" aria-hidden="true">' + c.icon + '</span>' +
+          '<a class="tile" href="#/c/' + c.id + '"><span class="tile-art" aria-hidden="true">' + catArt(c) + '</span>' +
           '<span class="tile-body"><b>' + esc(catName(c.id)) + '</b><span>' + products.filter(p => p.cat === c.id).length + ' ' + esc(t('items').toLowerCase()) + '</span></span></a>').join('') +
         '</div></section>' +
 
@@ -522,7 +522,7 @@
     const tiles = CATEGORIES.map(c => {
       const n = products.filter(p => p.cat === c.id).length;
       return '<a class="browse-tile" href="#/c/' + c.id + '">' +
-        '<span class="bt-ico" aria-hidden="true">' + c.icon + '</span>' +
+        '<span class="bt-ico" aria-hidden="true">' + catArt(c) + '</span>' +
         '<b>' + esc(catName(c.id)) + '</b>' +
         '<small>' + n + ' ' + esc(t('items').toLowerCase()) + '</small></a>';
     }).join('');
@@ -541,6 +541,27 @@
         '<a class="chip" href="#/c/bridal">' + esc(catName('bridal')) + '</a>' +
         '<a class="chip" href="#/c/silver">' + esc(catName('silver')) + '</a>' +
       '</div></div></section>';
+  }
+
+  const CAT_HERO = {
+    earrings: 'images/products/chand-bali.jpg',
+    necklaces: 'images/necklace.jpg',
+    bangles: 'images/bangles.jpg',
+    rings: 'images/products/solitaire-ring.jpg',
+    mangalsutra: 'images/products/bengali-mangalsutra.jpg',
+    'nose-pins': 'images/products/bengali-nath.jpg',
+    anklets: 'images/products/ghungroo-payal.jpg',
+    hair: 'images/products/alpona-tikka.jpg',
+    bridal: 'images/products/bou-set.jpg',
+    silver: 'images/products/silver-coin-10g.jpg',
+    men: 'images/products/men-kada.jpg',
+    kids: 'images/products/kids-studs.jpg'
+  };
+
+  function catArt(c) {
+    let src = CAT_HERO[c.id];
+    if (!src) { const p = products.find(x => x.cat === c.id && x.img); src = p ? p.img : ''; }
+    return src ? '<img src="' + esc(src) + '" alt="" loading="lazy">' : esc(c.icon);
   }
 
   function miniCard(p) {
