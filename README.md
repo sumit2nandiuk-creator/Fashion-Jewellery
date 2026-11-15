@@ -74,4 +74,4 @@ Dashboard (revenue, orders, customers, low stock, seven-day chart), product add/
 
 ### Images
 
-Three products use the real studio photographs (`images/earrings.jpg`, `necklace.jpg`, `bangles.jpg`). The rest render an initialled placeholder tile until photography is ready — add an `img` path in the admin product form to switch one over.
+All 40 products carry a photograph in `images/products/<product-id>.jpg` (1254 px square, shot on a warm ivory set with top-left light). Any product added later without an image falls back to an initialled placeholder tile; add an `img` path in the admin product form to give it a photo.

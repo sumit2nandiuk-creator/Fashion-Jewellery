@@ -67,17 +67,17 @@ window.FJ_PRODUCTS = [
   /* ---- silver ---- */
   { id: 'silver-coin-10g', name: 'Silver Coin 10 g', bn: 'রুপোর মুদ্রা', cat: 'silver', price: 1150, mrp: 1290, rating: 4.3, ratings: 187, metal: '999 silver', occasion: 'Investment', stock: 120, img: 'images/products/silver-coin-10g.jpg' },
   { id: 'silver-pooja-set', name: 'Silver Pooja Set', bn: 'রুপোর পুজো সেট', cat: 'silver', price: 3490, mrp: 4200, rating: 4.5, ratings: 76, metal: 'Silver', occasion: 'Gift', stock: 17, img: 'images/products/silver-pooja-set.jpg' },
-  { id: 'silver-bracelet', name: 'Silver Kada Bracelet', bn: 'রুপোর বালা', cat: 'silver', price: 2690, mrp: 3200, rating: 4.2, ratings: 142, metal: 'Silver', occasion: 'Men', stock: 25, img: null },
+  { id: 'silver-bracelet', name: 'Silver Kada Bracelet', bn: 'রুপোর বালা', cat: 'silver', price: 2690, mrp: 3200, rating: 4.2, ratings: 142, metal: 'Silver', occasion: 'Men', stock: 25, img: 'images/products/silver-bracelet.jpg' },
 
   /* ---- men ---- */
-  { id: 'men-kada', name: "Men's Gold Kada", bn: 'পুরুষদের কড়া', cat: 'men', price: 4590, mrp: 5600, rating: 4.4, ratings: 133, metal: 'Gold plated', occasion: 'Men', stock: 14, img: null },
-  { id: 'men-chain', name: "Men's Link Chain", bn: 'পুরুষদের চেন', cat: 'men', price: 3290, mrp: 4000, rating: 4.1, ratings: 205, metal: 'Stainless steel', occasion: 'Men', stock: 33, img: null },
-  { id: 'men-ring', name: "Men's Signet Ring", bn: 'পুরুষদের আংটি', cat: 'men', price: 1890, mrp: 2400, rating: 4.0, ratings: 88, metal: 'Silver', occasion: 'Men', stock: 27, img: null },
+  { id: 'men-kada', name: "Men's Gold Kada", bn: 'পুরুষদের কড়া', cat: 'men', price: 4590, mrp: 5600, rating: 4.4, ratings: 133, metal: 'Gold plated', occasion: 'Men', stock: 14, img: 'images/products/men-kada.jpg' },
+  { id: 'men-chain', name: "Men's Link Chain", bn: 'পুরুষদের চেন', cat: 'men', price: 3290, mrp: 4000, rating: 4.1, ratings: 205, metal: 'Stainless steel', occasion: 'Men', stock: 33, img: 'images/products/men-chain.jpg' },
+  { id: 'men-ring', name: "Men's Signet Ring", bn: 'পুরুষদের আংটি', cat: 'men', price: 1890, mrp: 2400, rating: 4.0, ratings: 88, metal: 'Silver', occasion: 'Men', stock: 27, img: 'images/products/men-ring.jpg' },
 
   /* ---- kids ---- */
-  { id: 'kids-bangle', name: 'Kids Gold Bangle', bn: 'শিশুদের বালা', cat: 'kids', price: 1690, mrp: 2100, rating: 4.5, ratings: 92, metal: 'Gold plated', occasion: 'Gift', stock: 36, img: null },
-  { id: 'kids-anklet', name: 'Kids Silver Anklet', bn: 'শিশুদের নূপুর', cat: 'kids', price: 790, mrp: 1050, rating: 4.3, ratings: 158, metal: 'Silver', occasion: 'Gift', stock: 52, img: null },
-  { id: 'kids-studs', name: 'Kids Flower Studs', bn: 'শিশুদের দুল', cat: 'kids', price: 590, mrp: 850, rating: 4.2, ratings: 121, metal: 'Silver', occasion: 'Everyday', stock: 61, img: null }
+  { id: 'kids-bangle', name: 'Kids Gold Bangle', bn: 'শিশুদের বালা', cat: 'kids', price: 1690, mrp: 2100, rating: 4.5, ratings: 92, metal: 'Gold plated', occasion: 'Gift', stock: 36, img: 'images/products/kids-bangle.jpg' },
+  { id: 'kids-anklet', name: 'Kids Silver Anklet', bn: 'শিশুদের নূপুর', cat: 'kids', price: 790, mrp: 1050, rating: 4.3, ratings: 158, metal: 'Silver', occasion: 'Gift', stock: 52, img: 'images/products/kids-anklet.jpg' },
+  { id: 'kids-studs', name: 'Kids Flower Studs', bn: 'শিশুদের দুল', cat: 'kids', price: 590, mrp: 850, rating: 4.2, ratings: 121, metal: 'Silver', occasion: 'Everyday', stock: 61, img: 'images/products/kids-studs.jpg' }
 ];
 
 window.FJ_REVIEWS = [
