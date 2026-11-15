@@ -87,7 +87,7 @@ h2,h3,.serif{font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;fo
 /* dropdown menus */
 .menu-wrap{position:relative}
 .menu{
-  position:absolute;top:calc(100% + 8px);right:0;z-index:60;min-width:244px;
+  position:fixed;top:0;left:0;z-index:80;min-width:210px;max-width:min(300px,calc(100vw - 24px));
   background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:3px;
   box-shadow:0 18px 40px rgba(59,10,21,.22);padding:10px 0;display:none;
 }
@@ -222,7 +222,7 @@ h2,h3,.serif{font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;fo
 .btn-block{width:100%}
 
 /* ---------------- listing ---------------- */
-.listing{display:grid;grid-template-columns:236px 1fr;gap:20px;align-items:start}
+.listing{display:block}
 .filters{background:var(--paper);border:1px solid var(--line);border-radius:3px;padding:18px;box-shadow:var(--shadow)}
 .filters h3{margin:0 0 12px;padding-bottom:10px;border-bottom:1px solid var(--line);font-size:18px;color:var(--maroon-ink)}
 .filters fieldset{border:0;margin:0 0 18px;padding:0}
@@ -275,6 +275,84 @@ h2,h3,.serif{font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;fo
 .review:last-child{border-bottom:0}
 .review b{font-size:13px;color:var(--maroon-ink)}
 .review p{margin:6px 0 0;font-size:13.5px;color:var(--ink-2)}
+
+/* ---------------- custom dropdowns ---------------- */
+.csel{position:relative;display:inline-flex;min-width:0}
+.csel select{
+  position:absolute!important;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none;
+  border:0;padding:0;margin:0;appearance:none;-webkit-appearance:none;
+}
+.csel-btn{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;
+  border:1px solid var(--line-2);border-radius:2px;background:var(--paper);color:var(--ink-2);
+  padding:9px 11px;font-family:inherit;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+  transition:border-color .16s,box-shadow .16s;white-space:nowrap;
+}
+.csel-btn:hover{border-color:var(--gold)}
+.csel-btn svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto;transition:transform .2s}
+.csel.open .csel-btn{border-color:var(--gold);box-shadow:0 0 0 3px rgba(190,151,77,.16)}
+.csel.open .csel-btn svg{transform:rotate(180deg)}
+.csel-menu{
+  position:absolute;top:calc(100% + 7px);left:0;z-index:85;min-width:100%;width:max-content;
+  max-width:min(300px,84vw);max-height:280px;overflow:auto;
+  background:var(--paper);border:1px solid var(--line);border-radius:3px;
+  box-shadow:0 20px 44px rgba(59,10,21,.22);padding:6px;display:none;
+}
+.csel-menu:before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--maroon),var(--gold));border-radius:3px 3px 0 0}
+.csel.open .csel-menu{display:block}
+.csel.up .csel-menu{top:auto;bottom:calc(100% + 7px)}
+.csel-opt{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;text-align:left;
+  background:none;border:0;padding:10px 12px;border-radius:2px;font-family:inherit;font-size:13px;
+  letter-spacing:.01em;color:var(--ink-2);transition:background .14s,color .14s;
+}
+.csel-opt:hover{background:var(--cream);color:var(--maroon)}
+.csel-opt.is-on{background:var(--cream);color:var(--maroon);font-weight:500}
+.csel-opt.is-on:after{content:"";width:5px;height:5px;border-radius:50%;background:var(--gold);flex:0 0 auto}
+
+/* search-bar scope picker */
+.search #searchCat + .csel-btn{padding-right:26px}
+.search .csel{align-self:stretch;max-width:172px}
+.search .csel-btn{
+  height:100%;border:0;border-right:1px solid var(--line-2);border-radius:0;background:transparent;
+  font-size:11.5px;letter-spacing:.02em;text-transform:none;color:var(--ink-2);padding:0 26px 0 12px;
+}
+.search .csel-btn svg{position:absolute;right:8px;top:50%;transform:translateY(-50%)}
+.search .csel.open .csel-btn svg{transform:translateY(-50%) rotate(180deg)}
+.search .csel-label{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:112px}
+.search{overflow:visible}
+.search button[type=submit]{border-radius:0 2px 2px 0}
+
+/* filters button + results head */
+.results-head h1 .res-count{font-size:13px;font-weight:400;color:var(--muted);letter-spacing:.02em}
+.head-tools{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.head-tools .csel{min-width:186px}
+.filter-btn{position:relative}
+.fcount{
+  display:inline-grid;place-items:center;min-width:18px;height:18px;padding:0 5px;margin-left:8px;
+  border-radius:999px;background:var(--maroon);color:var(--ivory);font-size:10px;letter-spacing:0;
+}
+
+/* filter sheet */
+.filters-panel{display:block}
+.fgroup{margin:0 0 20px}
+.fgroup h3{
+  margin:0 0 10px;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);
+  font-weight:500;font-family:"Jost",sans-serif;
+}
+.fchip{position:relative;display:inline-flex;margin:0 8px 8px 0;cursor:pointer}
+.fchip input{position:absolute;opacity:0;width:1px;height:1px}
+.fchip span{
+  border:1px solid var(--line-2);border-radius:999px;padding:8px 14px;background:var(--paper);
+  font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);transition:.16s;
+}
+.fchip:hover span{border-color:var(--gold)}
+.fchip input:checked + span{background:var(--maroon);border-color:var(--maroon);color:var(--ivory)}
+.fchip input:focus-visible + span{outline:2px solid var(--gold);outline-offset:2px}
+.frow{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink-2);cursor:pointer}
+.frow input{accent-color:var(--maroon);width:15px;height:15px}
+.modal-actions{display:flex;gap:10px;margin-top:22px;padding-top:16px;border-top:1px solid var(--line)}
+.modal-actions .btn{flex:1}
 
 /* ---------------- cart ---------------- */
 .cart-grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:20px;align-items:start}
@@ -346,7 +424,7 @@ h2,h3,.serif{font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;fo
 
 /* ---------------- toast ---------------- */
 .toast{
-  position:fixed;left:50%;bottom:26px;transform:translate(-50%,16px);
+  position:fixed;left:50%;bottom:96px;transform:translate(-50%,16px);
   background:var(--maroon-ink);color:var(--ivory);padding:13px 20px;border-radius:2px;
   border-left:2px solid var(--gold);box-shadow:0 16px 40px rgba(59,10,21,.35);
   opacity:0;pointer-events:none;transition:.28s;z-index:90;font-size:13px;letter-spacing:.03em;
@@ -408,21 +486,30 @@ table.grid td select{padding:6px 8px;border:1px solid var(--line-2);border-radiu
 .back-top:hover{background:var(--maroon);color:var(--ivory)}
 
 
-/* ---------------- bottom tab bar (mobile) ---------------- */
-.tabbar{display:none}
+/* ---------------- floating dock ---------------- */
+.tabbar{
+  position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:70;
+  width:min(560px,calc(100% - 24px));display:grid;grid-template-columns:repeat(5,1fr);gap:2px;
+  padding:7px;border-radius:22px;background:rgba(255,253,248,.94);
+  border:1px solid var(--line-2);box-shadow:0 18px 44px rgba(59,10,21,.22);
+  -webkit-backdrop-filter:blur(12px) saturate(1.15);backdrop-filter:blur(12px) saturate(1.15);
+}
 .tabbar .tab{
   position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
-  padding:9px 2px 8px;color:var(--muted);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+  padding:9px 2px 8px;border-radius:16px;color:var(--muted);
+  font-size:9px;letter-spacing:.12em;text-transform:uppercase;transition:background .2s,color .2s;
 }
-.tabbar .tab svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;display:block}
-.tabbar .tab.active{color:var(--maroon)}
-.tabbar .tab.active:before{content:"";position:absolute;top:0;left:24%;right:24%;height:2px;background:var(--gold)}
+.tabbar .tab svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;display:block;transition:transform .2s}
+.tabbar .tab:hover{background:var(--cream);color:var(--maroon)}
+.tabbar .tab.active{background:var(--maroon);color:var(--ivory);box-shadow:0 8px 18px rgba(110,18,36,.24)}
+.tabbar .tab.active svg{transform:translateY(-1px)}
 .tab-badge{
-  position:absolute;top:5px;right:calc(50% - 21px);min-width:16px;height:16px;padding:0 4px;border-radius:999px;
+  position:absolute;top:3px;right:calc(50% - 22px);min-width:16px;height:16px;padding:0 4px;border-radius:999px;
   background:var(--gold);color:#3b0a15;font-size:10px;font-weight:600;font-style:normal;letter-spacing:0;
   display:grid;place-items:center;box-shadow:0 0 0 2px var(--paper);
 }
 .tab-badge[hidden]{display:none}
+body{padding-bottom:104px}
 
 /* ---------------- browse page ---------------- */
 .browse{display:grid;grid-template-columns:210px minmax(0,1fr);gap:22px;align-items:start;margin-top:20px}
@@ -509,6 +596,11 @@ table.grid td select{padding:6px 8px;border:1px solid var(--line-2);border-radiu
   .deliver{display:none}
   .search{order:3;flex-basis:100%;height:40px}
   .search select{max-width:120px;padding-left:9px;font-size:11px}
+  .search .csel{max-width:134px}
+  .search .csel-label{max-width:78px}
+  .head-tools{width:100%;justify-content:space-between}
+  .head-tools .csel{min-width:0;flex:1}
+  .filter-btn{flex:0 0 auto}
   .topright{margin-left:auto;gap:0}
   .toplink small{display:none}
   .toplink{font-size:11px;padding:6px 7px}
@@ -525,13 +617,10 @@ table.grid td select{padding:6px 8px;border:1px solid var(--line-2);border-radiu
   .hero:after{inset:9px}
   .hero-actions .btn{flex:1}
   .card{padding:18px 16px}
-  .tabbar{
-    display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;z-index:70;
-    background:var(--paper);border-top:1px solid var(--line-2);
-    box-shadow:0 -8px 24px rgba(59,10,21,.1);padding-bottom:env(safe-area-inset-bottom);
-  }
-  body{padding-bottom:72px}
-  .toast{bottom:88px}
+  .tabbar{width:calc(100% - 20px);bottom:12px;padding:6px;border-radius:20px}
+  .tabbar .tab{font-size:8.5px;padding:8px 2px 7px}
+  body{padding-bottom:96px}
+  .toast{bottom:96px}
   .browse{grid-template-columns:1fr;gap:14px}
   .browse-rail{display:flex;gap:6px;overflow-x:auto;padding:8px;scrollbar-width:none}
   .browse-rail::-webkit-scrollbar{display:none}

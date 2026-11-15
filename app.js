@@ -106,6 +106,7 @@
       sel.innerHTML = '<option value="">' + esc(t('all')) + '</option>' +
         CATEGORIES.map(c => '<option value="' + c.id + '">' + esc(catName(c.id)) + '</option>').join('');
       sel.value = current || '';
+      if (sel._cselSync) sel._cselSync();
     }
   }
 
@@ -231,6 +232,35 @@
         '<div class="prod-grid">' + fresh.map(productCard).join('') + '</div></section>';
   }
 
+  function activeFilterCount() {
+    return (filters.price !== 'all' ? 1 : 0) + filters.metal.length + filters.occasion.length + (filters.rating ? 1 : 0);
+  }
+
+  const PRICE_BANDS = () => [['all', t('allPrices')], ['under1', 'Under ₹1,000'], ['1to3', '₹1,000 – ₹3,000'], ['3to6', '₹3,000 – ₹6,000'], ['6plus', '₹6,000 & above']];
+
+  function filterModal() {
+    const chips = (name, list, current) => list.map(v => {
+      const on = current.includes(v);
+      return '<label class="fchip"><input type="checkbox" name="' + name + '" value="' + esc(v) + '"' +
+        (on ? ' checked' : '') + '><span>' + esc(v) + '</span></label>';
+    }).join('');
+
+    openModal('<h2>' + esc(t('filters')) + '</h2>' +
+      '<form data-form="filters" class="filters-panel">' +
+        '<div class="fgroup"><h3>' + esc(t('priceRange')) + '</h3>' +
+          PRICE_BANDS().map(o => '<label class="fchip"><input type="radio" name="price" value="' + o[0] + '"' +
+            (filters.price === o[0] ? ' checked' : '') + '><span>' + esc(o[1]) + '</span></label>').join('') +
+        '</div>' +
+        '<div class="fgroup"><h3>' + esc(t('metal')) + '</h3>' + chips('metal', METALS, filters.metal) + '</div>' +
+        '<div class="fgroup"><h3>' + esc(t('occasion')) + '</h3>' + chips('occasion', OCCASIONS, filters.occasion) + '</div>' +
+        '<label class="frow"><input type="checkbox" name="rating"' + (filters.rating ? ' checked' : '') + '> 4★ &amp; above</label>' +
+        '<div class="modal-actions">' +
+          '<button type="button" class="btn btn-line" data-act="clear-filters">' + esc(t('clearFilters')) + '</button>' +
+          '<button type="submit" class="btn btn-cart">' + esc(t('showResults')) + '</button>' +
+        '</div>' +
+      '</form>', true);
+  }
+
   function viewListing(catId, query) {
     let items = products.slice();
     let title = t('browseAll');
@@ -244,30 +274,21 @@
       title = catName(catId);
     }
     const filtered = items.filter(matchesFilters);
-
-    const priceOpts = [['all', 'All'], ['under1', 'Under ₹1,000'], ['1to3', '₹1,000 – ₹3,000'], ['3to6', '₹3,000 – ₹6,000'], ['6plus', '₹6,000 & above']];
     const sortOpts = [['relevance', t('relevance')], ['price-asc', t('priceLow')], ['price-desc', t('priceHigh')], ['rating', t('avgRating')], ['new', t('newArrivals')]];
+    const n = activeFilterCount();
 
     return '<section class="section">' +
-      '<div class="results-head"><h1>' + esc(title) + ' <span style="font-weight:400;color:#7a6552;font-size:14px">· ' + t('results', { n: filtered.length }) + '</span></h1>' +
-        '<label style="display:flex;align-items:center;gap:8px;font-size:13px">' + esc(t('sortBy')) +
-        '<select class="sort-select" data-change="sort">' + sortOpts.map(o => '<option value="' + o[0] + '"' + (filters.sort === o[0] ? ' selected' : '') + '>' + esc(o[1]) + '</option>').join('') + '</select></label></div>' +
-      '<div class="listing">' +
-        '<aside class="filters"><h3>' + esc(t('clearFilters')) + '</h3>' +
-          '<p><button class="linkish" data-act="clear-filters">' + esc(t('clearFilters')) + '</button></p>' +
-          '<fieldset><legend>' + esc(t('priceRange')) + '</legend>' +
-            priceOpts.map(o => '<label><input type="radio" name="price" value="' + o[0] + '" data-change="price"' + (filters.price === o[0] ? ' checked' : '') + '> ' + esc(o[1]) + '</label>').join('') +
-          '</fieldset>' +
-          '<fieldset><legend>' + esc(t('metal')) + '</legend>' +
-            METALS.map(m => '<label><input type="checkbox" value="' + esc(m) + '" data-change="metal"' + (filters.metal.includes(m) ? ' checked' : '') + '> ' + esc(m) + '</label>').join('') +
-          '</fieldset>' +
-          '<fieldset><legend>' + esc(t('occasion')) + '</legend>' +
-            OCCASIONS.map(o => '<label><input type="checkbox" value="' + esc(o) + '" data-change="occasion"' + (filters.occasion.includes(o) ? ' checked' : '') + '> ' + esc(o) + '</label>').join('') +
-          '</fieldset>' +
-          '<label><input type="checkbox" data-change="rating"' + (filters.rating ? ' checked' : '') + '> 4★ &amp; above</label>' +
-        '</aside>' +
-        '<div>' + grid(filtered) + '</div>' +
-      '</div></section>';
+      '<div class="results-head"><h1>' + esc(title) +
+        ' <span class="res-count">· ' + t('results', { n: filtered.length }) + '</span></h1>' +
+        '<div class="head-tools">' +
+          '<select class="sort-select" data-change="sort" aria-label="' + esc(t('sortBy')) + '">' +
+            sortOpts.map(o => '<option value="' + o[0] + '"' + (filters.sort === o[0] ? ' selected' : '') + '>' + esc(o[1]) + '</option>').join('') +
+          '</select>' +
+          '<button class="btn btn-line filter-btn" type="button" data-act="open-filters">' +
+            esc(t('filters')) + (n ? '<span class="fcount">' + n + '</span>' : '') +
+          '</button>' +
+        '</div></div>' +
+      '<div class="listing">' + grid(filtered) + '</div></section>';
   }
 
   function viewProduct(id) {
@@ -708,6 +729,7 @@
     view.innerHTML = html;
     updateChrome();
     syncTabs();
+    enhanceSelects(document);
     try { window.scrollTo({ top: 0, behavior: 'auto' }); } catch (e) {}
   }
 
@@ -718,6 +740,7 @@
     body.innerHTML = '<button class="close" type="button" data-act="close-modal" aria-label="Close">×</button>' + html;
     backdrop.classList.add('open');
     backdrop.setAttribute('aria-hidden', 'false');
+    enhanceSelects(body);
     const first = body.querySelector('input,button:not(.close)');
     if (first) first.focus();
   }
@@ -791,6 +814,88 @@
   }
 
   /* ------------------------------------------------------------------ actions */
+  /* --------------------------------------------------------- custom selects */
+  function enhanceSelect(sel) {
+    if (!sel || sel.dataset.csel === '1') return;
+    sel.dataset.csel = '1';
+    const wrap = document.createElement('div');
+    wrap.className = 'csel';
+    wrap.innerHTML = '<button type="button" class="csel-btn" aria-haspopup="listbox" aria-expanded="false">' +
+      '<span class="csel-label"></span>' +
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>' +
+      '<div class="csel-menu" role="listbox"></div>';
+    sel.parentNode.insertBefore(wrap, sel);
+    const btn = wrap.querySelector('.csel-btn');
+    const menu = wrap.querySelector('.csel-menu');
+    const label = wrap.querySelector('.csel-label');
+    wrap.insertBefore(sel, menu);
+
+    const sync = () => {
+      const opt = sel.options[sel.selectedIndex];
+      label.textContent = opt ? opt.text : '';
+      menu.innerHTML = Array.from(sel.options).map(o =>
+        '<button type="button" role="option" aria-selected="' + (o.value === sel.value) + '"' +
+        ' class="csel-opt' + (o.value === sel.value ? ' is-on' : '') + '" data-val="' + esc(o.value) + '">' +
+        esc(o.text) + '</button>').join('');
+    };
+    sel._cselSync = sync;
+    sel.addEventListener('change', sync);
+
+    btn.addEventListener('click', ev => {
+      ev.stopPropagation();
+      const willOpen = !wrap.classList.contains('open');
+      $$('.csel.open').forEach(w => {
+        w.classList.remove('open');
+        const b = w.querySelector('.csel-btn'); if (b) b.setAttribute('aria-expanded', 'false');
+      });
+      if (!willOpen) return;
+      wrap.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+      wrap.classList.remove('up');
+      const r = btn.getBoundingClientRect();
+      const menuH = Math.min(280, sel.options.length * 42 + 12);
+      if (r.bottom + menuH + 16 > window.innerHeight && r.top > menuH + 16) wrap.classList.add('up');
+    });
+
+    menu.addEventListener('click', ev => {
+      const opt = ev.target.closest('.csel-opt'); if (!opt) return;
+      ev.stopPropagation();
+      sel.value = opt.dataset.val;
+      wrap.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+      sel.dispatchEvent(new Event('change', { bubbles: true }));
+      sync();
+    });
+
+    sync();
+  }
+
+  function enhanceSelects(root) {
+    $$('select', root || document).forEach(enhanceSelect);
+  }
+
+  function closeDropdowns() {
+    $$('.csel.open').forEach(w => {
+      w.classList.remove('open');
+      const b = w.querySelector('.csel-btn'); if (b) b.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  /* --------------------------------------------------------- header menus */
+  function placeMenu(menu, trigger) {
+    const r = trigger.getBoundingClientRect();
+    const margin = 12;
+    const gap = 8;
+    const w = Math.min(260, window.innerWidth - margin * 2);
+    menu.style.width = w + 'px';
+    menu.style.left = Math.max(margin, Math.min(r.right - w, window.innerWidth - w - margin)) + 'px';
+    menu.style.top = '0px';
+    const h = menu.offsetHeight || 200;
+    let top = r.bottom + gap;
+    if (top + h > window.innerHeight - margin) top = Math.max(margin, r.top - h - gap);
+    menu.style.top = top + 'px';
+  }
+
   /* ------------------------------------------------------- add-to-cart motion */
   const prefersReducedMotion = () => { try { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } };
 
@@ -937,6 +1042,7 @@
         const open = menu.classList.toggle('open');
         trigger.setAttribute('aria-expanded', String(open));
         $$('.menu.open').forEach(m => { if (m !== menu) m.classList.remove('open'); });
+        if (open) placeMenu(menu, trigger);
         break;
       }
       case 'lang':
@@ -971,9 +1077,10 @@
         break;
       case 'close-modal': closeModal(); break;
       case 'add-address': addressModal(); break;
+      case 'open-filters': filterModal(); break;
       case 'clear-filters':
-        filters.price = 'all'; filters.metal = []; filters.occasion = []; filters.rating = false; filters.sort = 'relevance';
-        render();
+        filters.price = 'all'; filters.metal = []; filters.occasion = []; filters.rating = false;
+        closeModal(); render();
         break;
       case 'track': {
         const order = orders.find(o => o.id === id);
@@ -1058,6 +1165,14 @@
       else products.push(Object.assign({ id: uid('fj-').toLowerCase(), rating: 4.2, ratings: 0 }, payload));
       saveProducts(); closeModal(); render(); toast(t('saveProduct'));
     }
+    else if (kind === 'filters') {
+      const fd = new FormData(form);
+      filters.price = fd.get('price') || 'all';
+      filters.metal = fd.getAll('metal').map(String);
+      filters.occasion = fd.getAll('occasion').map(String);
+      filters.rating = fd.get('rating') === 'on';
+      closeModal(); render();
+    }
     else if (kind === 'checkout') placeOrder(form);
     else if (kind === 'settings') {
       settings = { freeDeliveryOver: Number(data.freeDeliveryOver) || 999, deliveryFee: Number(data.deliveryFee) || 49 };
@@ -1066,7 +1181,7 @@
   });
 
   document.addEventListener('keydown', event => {
-    if (event.key === 'Escape') { closeModal(); $$('.menu.open').forEach(m => m.classList.remove('open')); }
+    if (event.key === 'Escape') { closeModal(); $$('.menu.open').forEach(m => m.classList.remove('open')); closeDropdowns(); }
   });
 
   $('#modal').addEventListener('click', event => { if (event.target.id === 'modal') closeModal(); });

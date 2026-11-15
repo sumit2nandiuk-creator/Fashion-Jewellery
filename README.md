@@ -53,7 +53,7 @@ A separate, fully client-side storefront: catalogue, cart, checkout, accounts, o
 
 `#/` home · `#/browse` category browser · `#/c/<category>` listing (accepts `?price=under1|1to3|3to6|6plus`, `?occasion=Gift`, `?sort=rating`) · `#/s/<query>` search · `#/p/<id>` product · `#/cart` · `#/checkout` · `#/order/<id>` confirmation · `#/orders` · `#/wishlist` · `#/profile` · `#/account` · `#/admin`
 
-On phones a fixed bottom bar carries Home, Browse, Wishlist, You and Cart (with a live count badge); on wider screens the same destinations live in the header.
+A floating dock (Home, Browse, Wishlist, You, Cart with a live count) sits at the bottom of every screen; the header keeps only the brand, delivery location, search and language picker. Listing filters open from a Filters button as a sheet rather than sitting permanently beside the grid, and every dropdown — search scope, sort, quantity, order status, product category and the language menu — is a custom panel, not a native select.
 
 ### Demo accounts
 
