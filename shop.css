@@ -110,6 +110,7 @@ h2,h3,.serif{font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;fo
   transition:color .16s,border-color .16s;
 }
 .subbar a:hover,.subbar button:hover{color:var(--maroon);border-bottom-color:var(--gold)}
+.subbar a.active,.subbar button.active{color:var(--maroon);border-bottom-color:var(--gold);font-weight:600}
 .subbar .all-btn{font-weight:600;display:flex;align-items:center;gap:7px;letter-spacing:.13em}
 .subbar .all-btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.6}
 .subbar .all-btn:hover{border-bottom-color:transparent;background:rgba(110,18,36,.06)}
@@ -151,16 +152,13 @@ h2,h3,.serif{font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;fo
 }
 .tile:hover{box-shadow:var(--shadow-lift);transform:translateY(-3px);border-color:var(--line-2)}
 .tile-art{
-  position:relative;height:172px;padding:12px;overflow:hidden;display:grid;place-items:center;
+  position:relative;display:block;line-height:0;
   font-size:26px;background:#fbf5e9;
 }
-/* the image is sized by its own ratio, so nothing can be cropped */
-.tile-art img{
-  width:auto;height:100%;max-width:100%;object-fit:contain;object-position:center;
-  display:block;transition:transform .5s ease;
-}
+/* no fixed height: the image sets the height, so it can never be cropped */
+.tile-art img{width:100%;height:auto;display:block;transition:transform .5s ease}
 .tile-art:after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 1px rgba(190,151,77,.22);pointer-events:none}
-.tile:hover .tile-art img{transform:scale(1.05)}
+/* no hover zoom: a scaled photo would clip at the tile edge */
 .tile-body{padding:14px 14px 16px;text-align:center;border-top:1px solid var(--line)}
 .tile-body b{display:block;font-family:"Cormorant Garamond",Georgia,serif;font-size:16px;font-weight:600;line-height:1.25;color:var(--maroon-ink)}
 
@@ -640,7 +638,7 @@ body{padding-bottom:104px}
   .browse-main{padding:16px}
   .browse-grid{grid-template-columns:repeat(3,1fr);gap:14px 8px}
   .bt-ico{width:58px;height:58px;font-size:20px}
-  .tile-art{height:140px;padding:8px}
+
   .browse-tile b{font-size:13.5px}
   .profile-head{padding:20px 18px;flex-wrap:wrap;gap:14px}
   .profile-head h1{font-size:23px}

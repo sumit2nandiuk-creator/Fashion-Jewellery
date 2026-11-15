@@ -111,6 +111,18 @@
     }
   }
 
+  function syncCategoryBar() {
+    const { parts } = parseHash();
+    let here = parts[0] === 'c' ? (parts[1] || 'all') : '';
+    if (parts[0] === 'p') { const p = product(parts[1]); here = p ? p.cat : ''; }
+    $$('#catBar a').forEach(el => {
+      const id = (el.getAttribute('href') || '').replace('#/c/', '');
+      const on = Boolean(here) && id === here;
+      el.classList.toggle('active', on);
+      if (on) el.setAttribute('aria-current', 'page'); else el.removeAttribute('aria-current');
+    });
+  }
+
   function updateChrome() {
     const count = cart.reduce((n, line) => n + line.qty, 0);
     const badge = $('#cartCount'); if (badge) badge.textContent = String(count);
@@ -561,7 +573,7 @@
     let src = CAT_HERO[c.id];
     if (!src) { const p = products.find(x => x.cat === c.id && x.img); src = p ? p.img : ''; }
     return src
-      ? '<img src="' + esc(src) + '" alt="" loading="lazy" style="width:auto;height:100%;max-width:100%;object-fit:contain">'
+      ? '<img src="' + esc(src) + '" alt="" loading="lazy" style="width:100%;height:auto;display:block">'
       : esc(c.icon);
   }
 
@@ -751,6 +763,7 @@
     view.innerHTML = html;
     updateChrome();
     syncTabs();
+    syncCategoryBar();
     enhanceSelects(document);
     try { window.scrollTo({ top: 0, behavior: 'auto' }); } catch (e) {}
   }
