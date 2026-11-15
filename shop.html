@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#131921">
+  <link rel="icon" href="images/favicon.png" type="image/png" sizes="64x64">
+  <link rel="apple-touch-icon" href="images/logo-mark-180.png">
+  <title>Fashion Jewellery — Bengali gold, silver and bridal jewellery</title>
+  <meta name="description" content="Shop handcrafted Bengali jewellery: earrings, necklaces, bangles, rings, bridal sets, silver and more. Free India delivery over ₹999.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shop.css?v=1">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand hover-box" href="#/" aria-label="Fashion Jewellery home">
+      <img src="images/logo-mark.png" alt="">
+      <span class="brand-text">Fashion Jewellery<small>বাংলার গহনা</small></span>
+    </a>
+
+    <a class="deliver hover-box" href="#/account">
+      <span class="ico">📍</span>
+      <span><span data-i18n="deliverTo">Deliver to</span><b>Kolkata 700086</b></span>
+    </a>
+
+    <form class="search" id="searchForm" role="search">
+      <select id="searchCat" aria-label="Search category"></select>
+      <input id="searchInput" type="search" data-i18n-ph="searchPh" placeholder="Search jewellery, gold, bangles…" autocomplete="off">
+      <button type="submit" aria-label="Search">🔍</button>
+    </form>
+
+    <div class="topright">
+      <div class="menu-wrap">
+        <button class="lang-btn" type="button" data-act="toggle-menu" data-menu="langMenu" aria-haspopup="true" aria-expanded="false">
+          <span class="flag">🌐</span><span id="langCode">EN</span>
+        </button>
+        <div class="menu" id="langMenu" role="menu">
+          <h4 data-i18n="languageNote">Language</h4>
+          <button type="button" data-act="lang" data-lang="en" role="menuitem">English</button>
+          <button type="button" data-act="lang" data-lang="bn" role="menuitem">বাংলা</button>
+          <button type="button" data-act="lang" data-lang="hi" role="menuitem">हिन्दी</button>
+        </div>
+      </div>
+
+      <div class="menu-wrap">
+        <button class="toplink" type="button" data-act="toggle-menu" data-menu="accountMenu" aria-haspopup="true" aria-expanded="false">
+          <small id="helloLine" data-i18n="hello">Hello, sign in</small>
+          <b data-i18n="account">Account &amp; Lists</b>
+        </button>
+        <div class="menu" id="accountMenu" role="menu">
+          <div id="accountMenuTop"></div>
+          <div class="sep"></div>
+          <a href="#/account" data-i18n="accountTitle">Your account</a>
+          <a href="#/orders" data-i18n="ordersTitle">Your orders</a>
+          <a href="#/wishlist" data-i18n="wishlist">Wishlist</a>
+          <div class="sep"></div>
+          <a href="#/admin" data-i18n="admin">Admin panel</a>
+        </div>
+      </div>
+
+      <a class="toplink" href="#/orders"><small data-i18n="returns">Returns</small><b data-i18n="orders">Orders</b></a>
+      <a class="toplink cart-link" href="#/cart" aria-label="Cart">
+        <span class="cart-ico">🛒</span><span class="cart-count" id="cartCount">0</span>
+        <b data-i18n="cart">Cart</b>
+      </a>
+    </div>
+  </div>
+</header>
+
+<nav class="subbar" aria-label="Categories">
+  <div class="subbar-inner" id="catBar"></div>
+</nav>
+
+<main class="wrap" id="view"></main>
+
+<footer class="foot">
+  <a class="back-top" href="#/" data-i18n="backToTop">Back to top</a>
+  <div class="foot-top">
+    <div>
+      <h4 data-i18n="shopByCategory">Shop by category</h4>
+      <div id="footCats"></div>
+    </div>
+    <div>
+      <h4 data-i18n="footerHelp">Help &amp; settings</h4>
+      <a href="#/account" data-i18n="accountTitle">Your account</a>
+      <a href="#/orders" data-i18n="ordersTitle">Your orders</a>
+      <a href="shipping.html" data-i18n="returns">Returns</a>
+      <a href="shipping.html">Shipping</a>
+      <a href="#/admin" data-i18n="admin">Admin panel</a>
+    </div>
+    <div>
+      <h4 data-i18n="footerAbout">About Fashion Jewellery</h4>
+      <a href="index.html" data-i18n="viewBoutique">Boutique pages</a>
+      <a href="index.html#story">Our story</a>
+      <a href="https://wa.me/918697771768" target="_blank" rel="noopener noreferrer">WhatsApp · 86977 1768</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </div>
+  </div>
+  <div class="foot-bottom">© 2026 Fashion Jewellery · Baghajatin, Kolkata 700086 · বাংলার গহনা</div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="modal-backdrop" id="modal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal" id="modalBody"></div>
+</div>
+
+<script src="data.js"></script>
+<script src="i18n.js"></script>
+<script src="app.js?v=1"></script>
+</body>
+</html>
