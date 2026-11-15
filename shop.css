@@ -151,10 +151,14 @@ h2,h3,.serif{font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;fo
 }
 .tile:hover{box-shadow:var(--shadow-lift);transform:translateY(-3px);border-color:var(--line-2)}
 .tile-art{
-  position:relative;height:152px;overflow:hidden;display:grid;place-items:center;font-size:26px;
-  background:#fbf5e9;
+  position:relative;height:172px;padding:12px;overflow:hidden;display:grid;place-items:center;
+  font-size:26px;background:#fbf5e9;
 }
-.tile-art img{width:100%;height:100%;object-fit:contain;display:block;transition:transform .5s ease}
+/* the image is sized by its own ratio, so nothing can be cropped */
+.tile-art img{
+  width:auto;height:100%;max-width:100%;object-fit:contain;object-position:center;
+  display:block;transition:transform .5s ease;
+}
 .tile-art:after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 1px rgba(190,151,77,.22);pointer-events:none}
 .tile:hover .tile-art img{transform:scale(1.05)}
 .tile-body{padding:14px 14px 16px;text-align:center;border-top:1px solid var(--line)}
@@ -533,7 +537,7 @@ body{padding-bottom:104px}
   color:var(--gold-ink);background:linear-gradient(160deg,#fffdf8,#f6ead5);
   border:1px solid var(--line-2);box-shadow:0 2px 10px rgba(74,11,24,.07);
 }
-.bt-ico img{width:100%;height:100%;object-fit:cover;display:block}
+.bt-ico img{width:auto;height:100%;max-width:100%;object-fit:contain;display:block}
 .browse-tile b{font-family:"Cormorant Garamond",Georgia,serif;font-size:15px;font-weight:600;line-height:1.2;color:var(--maroon-ink)}
 .browse-tile small{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 .chip-row{display:flex;gap:10px;flex-wrap:wrap}
@@ -636,7 +640,7 @@ body{padding-bottom:104px}
   .browse-main{padding:16px}
   .browse-grid{grid-template-columns:repeat(3,1fr);gap:14px 8px}
   .bt-ico{width:58px;height:58px;font-size:20px}
-  .tile-art{height:128px}
+  .tile-art{height:140px;padding:8px}
   .browse-tile b{font-size:13.5px}
   .profile-head{padding:20px 18px;flex-wrap:wrap;gap:14px}
   .profile-head h1{font-size:23px}
