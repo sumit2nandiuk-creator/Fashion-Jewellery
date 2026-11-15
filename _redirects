@@ -1,0 +1,6 @@
+# Cloudflare Pages redirect rules: existing links keep resolving after the move to the storefront.
+
+/index.html        /shop.html            301
+/collections.html  /shop.html#/browse    301
+/cart.html         /shop.html#/cart      301
+/product-*         /shop.html            301

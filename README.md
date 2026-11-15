@@ -36,6 +36,9 @@ Customers build a bag and send the order as a WhatsApp message to +91 86977 7176
 - `docs/website-estimate.md` — the same estimate as editable Markdown
 - `docs/logos/` — the chosen emblem logo (master, 1200 px lockup and seal-only mark)
 - `docs/build-estimate-pdf.py` — regenerates the PDF (`python3 docs/build-estimate-pdf.py`, needs `fpdf2`)
+- `docs/Fashion-Jewellery-Hosting-Estimate.pdf` — monthly and yearly hosting cost sheet, ref `FJ-HOST-2026-01`
+- `docs/hosting-estimate-pdf.py` — regenerates the hosting sheet (`python3 docs/hosting-estimate-pdf.py`, needs `fpdf2`)
+- `_headers`, `_redirects` — Cloudflare Pages caching headers and redirects for the old boutique links
 
 ## Store (`shop.html`)
 
@@ -60,7 +63,7 @@ A floating dock (Home, Browse, Wishlist, You, Cart with a live count) sits at th
 | Role | Email | Password |
 |---|---|---|
 | Customer | `ananya@example.com` | `ananya123` |
-| Admin | `admin@fashionjewellery.in` | `admin123` |
+| Admin | `admin@fashionjewellery.com` | `admin123` |
 
 Social sign-in buttons (Google, Facebook, Apple) create a mock account locally — no request leaves the browser. Checkout is a demo: card, UPI and cash-on-delivery options record an order but never charge anything.
 

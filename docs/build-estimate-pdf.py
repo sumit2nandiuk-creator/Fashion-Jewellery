@@ -41,8 +41,8 @@ COSTS = [
 ]
 
 RUNNING = [
-    ("Domain name, e.g. fashionjewellery.in", "\u20b9900\u20131,500 / year", "  at the registrar"),
-    ("Hosting on Cloudflare Pages", "Free", "  static, no server"),
+    ("Domain, fashionjewellery.com", "\u20b9983 / year", "  at cost, Cloudflare Registrar"),
+    ("Hosting, CDN and SSL on Pages", "Free", "  static site, no server"),
     ("Care plan (optional)", "\u20b92,500 / month", "  monitoring, backups, 2 h of changes"),
     ("Professional email (optional)", "\u20b9150 / user / month", "  Google Workspace or similar"),
 ]
@@ -207,7 +207,7 @@ def build():
     para(pdf,
          "A compact, mobile-first storefront for Fashion Jewellery: home, collections, three product pages, "
          "cart and four policy pages, with multi-currency pricing and ordering handed off to WhatsApp. The "
-         "build is plain HTML, CSS and JavaScript, hosted free, so the running cost stays close to zero "
+         "build is plain HTML, CSS and JavaScript, hosted on Cloudflare Pages, so the running cost stays low "
          "while the shop grows.", size=9, lead=5.0)
 
     heading(pdf, "What the shop gets")
@@ -248,7 +248,9 @@ def build():
     heading(pdf, "Domain, hosting and maintenance")
     simple_table(pdf, ("Item", "Cost", "Notes"), RUNNING,
                  (72, 38, 64), (Align.L, Align.R, Align.L), head_style)
-    para(pdf, "The first 30 days after launch are covered for fixes and small adjustments at no charge.",
+    para(pdf, "The first 30 days after launch are covered for fixes and small adjustments at no charge. "
+              "The separate hosting sheet, FJ-HOST-2026-01, prices the full running cost with Cloudflare Pro, "
+              "Workers and R2 image storage: about \u20b92,289 a month, or \u20b927,468 a year.",
          size=8.2, color=MUTED, lead=4.5)
 
     heading(pdf, "Milestones and payment")
