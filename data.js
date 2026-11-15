@@ -17,24 +17,24 @@ window.FJ_CATEGORIES = [
 window.FJ_PRODUCTS = [
   /* ---- earrings ---- */
   { id: 'rajbari-jhumka', name: 'The Rajbari Jhumka', bn: 'রাজবাড়ির ঝুমকা', cat: 'earrings', price: 2450, mrp: 3200, rating: 4.6, ratings: 812, metal: 'Gold plated', occasion: 'Bridal', stock: 24, img: 'images/earrings.jpg', badge: 'Bestseller' },
-  { id: 'chand-bali', name: 'Chandbali Crescent Earrings', bn: 'চাঁদবালি', cat: 'earrings', price: 1890, mrp: 2400, rating: 4.4, ratings: 431, metal: 'Gold plated', occasion: 'Festive', stock: 31, img: null },
-  { id: 'pearl-studs', name: 'Kolkata Pearl Studs', bn: 'মুক্তো দুল', cat: 'earrings', price: 890, mrp: 1200, rating: 4.2, ratings: 268, metal: 'Silver', occasion: 'Everyday', stock: 60, img: null },
-  { id: 'kundan-drop', name: 'Kundan Drop Earrings', bn: 'কুন্দন ঝুমকা', cat: 'earrings', price: 3450, mrp: 4200, rating: 4.7, ratings: 190, metal: 'Kundan', occasion: 'Wedding', stock: 12, img: null },
+  { id: 'chand-bali', name: 'Chandbali Crescent Earrings', bn: 'চাঁদবালি', cat: 'earrings', price: 1890, mrp: 2400, rating: 4.4, ratings: 431, metal: 'Gold plated', occasion: 'Festive', stock: 31, img: 'images/products/chand-bali.jpg' },
+  { id: 'pearl-studs', name: 'Kolkata Pearl Studs', bn: 'মুক্তো দুল', cat: 'earrings', price: 890, mrp: 1200, rating: 4.2, ratings: 268, metal: 'Silver', occasion: 'Everyday', stock: 60, img: 'images/products/pearl-studs.jpg' },
+  { id: 'kundan-drop', name: 'Kundan Drop Earrings', bn: 'কুন্দন ঝুমকা', cat: 'earrings', price: 3450, mrp: 4200, rating: 4.7, ratings: 190, metal: 'Kundan', occasion: 'Wedding', stock: 12, img: 'images/products/kundan-drop.jpg' },
 
   /* ---- necklaces ---- */
   { id: 'debi-haar', name: 'The Debi Haar', bn: 'দেবী হার', cat: 'necklaces', price: 6900, mrp: 8500, rating: 4.8, ratings: 540, metal: 'Antique gold', occasion: 'Temple', stock: 9, img: 'images/necklace.jpg', badge: 'Classic' },
-  { id: 'sita-choker', name: 'Sita Choker', bn: 'সীতা চোকার', cat: 'necklaces', price: 4290, mrp: 5400, rating: 4.5, ratings: 322, metal: 'Gold plated', occasion: 'Wedding', stock: 15, img: null },
-  { id: 'alpona-chain', name: 'Alpona Chain', bn: 'আলপনা চেন', cat: 'necklaces', price: 1590, mrp: 2100, rating: 4.1, ratings: 148, metal: 'Gold plated', occasion: 'Everyday', stock: 40, img: null },
-  { id: 'raja-rani-set', name: 'Raja Rani Necklace', bn: 'রাজা রানী হার', cat: 'necklaces', price: 9800, mrp: 12500, rating: 4.9, ratings: 96, metal: '22k gold', occasion: 'Bridal', stock: 4, img: null },
+  { id: 'sita-choker', name: 'Sita Choker', bn: 'সীতা চোকার', cat: 'necklaces', price: 4290, mrp: 5400, rating: 4.5, ratings: 322, metal: 'Gold plated', occasion: 'Wedding', stock: 15, img: 'images/products/sita-choker.jpg' },
+  { id: 'alpona-chain', name: 'Alpona Chain', bn: 'আলপনা চেন', cat: 'necklaces', price: 1590, mrp: 2100, rating: 4.1, ratings: 148, metal: 'Gold plated', occasion: 'Everyday', stock: 40, img: 'images/products/alpona-chain.jpg' },
+  { id: 'raja-rani-set', name: 'Raja Rani Necklace', bn: 'রাজা রানী হার', cat: 'necklaces', price: 9800, mrp: 12500, rating: 4.9, ratings: 96, metal: '22k gold', occasion: 'Bridal', stock: 4, img: 'images/products/raja-rani-set.jpg' },
 
   /* ---- bangles ---- */
   { id: 'bangla-bala', name: 'The Bangla Bala Set', bn: 'বাংলা বালা', cat: 'bangles', price: 3200, mrp: 4000, rating: 4.6, ratings: 389, metal: 'Gold plated', occasion: 'Everyday', stock: 22, img: 'images/bangles.jpg', badge: 'New' },
-  { id: 'shankha-pola', name: 'Shankha Pola Pair', bn: 'শাঁখা পলা', cat: 'bangles', price: 2150, mrp: 2600, rating: 4.4, ratings: 512, metal: 'Conch & coral', occasion: 'Bridal', stock: 35, img: null },
-  { id: 'kankan-gold', name: 'Kankan Gold Bangle', bn: 'কঙ্কণ', cat: 'bangles', price: 5400, mrp: 6600, rating: 4.3, ratings: 174, metal: '22k gold', occasion: 'Festive', stock: 11, img: null },
-  { id: 'meenakari-churi', name: 'Meenakari Churi Stack', bn: 'মিনাকারি চুড়ি', cat: 'bangles', price: 1290, mrp: 1800, rating: 4.0, ratings: 205, metal: 'Meenakari', occasion: 'Festive', stock: 48, img: null },
+  { id: 'shankha-pola', name: 'Shankha Pola Pair', bn: 'শাঁখা পলা', cat: 'bangles', price: 2150, mrp: 2600, rating: 4.4, ratings: 512, metal: 'Conch & coral', occasion: 'Bridal', stock: 35, img: 'images/products/shankha-pola.jpg' },
+  { id: 'kankan-gold', name: 'Kankan Gold Bangle', bn: 'কঙ্কণ', cat: 'bangles', price: 5400, mrp: 6600, rating: 4.3, ratings: 174, metal: '22k gold', occasion: 'Festive', stock: 11, img: 'images/products/kankan-gold.jpg' },
+  { id: 'meenakari-churi', name: 'Meenakari Churi Stack', bn: 'মিনাকারি চুড়ি', cat: 'bangles', price: 1290, mrp: 1800, rating: 4.0, ratings: 205, metal: 'Meenakari', occasion: 'Festive', stock: 48, img: 'images/products/meenakari-churi.jpg' },
 
   /* ---- rings ---- */
-  { id: 'muse-ring', name: 'The Muse Ring', bn: 'মিউজ আংটি', cat: 'rings', price: 1450, mrp: 1900, rating: 4.5, ratings: 233, metal: 'Gold plated', occasion: 'Everyday', stock: 30, img: null },
+  { id: 'muse-ring', name: 'The Muse Ring', bn: 'মিউজ আংটি', cat: 'rings', price: 1450, mrp: 1900, rating: 4.5, ratings: 233, metal: 'Gold plated', occasion: 'Everyday', stock: 30, img: 'images/products/muse-ring.jpg' },
   { id: 'kundan-ring', name: 'Kundan Statement Ring', bn: 'কুন্দন আংটি', cat: 'rings', price: 1990, mrp: 2500, rating: 4.2, ratings: 118, metal: 'Kundan', occasion: 'Party', stock: 26, img: null },
   { id: 'silver-toe-ring', name: 'Silver Toe Ring Pair', bn: 'রুপোর আংটি', cat: 'rings', price: 690, mrp: 950, rating: 4.1, ratings: 342, metal: 'Silver', occasion: 'Bridal', stock: 70, img: null },
   { id: 'solitaire-ring', name: 'Zircon Solitaire Ring', bn: 'সলিটেয়ার আংটি', cat: 'rings', price: 2890, mrp: 3500, rating: 4.7, ratings: 89, metal: 'Rhodium', occasion: 'Gift', stock: 18, img: null },
