@@ -39,7 +39,7 @@
 
   if (!users) {
     users = [
-      { name: 'Store Admin', email: 'admin@fashionjewellery.in', phone: '8697771768', password: 'admin123', role: 'admin', addresses: [] },
+      { name: 'Store Admin', email: 'admin@fashionjewellery.com', phone: '8697771768', password: 'admin123', role: 'admin', addresses: [] },
       { name: 'Ananya Sen', email: 'ananya@example.com', phone: '9876543210', password: 'ananya123', role: 'customer',
         addresses: [{ name: 'Ananya Sen', phone: '9876543210', line: '14B, Sarat Chatterjee Road', city: 'Kolkata', state: 'West Bengal', pin: '700086' }] }
     ];
@@ -484,7 +484,7 @@
     return '<section class="section card" style="max-width:460px;margin:20px auto">' +
       '<h2>' + esc(t('signInFirst')) + '</h2><p><a class="btn btn-cart" data-act="open-auth" data-mode="in">' + esc(t('signIn')) + '</a> ' +
       '<a class="btn btn-line" data-act="open-auth" data-mode="up">' + esc(t('signUp')) + '</a></p>' +
-      '<p class="hint">Demo account: ananya@example.com / ananya123 · Admin: admin@fashionjewellery.in / admin123</p></section>';
+      '<p class="hint">Demo account: ananya@example.com / ananya123 · Admin: admin@fashionjewellery.com / admin123</p></section>';
   }
 
   function viewAccount() {
@@ -600,7 +600,7 @@
         '<div class="card" style="margin-top:16px;max-width:520px">' +
           '<p style="font-size:13.5px">' + esc(t('newHere')) + ' ' +
             '<button class="linkish" type="button" data-act="open-auth" data-mode="up">' + esc(t('signUp')) + '</button></p>' +
-          '<p class="hint">Demo account: ananya@example.com / ananya123 · Admin: admin@fashionjewellery.in / admin123</p>' +
+          '<p class="hint">Demo account: ananya@example.com / ananya123 · Admin: admin@fashionjewellery.com / admin123</p>' +
         '</div></section>';
     }
 
@@ -656,7 +656,7 @@
   function viewAdmin() {
     if (!isAdmin()) {
       return '<section class="section card" style="max-width:420px;margin:20px auto"><h2>' + esc(t('adminLogin')) + '</h2>' +
-        '<form data-form="admin-login"><div class="field"><label>' + esc(t('email')) + '</label><input name="email" type="email" value="admin@fashionjewellery.in"></div>' +
+        '<form data-form="admin-login"><div class="field"><label>' + esc(t('email')) + '</label><input name="email" type="email" value="admin@fashionjewellery.com"></div>' +
         '<div class="field" style="margin-top:8px"><label>' + esc(t('password')) + '</label><input name="password" type="password" value="admin123"></div>' +
         '<button class="btn btn-cart btn-block" style="margin-top:12px" type="submit">' + esc(t('signIn')) + '</button></form>' +
         '<p class="hint" style="margin-top:10px">' + esc(t('adminHint')) + '</p></section>';
