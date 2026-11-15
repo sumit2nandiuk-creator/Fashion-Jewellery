@@ -560,7 +560,9 @@
   function catArt(c) {
     let src = CAT_HERO[c.id];
     if (!src) { const p = products.find(x => x.cat === c.id && x.img); src = p ? p.img : ''; }
-    return src ? '<img src="' + esc(src) + '" alt="" loading="lazy">' : esc(c.icon);
+    return src
+      ? '<img src="' + esc(src) + '" alt="" loading="lazy" style="width:auto;height:100%;max-width:100%;object-fit:contain">'
+      : esc(c.icon);
   }
 
   function miniCard(p) {
