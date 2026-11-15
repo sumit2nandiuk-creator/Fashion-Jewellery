@@ -231,7 +231,7 @@
       '<section class="section card"><div class="card-head"><h2>' + esc(t('shopByCategory')) + '</h2>' +
         '<a href="#/browse">' + esc(t('seeAll')) + '</a></div>' +
         '<div class="tiles">' + CATEGORIES.map(c =>
-          '<a class="tile" href="#/c/' + c.id + '"><span class="tile-art" aria-hidden="true">' + catArt(c) + '</span>' +
+          '<a class="tile" href="#/c/' + c.id + '">' + catArt(c, 'tile-art') +
           '<span class="tile-body"><b>' + esc(catName(c.id)) + '</b></span></a>').join('') +
         '</div></section>' +
 
@@ -534,7 +534,7 @@
   function viewBrowse() {
     const tiles = CATEGORIES.map(c => {
       return '<a class="browse-tile" href="#/c/' + c.id + '">' +
-        '<span class="bt-ico" aria-hidden="true">' + catArt(c) + '</span>' +
+        catArt(c, 'bt-ico') +
         '<b>' + esc(catName(c.id)) + '</b></a>';
     }).join('');
 
@@ -569,12 +569,19 @@
     kids: 'images/products/kids-studs.jpg'
   };
 
-  function catArt(c) {
-    let src = CAT_HERO[c.id];
-    if (!src) { const p = products.find(x => x.cat === c.id && x.img); src = p ? p.img : ''; }
-    return src
-      ? '<img src="' + esc(src) + '" alt="" loading="lazy" style="width:100%;height:auto;display:block">'
-      : esc(c.icon);
+  function catSrc(c) {
+    const fixed = CAT_HERO[c.id];
+    if (fixed) return fixed;
+    const p = products.find(x => x.cat === c.id && x.img);
+    return p ? p.img : '';
+  }
+
+  /* photo is painted as a contained background: it can never crop, and the
+     caption underneath keeps its own place in the card */
+  function catArt(c, cls) {
+    const src = catSrc(c);
+    if (!src) return '<span class="' + cls + '" aria-hidden="true">' + esc(c.icon) + '</span>';
+    return '<span class="' + cls + '" aria-hidden="true" style="background-image:url(&quot;' + esc(src) + '&quot;)"></span>';
   }
 
   function miniCard(p) {
