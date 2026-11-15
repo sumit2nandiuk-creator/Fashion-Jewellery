@@ -250,10 +250,9 @@ def build():
     table(pdf, ["Option", "Monthly", "Per year", "What it buys"],
           [(name, inr(m), inr(y), note) for name, m, y, note in SCENARIOS],
           [30, 22, 24, 98], ["LEFT", "RIGHT", "RIGHT", "LEFT"], head_style)
-    para(pdf, "Start on Essentials if the aim is simply to be online with the catalogue as it stands. Move to "
-              "Recommended once the shop takes orders or the photography passes a few gigabytes; the Pro plan also "
-              "adds managed firewall rules and lossless image optimisation, which is why the pages get lighter rather "
-              "than heavier as the catalogue grows.", 8.4, MUTED)
+    para(pdf, "Start on Essentials to be online with the catalogue as it stands. Move to Recommended once the shop "
+              "takes orders or the photography passes a few gigabytes; Pro adds managed firewall rules and lossless "
+              "image optimisation, so pages get lighter, not heavier, as the catalogue grows.", 8.4, MUTED)
 
     heading(pdf, "One-time setup at launch")
     rows = [(item, h + " h", inr(float(amount.replace(",", ""))), kind) for item, h, amount, kind in SETUP]
@@ -271,20 +270,22 @@ def build():
         pdf.multi_cell(0, 5.2, text, new_x=XPos.LMARGIN, new_y=YPos.NEXT)
         pdf.ln(0.6)
 
-    heading(pdf, "Notes")
+    heading(pdf, "Notes", 3)
     notes = [
         "Pages serves the site from Cloudflare's edge: static requests and bandwidth unmetered, 500 builds a month.",
         "R2 includes 10 GB and 10M reads free and never charges egress, which is why a photo-heavy shop costs rupees, not a hosting bill.",
         "Cloudflare bills in dollars at the rates shown (\u20b988 to the dollar, before card markup); GST at 18% applies to an Indian business.",
         "Not included: ads, photography, copywriting, gateway or WhatsApp fees. The \u20b955,000 build fee is unaffected.",
+        "Pro is optional: domain, Workers and R2 alone are \u20b9529 a month, \u20b96,348 a year, enough while orders stay on WhatsApp.",
+        "Hostinger costs more here, not less: \u20b9149 is a 48-month prepayment renewing at \u20b9449\u2013649, plus GST and a \u20b91,499 .com renewal \u2014 \u20b98,127\u2013\u20b910,959 a year after, for PHP hosting this static shop does not use.",
     ]
     for note in notes:
         pdf.set_x(18)
         pdf.set_font("body", "", 8)
         pdf.set_text_color(*MUTED)
-        pdf.cell(4, 4.6, "\u00b7")
-        pdf.multi_cell(0, 4.6, note, new_x=XPos.LMARGIN, new_y=YPos.NEXT)
-        pdf.ln(0.8)
+        pdf.cell(4, 4.3, "\u00b7")
+        pdf.multi_cell(0, 4.3, note, new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+        pdf.ln(0.45)
 
     pdf.output("docs/Fashion-Jewellery-Hosting-Estimate.pdf")
     print("wrote docs/Fashion-Jewellery-Hosting-Estimate.pdf")
