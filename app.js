@@ -86,6 +86,7 @@
     $$('[data-i18n]').forEach(el => { el.textContent = t(el.dataset.i18n); });
     $$('[data-i18n-ph]').forEach(el => { el.placeholder = t(el.dataset.i18nPh); });
     const code = $('#langCode'); if (code) code.textContent = lang.toUpperCase();
+    $$('#langMenu [data-lang]').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
     const hello = $('#helloLine');
     if (hello) {
       const user = currentUser();
@@ -907,11 +908,12 @@
     const r = trigger.getBoundingClientRect();
     const margin = 12;
     const gap = 8;
-    const w = Math.min(260, window.innerWidth - margin * 2);
-    menu.style.width = w + 'px';
-    menu.style.left = Math.max(margin, Math.min(r.right - w, window.innerWidth - w - margin)) + 'px';
+    menu.style.width = 'auto';
+    menu.style.maxWidth = (window.innerWidth - margin * 2) + 'px';
     menu.style.top = '0px';
+    const w = menu.offsetWidth || 170;
     const h = menu.offsetHeight || 200;
+    menu.style.left = Math.max(margin, Math.min(r.right - w, window.innerWidth - w - margin)) + 'px';
     let top = r.bottom + gap;
     if (top + h > window.innerHeight - margin) top = Math.max(margin, r.top - h - gap);
     menu.style.top = top + 'px';
@@ -1068,6 +1070,7 @@
       }
       case 'lang':
         lang = trigger.dataset.lang; LS.set('fj_lang', lang);
+        $$('.menu.open').forEach(m => m.classList.remove('open'));
         renderCategoryBar(); render();
         toast(t('langLabel') + ': ' + ({ en: 'English', bn: 'বাংলা', hi: 'हिन्दी' })[lang]);
         break;
@@ -1098,6 +1101,12 @@
         break;
       case 'close-modal': closeModal(); break;
       case 'add-address': addressModal(); break;
+      case 'top': {
+        const smooth = !prefersReducedMotion();
+        try { window.scrollTo({ top: 0, behavior: smooth ? 'smooth' : 'auto' }); }
+        catch (e) { window.scrollTo(0, 0); }
+        break;
+      }
       case 'open-filters': filterModal(); break;
       case 'clear-filters':
         filters.price = 'all'; filters.metal = []; filters.occasion = []; filters.rating = false;
@@ -1215,6 +1224,16 @@
     else if (c) location.hash = '#/c/' + c;
     else location.hash = '#/c/all';
   });
+
+  document.addEventListener('pointerdown', event => {
+    if (!event.target.closest('.csel')) closeDropdowns();
+    if (!event.target.closest('.menu-wrap')) $$('.menu.open').forEach(m => m.classList.remove('open'));
+  }, true);
+
+  window.addEventListener('scroll', () => {
+    closeDropdowns();
+    $$('.menu.open').forEach(m => m.classList.remove('open'));
+  }, { passive: true });
 
   window.addEventListener('hashchange', render);
 
