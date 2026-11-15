@@ -51,7 +51,9 @@ A separate, fully client-side storefront: catalogue, cart, checkout, accounts, o
 
 ### Routes
 
-`#/` home · `#/c/<category>` listing · `#/s/<query>` search · `#/p/<id>` product · `#/cart` · `#/checkout` · `#/order/<id>` confirmation · `#/orders` · `#/wishlist` · `#/account` · `#/admin`
+`#/` home · `#/browse` category browser · `#/c/<category>` listing (accepts `?price=under1|1to3|3to6|6plus`, `?occasion=Gift`, `?sort=rating`) · `#/s/<query>` search · `#/p/<id>` product · `#/cart` · `#/checkout` · `#/order/<id>` confirmation · `#/orders` · `#/wishlist` · `#/profile` · `#/account` · `#/admin`
+
+On phones a fixed bottom bar carries Home, Browse, Wishlist, You and Cart (with a live count badge); on wider screens the same destinations live in the header.
 
 ### Demo accounts
 

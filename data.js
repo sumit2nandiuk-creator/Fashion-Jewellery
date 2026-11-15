@@ -35,22 +35,22 @@ window.FJ_PRODUCTS = [
 
   /* ---- rings ---- */
   { id: 'muse-ring', name: 'The Muse Ring', bn: 'মিউজ আংটি', cat: 'rings', price: 1450, mrp: 1900, rating: 4.5, ratings: 233, metal: 'Gold plated', occasion: 'Everyday', stock: 30, img: 'images/products/muse-ring.jpg' },
-  { id: 'kundan-ring', name: 'Kundan Statement Ring', bn: 'কুন্দন আংটি', cat: 'rings', price: 1990, mrp: 2500, rating: 4.2, ratings: 118, metal: 'Kundan', occasion: 'Party', stock: 26, img: null },
-  { id: 'silver-toe-ring', name: 'Silver Toe Ring Pair', bn: 'রুপোর আংটি', cat: 'rings', price: 690, mrp: 950, rating: 4.1, ratings: 342, metal: 'Silver', occasion: 'Bridal', stock: 70, img: null },
-  { id: 'solitaire-ring', name: 'Zircon Solitaire Ring', bn: 'সলিটেয়ার আংটি', cat: 'rings', price: 2890, mrp: 3500, rating: 4.7, ratings: 89, metal: 'Rhodium', occasion: 'Gift', stock: 18, img: null },
+  { id: 'kundan-ring', name: 'Kundan Statement Ring', bn: 'কুন্দন আংটি', cat: 'rings', price: 1990, mrp: 2500, rating: 4.2, ratings: 118, metal: 'Kundan', occasion: 'Party', stock: 26, img: 'images/products/kundan-ring.jpg' },
+  { id: 'silver-toe-ring', name: 'Silver Toe Ring Pair', bn: 'রুপোর আংটি', cat: 'rings', price: 690, mrp: 950, rating: 4.1, ratings: 342, metal: 'Silver', occasion: 'Bridal', stock: 70, img: 'images/products/silver-toe-ring.jpg' },
+  { id: 'solitaire-ring', name: 'Zircon Solitaire Ring', bn: 'সলিটেয়ার আংটি', cat: 'rings', price: 2890, mrp: 3500, rating: 4.7, ratings: 89, metal: 'Rhodium', occasion: 'Gift', stock: 18, img: 'images/products/solitaire-ring.jpg' },
 
   /* ---- mangalsutra ---- */
-  { id: 'bengali-mangalsutra', name: 'Bengali Mangalsutra', bn: 'মঙ্গলসূত্র', cat: 'mangalsutra', price: 3650, mrp: 4500, rating: 4.5, ratings: 276, metal: 'Gold plated', occasion: 'Bridal', stock: 20, img: null },
-  { id: 'diamond-mangalsutra', name: 'Diamond Look Mangalsutra', bn: 'ডায়মন্ড মঙ্গলসূত্র', cat: 'mangalsutra', price: 4890, mrp: 6200, rating: 4.6, ratings: 143, metal: 'Cz & gold', occasion: 'Daily', stock: 14, img: null },
-  { id: 'black-bead-chain', name: 'Black Bead Chain', bn: 'কালো পুঁতির চেন', cat: 'mangalsutra', price: 1190, mrp: 1600, rating: 4.0, ratings: 311, metal: 'Gold plated', occasion: 'Daily', stock: 55, img: null },
+  { id: 'bengali-mangalsutra', name: 'Bengali Mangalsutra', bn: 'মঙ্গলসূত্র', cat: 'mangalsutra', price: 3650, mrp: 4500, rating: 4.5, ratings: 276, metal: 'Gold plated', occasion: 'Bridal', stock: 20, img: 'images/products/bengali-mangalsutra.jpg' },
+  { id: 'diamond-mangalsutra', name: 'Diamond Look Mangalsutra', bn: 'ডায়মন্ড মঙ্গলসূত্র', cat: 'mangalsutra', price: 4890, mrp: 6200, rating: 4.6, ratings: 143, metal: 'Cz & gold', occasion: 'Daily', stock: 14, img: 'images/products/diamond-mangalsutra.jpg' },
+  { id: 'black-bead-chain', name: 'Black Bead Chain', bn: 'কালো পুঁতির চেন', cat: 'mangalsutra', price: 1190, mrp: 1600, rating: 4.0, ratings: 311, metal: 'Gold plated', occasion: 'Daily', stock: 55, img: 'images/products/black-bead-chain.jpg' },
 
   /* ---- nose pins ---- */
-  { id: 'bengali-nath', name: 'Bridal Bengali Nath', bn: 'বিয়ের নথ', cat: 'nose-pins', price: 2790, mrp: 3400, rating: 4.7, ratings: 167, metal: 'Gold plated', occasion: 'Bridal', stock: 16, img: null },
-  { id: 'pearl-nose-pin', name: 'Pearl Nose Pin', bn: 'মুক্তো নথ', cat: 'nose-pins', price: 490, mrp: 700, rating: 4.2, ratings: 402, metal: 'Silver', occasion: 'Everyday', stock: 90, img: null },
-  { id: 'kundan-nose-ring', name: 'Kundan Nose Ring', bn: 'কুন্দন নথ', cat: 'nose-pins', price: 1590, mrp: 2000, rating: 4.3, ratings: 121, metal: 'Kundan', occasion: 'Festive', stock: 28, img: null },
+  { id: 'bengali-nath', name: 'Bridal Bengali Nath', bn: 'বিয়ের নথ', cat: 'nose-pins', price: 2790, mrp: 3400, rating: 4.7, ratings: 167, metal: 'Gold plated', occasion: 'Bridal', stock: 16, img: 'images/products/bengali-nath.jpg' },
+  { id: 'pearl-nose-pin', name: 'Pearl Nose Pin', bn: 'মুক্তো নথ', cat: 'nose-pins', price: 490, mrp: 700, rating: 4.2, ratings: 402, metal: 'Silver', occasion: 'Everyday', stock: 90, img: 'images/products/pearl-nose-pin.jpg' },
+  { id: 'kundan-nose-ring', name: 'Kundan Nose Ring', bn: 'কুন্দন নথ', cat: 'nose-pins', price: 1590, mrp: 2000, rating: 4.3, ratings: 121, metal: 'Kundan', occasion: 'Festive', stock: 28, img: 'images/products/kundan-nose-ring.jpg' },
 
   /* ---- anklets ---- */
-  { id: 'ghungroo-payal', name: 'Ghungroo Payal', bn: 'ঘুঙুর পায়েল', cat: 'anklets', price: 990, mrp: 1400, rating: 4.4, ratings: 588, metal: 'Silver', occasion: 'Everyday', stock: 64, img: null },
+  { id: 'ghungroo-payal', name: 'Ghungroo Payal', bn: 'ঘুঙুর পায়েল', cat: 'anklets', price: 990, mrp: 1400, rating: 4.4, ratings: 588, metal: 'Silver', occasion: 'Everyday', stock: 64, img: 'images/products/ghungroo-payal.jpg' },
   { id: 'silver-chain-anklet', name: 'Silver Chain Anklet', bn: 'রুপোর নূপুর', cat: 'anklets', price: 1350, mrp: 1800, rating: 4.2, ratings: 213, metal: 'Silver', occasion: 'Daily', stock: 39, img: null },
   { id: 'bridal-payal', name: 'Bridal Payal with Bells', bn: 'বিয়ের পায়েল', cat: 'anklets', price: 2190, mrp: 2800, rating: 4.6, ratings: 97, metal: 'Silver', occasion: 'Bridal', stock: 19, img: null },
 
