@@ -289,6 +289,7 @@ def build():
         "Supabase and Cloudflare bill in dollars at the rates shown (\u20b988 to the dollar, before card markup); GST at 18% applies to an Indian business.",
         "The \u20b955,000 build fee is unchanged. The backend, admin panel, accounts and gateway integration are new scope, quoted separately.",
         "Both gateways need KYC before the first sale: PAN, GST certificate, bank proof and a live site. Razorpay clears in days; Stripe India can take longer.",
+        "AWS lands near \u20b92,300 too, once RDS, Cognito and SES are added, but brings a VPC, security groups and four days of setup. Past a terabyte a month, CloudFront charges $0.109 a GB for India where R2 charges nothing.",
     ]
     for note in notes:
         pdf.set_x(18)
