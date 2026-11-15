@@ -220,7 +220,7 @@
         '<a href="#/browse">' + esc(t('seeAll')) + '</a></div>' +
         '<div class="tiles">' + CATEGORIES.map(c =>
           '<a class="tile" href="#/c/' + c.id + '"><span class="tile-art" aria-hidden="true">' + catArt(c) + '</span>' +
-          '<span class="tile-body"><b>' + esc(catName(c.id)) + '</b><span>' + products.filter(p => p.cat === c.id).length + ' ' + esc(t('items').toLowerCase()) + '</span></span></a>').join('') +
+          '<span class="tile-body"><b>' + esc(catName(c.id)) + '</b></span></a>').join('') +
         '</div></section>' +
 
       '<section class="section card"><div class="card-head"><h2>' + esc(t('deals')) + '</h2><a href="#/c/all">' + esc(t('seeAll')) + '</a></div>' +
@@ -521,11 +521,9 @@
 
   function viewBrowse() {
     const tiles = CATEGORIES.map(c => {
-      const n = products.filter(p => p.cat === c.id).length;
       return '<a class="browse-tile" href="#/c/' + c.id + '">' +
         '<span class="bt-ico" aria-hidden="true">' + catArt(c) + '</span>' +
-        '<b>' + esc(catName(c.id)) + '</b>' +
-        '<small>' + n + ' ' + esc(t('items').toLowerCase()) + '</small></a>';
+        '<b>' + esc(catName(c.id)) + '</b></a>';
     }).join('');
 
     const rail = '<aside class="browse-rail"><h4>' + esc(t('allCats')) + '</h4>' +
@@ -546,8 +544,8 @@
 
   const CAT_HERO = {
     earrings: 'images/products/chand-bali.jpg',
-    necklaces: 'images/necklace.jpg',
-    bangles: 'images/bangles.jpg',
+    necklaces: 'images/products/sita-choker.jpg',
+    bangles: 'images/products/kankan-gold.jpg',
     rings: 'images/products/solitaire-ring.jpg',
     mangalsutra: 'images/products/bengali-mangalsutra.jpg',
     'nose-pins': 'images/products/bengali-nath.jpg',
