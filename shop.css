@@ -330,6 +330,20 @@ h2,h3,.serif{font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;fo
 .hint{font-size:11.5px;color:var(--muted);line-height:1.5}
 .notice{background:var(--gold-pale);border:1px solid rgba(190,151,77,.55);color:#5c4413;border-radius:2px;padding:9px 12px;font-size:12px;margin:10px 0}
 
+/* ---------------- add-to-cart flight ---------------- */
+.fly-chip{
+  position:fixed;z-index:95;display:grid;place-items:center;min-width:34px;height:26px;padding:0 9px;
+  border-radius:13px;background:var(--maroon);color:var(--gold-soft);
+  font-family:inherit;font-size:12px;font-weight:500;letter-spacing:.04em;
+  box-shadow:0 10px 22px rgba(59,10,21,.35);pointer-events:none;
+}
+@keyframes cart-bump{0%,100%{transform:translateY(0) scale(1)}30%{transform:translateY(-3px) scale(1.14)}60%{transform:translateY(0) scale(.96)}}
+@keyframes badge-pop{0%,100%{transform:scale(1)}35%{transform:scale(1.4)}70%{transform:scale(.9)}}
+.cart-link.bump .cart-ico{animation:cart-bump .68s cubic-bezier(.2,.72,.3,1)}
+.cart-link.bump .cart-count{animation:badge-pop .68s ease}
+.tab.bump svg{animation:cart-bump .68s cubic-bezier(.2,.72,.3,1)}
+.tab.bump .tab-badge{animation:badge-pop .68s ease}
+
 /* ---------------- toast ---------------- */
 .toast{
   position:fixed;left:50%;bottom:26px;transform:translate(-50%,16px);
@@ -546,4 +560,5 @@ table.grid td select{padding:6px 8px;border:1px solid var(--line-2);border-radiu
 }
 @media(prefers-reduced-motion:reduce){
   *{transition:none !important;animation:none !important}
+  .fly-chip{display:none}
 }

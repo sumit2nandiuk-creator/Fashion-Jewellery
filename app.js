@@ -791,6 +791,63 @@
   }
 
   /* ------------------------------------------------------------------ actions */
+  /* ------------------------------------------------------- add-to-cart motion */
+  const prefersReducedMotion = () => { try { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } };
+
+  function cartTargets() {
+    return [$('.cart-link'), $('.tab[data-tab="cart"]')].filter(el => {
+      if (!el || typeof el.getBoundingClientRect !== 'function') return false;
+      const r = el.getBoundingClientRect();
+      return r.width > 0 && r.height > 0;
+    });
+  }
+
+  function pulseCart() {
+    cartTargets().forEach(el => {
+      el.classList.remove('bump');
+      void el.offsetWidth;
+      el.classList.add('bump');
+      setTimeout(() => el.classList.remove('bump'), 700);
+    });
+  }
+
+  function flyToCart(source) {
+    if (prefersReducedMotion() || !source || typeof source.getBoundingClientRect !== 'function') { pulseCart(); return; }
+    const target = cartTargets()[0];
+    const from = source.getBoundingClientRect();
+    if (!target || (!from.width && !from.height)) { pulseCart(); return; }
+    const to = target.getBoundingClientRect();
+    const chip = document.createElement('span');
+    chip.className = 'fly-chip';
+    chip.textContent = '+1';
+    chip.setAttribute('aria-hidden', 'true');
+    chip.style.left = (from.left + from.width / 2) + 'px';
+    chip.style.top = (from.top + from.height / 2) + 'px';
+    document.body.appendChild(chip);
+
+    let finished = false;
+    const done = () => {
+      if (finished) return;
+      finished = true;
+      if (typeof chip.remove === 'function') chip.remove();
+      pulseCart();
+    };
+
+    if (typeof chip.animate !== 'function') { done(); return; }
+
+    const dx = (to.left + to.width / 2) - (from.left + from.width / 2);
+    const dy = (to.top + to.height / 2) - (from.top + from.height / 2);
+    const animation = chip.animate([
+      { transform: 'translate(-50%, -50%) scale(.6)', opacity: 0 },
+      { transform: 'translate(-50%, -50%) scale(1.05)', opacity: 1, offset: .18 },
+      { transform: 'translate(calc(-50% + ' + (dx * .55) + 'px), calc(-50% + ' + (dy * .55 - 60) + 'px)) scale(.9)', opacity: 1, offset: .6 },
+      { transform: 'translate(calc(-50% + ' + dx + 'px), calc(-50% + ' + dy + 'px)) scale(.35)', opacity: 0 }
+    ], { duration: 780, easing: 'cubic-bezier(.2,.72,.3,1)' });
+    animation.onfinish = done;
+    animation.oncancel = done;
+    setTimeout(done, 1200);
+  }
+
   function addToCart(id, qty) {
     const line = cart.find(l => l.id === id);
     if (line) line.qty = Math.min(10, line.qty + (qty || 1));
@@ -890,6 +947,7 @@
       case 'add': {
         const qtySel = $('#pdQty');
         addToCart(id, qtySel ? Number(qtySel.value) : 1);
+        flyToCart(trigger);
         break;
       }
       case 'buy':
