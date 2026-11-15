@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#131921">
+  <meta name="theme-color" content="#4a0b18">
   <link rel="icon" href="images/favicon.png" type="image/png" sizes="64x64">
   <link rel="apple-touch-icon" href="images/logo-mark-180.png">
   <title>Fashion Jewellery — Bengali gold, silver and bridal jewellery</title>
@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="shop.css?v=1">
+  <link rel="stylesheet" href="shop.css?v=2">
 </head>
 <body>
 
@@ -23,20 +23,20 @@
     </a>
 
     <a class="deliver hover-box" href="#/account">
-      <span class="ico">📍</span>
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21c4.2-4.4 6.5-7.6 6.5-10.5a6.5 6.5 0 1 0-13 0C5.5 13.4 7.8 16.6 12 21Z"/><circle cx="12" cy="10.4" r="2.4"/></svg>
       <span><span data-i18n="deliverTo">Deliver to</span><b>Kolkata 700086</b></span>
     </a>
 
     <form class="search" id="searchForm" role="search">
       <select id="searchCat" aria-label="Search category"></select>
       <input id="searchInput" type="search" data-i18n-ph="searchPh" placeholder="Search jewellery, gold, bangles…" autocomplete="off">
-      <button type="submit" aria-label="Search">🔍</button>
+      <button type="submit" aria-label="Search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m20.5 20.5-4.7-4.7"/></svg></button>
     </form>
 
     <div class="topright">
       <div class="menu-wrap">
         <button class="lang-btn" type="button" data-act="toggle-menu" data-menu="langMenu" aria-haspopup="true" aria-expanded="false">
-          <span class="flag">🌐</span><span id="langCode">EN</span>
+          <span class="flag"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><path d="M3.6 12h16.8M12 3.4c2.7 2.9 2.7 14.3 0 17.2-2.7-2.9-2.7-14.3 0-17.2Z"/></svg></span><span id="langCode">EN</span>
         </button>
         <div class="menu" id="langMenu" role="menu">
           <h4 data-i18n="languageNote">Language</h4>
@@ -64,7 +64,7 @@
 
       <a class="toplink" href="#/orders"><small data-i18n="returns">Returns</small><b data-i18n="orders">Orders</b></a>
       <a class="toplink cart-link" href="#/cart" aria-label="Cart">
-        <span class="cart-ico">🛒</span><span class="cart-count" id="cartCount">0</span>
+        <span class="cart-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.6 7.4h12.8l-1.2 12.1a2 2 0 0 1-2 1.8H8.8a2 2 0 0 1-2-1.8L5.6 7.4Z"/><path d="M9.2 7.4V6.2a2.8 2.8 0 0 1 5.6 0v1.2"/></svg></span><span class="cart-count" id="cartCount">0</span>
         <b data-i18n="cart">Cart</b>
       </a>
     </div>

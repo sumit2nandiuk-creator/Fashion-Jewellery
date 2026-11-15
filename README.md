@@ -37,14 +37,14 @@ Customers build a bag and send the order as a WhatsApp message to +91 86977 7176
 - `docs/logos/` — the chosen emblem logo (master, 1200 px lockup and seal-only mark)
 - `docs/build-estimate-pdf.py` — regenerates the PDF (`python3 docs/build-estimate-pdf.py`, needs `fpdf2`)
 
-## Store — Amazon-style shop (`shop.html`)
+## Store (`shop.html`)
 
 A separate, fully client-side storefront: catalogue, cart, checkout, accounts, orders and an admin panel. No server, no build step — everything is plain HTML, CSS and JavaScript with state in `localStorage`.
 
 | File | What it does |
 |---|---|
 | `shop.html` | App shell: top bar, search, category strip, view container, footer, modal and toast hosts |
-| `shop.css` | Store styles (Amazon-style layout, buttons, cards, tables, modals) |
+| `shop.css` | Store styles: maroon, gold and ivory, serif headings, hairline rules |
 | `data.js` | 12 jewellery categories and 40 sample products, plus sample reviews |
 | `i18n.js` | Interface strings in English, Bengali and Hindi |
 | `app.js` | Router, cart, wishlist, accounts, checkout, orders and the admin panel |
