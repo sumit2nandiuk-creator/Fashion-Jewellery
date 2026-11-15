@@ -43,8 +43,8 @@ COSTS = [
 RUNNING = [
     ("Domain, fashionjewellery.com", "\u20b9983 / year", "  at cost, Cloudflare Registrar"),
     ("Hosting, CDN and SSL on Pages", "Free", "  static site, no server"),
+    ("Database, accounts and payments", "\u20b92,200 / month", "  Supabase Pro, daily backups"),
     ("Care plan (optional)", "\u20b92,500 / month", "  monitoring, backups, 2 h of changes"),
-    ("Professional email (optional)", "\u20b9150 / user / month", "  Google Workspace or similar"),
 ]
 
 MILESTONES = [
@@ -248,9 +248,9 @@ def build():
     heading(pdf, "Domain, hosting and maintenance")
     simple_table(pdf, ("Item", "Cost", "Notes"), RUNNING,
                  (72, 38, 64), (Align.L, Align.R, Align.L), head_style)
-    para(pdf, "The first 30 days after launch are covered for fixes and small adjustments at no charge. "
-              "The separate hosting sheet, FJ-HOST-2026-01, prices the full running cost with Cloudflare Pro, "
-              "Workers and R2 image storage: about \u20b92,289 a month, or \u20b927,468 a year.",
+    para(pdf, "The first 30 days after launch cover fixes and small adjustments at no charge. The backend, admin "
+              "panel, customer accounts and gateway integration are outside this fee and quoted separately. Running "
+              "cost, priced in FJ-HOST-2026-02, is about \u20b92,289 a month, or \u20b927,462 a year.",
          size=8.2, color=MUTED, lead=4.5)
 
     heading(pdf, "Milestones and payment")

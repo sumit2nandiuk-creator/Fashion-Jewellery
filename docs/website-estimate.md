@@ -71,10 +71,10 @@ The effort total is rounded down to a flat ₹55,000 for the whole build, design
 |---|---|---|
 | Domain, fashionjewellery.com | ₹983 / year | at cost, Cloudflare Registrar |
 | Hosting, CDN and SSL on Pages | Free | static site, no server to rent |
+| Database, accounts and payments | ₹2,200 / month | Supabase Pro, daily backups |
 | Care plan (optional) | ₹2,500 / month | monitoring, backups, 2 h of changes |
-| Professional email (optional) | ₹150 / user / month | Google Workspace or similar |
 
-The first 30 days after launch are covered for fixes and small adjustments at no charge. The separate hosting sheet, `FJ-HOST-2026-01`, prices the full running cost with Cloudflare Pro, Workers and R2 image storage: about ₹2,289 a month, or ₹27,468 a year.
+The first 30 days after launch cover fixes and small adjustments at no charge. The backend, admin panel, customer accounts and gateway integration are outside the ₹55,000 fee and are quoted separately. Running cost, priced in `FJ-HOST-2026-02`, is about ₹2,289 a month, or ₹27,462 a year.
 
 ---
 
