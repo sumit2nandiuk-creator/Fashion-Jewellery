@@ -36,7 +36,7 @@ Customers build a bag and send the order as a WhatsApp message to +91 86977 7176
 - `docs/website-estimate.md` — the same estimate as editable Markdown
 - `docs/logos/` — the chosen emblem logo (master, 1200 px lockup and seal-only mark)
 - `docs/build-estimate-pdf.py` — regenerates the PDF (`python3 docs/build-estimate-pdf.py`, needs `fpdf2`)
-- `docs/Fashion-Jewellery-Hosting-Estimate.pdf` — monthly and yearly hosting cost sheet, ref `FJ-HOST-2026-01`
+- `docs/Fashion-Jewellery-Hosting-Estimate.pdf` — monthly and yearly running-cost sheet (static site, Postgres, accounts, Razorpay and Stripe), ref `FJ-HOST-2026-02`
 - `docs/hosting-estimate-pdf.py` — regenerates the hosting sheet (`python3 docs/hosting-estimate-pdf.py`, needs `fpdf2`)
 - `_headers`, `_redirects` — Cloudflare Pages caching headers and redirects for the old boutique links
 
